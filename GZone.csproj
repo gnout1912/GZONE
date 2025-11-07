@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <Compile Include="models\GoiTap.cs" />
     <Compile Include="QuanLyGoiTap.cs">
       <SubType>Form</SubType>
     </Compile>
