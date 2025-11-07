@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <Compile Include="ThemGoiTapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemGoiTapForm.Designer.cs">
+      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="models\GoiTap.cs" />
     <Compile Include="QuanLyGoiTap.cs">
       <SubType>Form</SubType>
@@ -56,6 +62,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ThemGoiTapForm.resx">
+      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuanLyGoiTap.resx">
       <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
     </EmbeddedResource>

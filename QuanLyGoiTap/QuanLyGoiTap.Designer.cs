@@ -29,23 +29,29 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DanhSachGoiTap = new System.Windows.Forms.Label();
             this.dgvDSGoiTap = new System.Windows.Forms.DataGridView();
             this.colMaGoiTap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenGoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThoiHan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colChinhSua = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colXoaGoiTap = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnThemGT = new System.Windows.Forms.Button();
+            this.btnDelAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSGoiTap)).BeginInit();
             this.SuspendLayout();
             // 
             // DanhSachGoiTap
             // 
             this.DanhSachGoiTap.AutoSize = true;
-            this.DanhSachGoiTap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.DanhSachGoiTap.Location = new System.Drawing.Point(190, 18);
+            this.DanhSachGoiTap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.DanhSachGoiTap.Location = new System.Drawing.Point(362, 9);
             this.DanhSachGoiTap.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.DanhSachGoiTap.Name = "DanhSachGoiTap";
-            this.DanhSachGoiTap.Size = new System.Drawing.Size(149, 20);
+            this.DanhSachGoiTap.Size = new System.Drawing.Size(166, 20);
             this.DanhSachGoiTap.TabIndex = 0;
             this.DanhSachGoiTap.Text = "Danh Sách Gói Tập";
             // 
@@ -66,55 +72,115 @@
             this.colMaGoiTap,
             this.colTenGoi,
             this.colThoiHan,
-            this.colGia});
+            this.colGia,
+            this.colChinhSua,
+            this.colXoaGoiTap});
+            this.dgvDSGoiTap.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvDSGoiTap.EnableHeadersVisualStyles = false;
-            this.dgvDSGoiTap.Location = new System.Drawing.Point(25, 37);
-            this.dgvDSGoiTap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvDSGoiTap.Location = new System.Drawing.Point(35, 55);
+            this.dgvDSGoiTap.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDSGoiTap.Name = "dgvDSGoiTap";
             this.dgvDSGoiTap.RowTemplate.Height = 24;
-            this.dgvDSGoiTap.Size = new System.Drawing.Size(657, 366);
+            this.dgvDSGoiTap.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvDSGoiTap.Size = new System.Drawing.Size(891, 534);
             this.dgvDSGoiTap.TabIndex = 1;
             // 
             // colMaGoiTap
             // 
-            this.colMaGoiTap.DataPropertyName = "GT_Ma";
+            this.colMaGoiTap.DataPropertyName = "Ma";
+            this.colMaGoiTap.Frozen = true;
             this.colMaGoiTap.HeaderText = "Mã gói tập";
             this.colMaGoiTap.Name = "colMaGoiTap";
             this.colMaGoiTap.ReadOnly = true;
+            this.colMaGoiTap.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colMaGoiTap.Width = 156;
             // 
             // colTenGoi
             // 
-            this.colTenGoi.DataPropertyName = "GT_Ten";
+            this.colTenGoi.DataPropertyName = "Ten";
+            this.colTenGoi.Frozen = true;
             this.colTenGoi.HeaderText = "Tên Gói Tập";
             this.colTenGoi.Name = "colTenGoi";
             this.colTenGoi.ReadOnly = true;
-            this.colTenGoi.Width = 155;
+            this.colTenGoi.Width = 175;
             // 
             // colThoiHan
             // 
-            this.colThoiHan.DataPropertyName = "GT_ThoiHan";
+            this.colThoiHan.DataPropertyName = "ThoiHan";
+            this.colThoiHan.Frozen = true;
             this.colThoiHan.HeaderText = "Thời hạn gói tập";
             this.colThoiHan.Name = "colThoiHan";
             this.colThoiHan.ReadOnly = true;
-            this.colThoiHan.Width = 156;
+            this.colThoiHan.Width = 160;
             // 
             // colGia
             // 
-            this.colGia.DataPropertyName = "GT_Gia";
+            this.colGia.DataPropertyName = "Gia";
+            this.colGia.Frozen = true;
             this.colGia.HeaderText = "Giá Gói Tập";
             this.colGia.Name = "colGia";
             this.colGia.ReadOnly = true;
             this.colGia.Width = 155;
             // 
+            // colChinhSua
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            this.colChinhSua.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colChinhSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colChinhSua.Frozen = true;
+            this.colChinhSua.HeaderText = "Chỉnh Sửa";
+            this.colChinhSua.Name = "colChinhSua";
+            this.colChinhSua.Text = "Chỉnh sửa";
+            this.colChinhSua.UseColumnTextForButtonValue = true;
+            // 
+            // colXoaGoiTap
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            this.colXoaGoiTap.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colXoaGoiTap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colXoaGoiTap.HeaderText = "Xóa Gói Tập";
+            this.colXoaGoiTap.Name = "colXoaGoiTap";
+            this.colXoaGoiTap.Text = "Xóa";
+            this.colXoaGoiTap.UseColumnTextForButtonValue = true;
+            // 
+            // btnThemGT
+            // 
+            this.btnThemGT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnThemGT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnThemGT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnThemGT.Location = new System.Drawing.Point(699, 29);
+            this.btnThemGT.Name = "btnThemGT";
+            this.btnThemGT.Size = new System.Drawing.Size(112, 21);
+            this.btnThemGT.TabIndex = 2;
+            this.btnThemGT.Text = "Thêm Gói Tập";
+            this.btnThemGT.UseVisualStyleBackColor = false;
+            // 
+            // btnDelAll
+            // 
+            this.btnDelAll.BackColor = System.Drawing.Color.Red;
+            this.btnDelAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelAll.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDelAll.Location = new System.Drawing.Point(817, 27);
+            this.btnDelAll.Name = "btnDelAll";
+            this.btnDelAll.Size = new System.Drawing.Size(109, 23);
+            this.btnDelAll.TabIndex = 3;
+            this.btnDelAll.Text = "Xóa Tất Cả";
+            this.btnDelAll.UseVisualStyleBackColor = false;
+            // 
             // QuanLyGoiTap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 439);
+            this.ClientSize = new System.Drawing.Size(952, 612);
+            this.Controls.Add(this.btnDelAll);
+            this.Controls.Add(this.btnThemGT);
             this.Controls.Add(this.dgvDSGoiTap);
             this.Controls.Add(this.DanhSachGoiTap);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "QuanLyGoiTap";
             this.Text = "Quản lý gói tập";
             this.Load += new System.EventHandler(this.QuanLyGoiTap_Load);
@@ -132,6 +198,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenGoi;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiHan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGia;
+        private System.Windows.Forms.DataGridViewButtonColumn colChinhSua;
+        private System.Windows.Forms.DataGridViewButtonColumn colXoaGoiTap;
+        private System.Windows.Forms.Button btnThemGT;
+        private System.Windows.Forms.Button btnDelAll;
     }
 }
 
