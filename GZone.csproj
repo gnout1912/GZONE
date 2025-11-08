@@ -47,6 +47,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <Compile Include="QuanLyChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyChamCong.Designer.cs">
+      <DependentUpon>QuanLyChamCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyNhanVien.Designer.cs">
+      <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="models\ChamCong.cs" />
+    <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
     <Compile Include="QuanLyGoiTap.cs">
       <SubType>Form</SubType>
@@ -68,6 +82,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanLyNhanVien.resx">
+      <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="models\.editorconfig" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

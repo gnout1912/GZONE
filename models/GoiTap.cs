@@ -60,7 +60,7 @@ namespace GZone.models
                     }
 
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi khi tải dữ liệu gói tập: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
