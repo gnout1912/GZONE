@@ -14,6 +14,7 @@ namespace GZone
         {
             InitializeComponent();
             _goiTapDAL = new GoiTapDAL();
+            dgvDSGoiTap.AutoGenerateColumns = false;
         }
         private void QuanLyGoiTap_Load(object sender, EventArgs e)
         {
@@ -40,6 +41,5 @@ namespace GZone
                 dgvDSGoiTap.Rows[i].HeaderCell.Value = (i + 1).ToString();
             }
         }
- 
     }
 }
