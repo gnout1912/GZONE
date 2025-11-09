@@ -102,7 +102,6 @@
             this.colSdt.DataPropertyName = "Sdt";
             this.colSdt.HeaderText = "SĐT";
             this.colSdt.Name = "colSdt";
-            this.colSdt.Width = 100;
             // 
             // colGioiTinh
             // 
@@ -123,7 +122,7 @@
             this.lblTen.AutoSize = true;
             this.lblTen.Location = new System.Drawing.Point(40, 60);
             this.lblTen.Name = "lblTen";
-            this.lblTen.Size = new System.Drawing.Size(54, 16);
+            this.lblTen.Size = new System.Drawing.Size(47, 13);
             this.lblTen.TabIndex = 2;
             this.lblTen.Text = "Tên NV:";
             // 
@@ -132,7 +131,7 @@
             this.lblSdt.AutoSize = true;
             this.lblSdt.Location = new System.Drawing.Point(40, 90);
             this.lblSdt.Name = "lblSdt";
-            this.lblSdt.Size = new System.Drawing.Size(35, 16);
+            this.lblSdt.Size = new System.Drawing.Size(32, 13);
             this.lblSdt.TabIndex = 3;
             this.lblSdt.Text = "SĐT:";
             // 
@@ -141,7 +140,7 @@
             this.lblGioiTinh.AutoSize = true;
             this.lblGioiTinh.Location = new System.Drawing.Point(320, 60);
             this.lblGioiTinh.Name = "lblGioiTinh";
-            this.lblGioiTinh.Size = new System.Drawing.Size(64, 16);
+            this.lblGioiTinh.Size = new System.Drawing.Size(54, 13);
             this.lblGioiTinh.TabIndex = 4;
             this.lblGioiTinh.Text = "Giới Tính:";
             // 
@@ -150,7 +149,7 @@
             this.lblCNMa.AutoSize = true;
             this.lblCNMa.Location = new System.Drawing.Point(320, 90);
             this.lblCNMa.Name = "lblCNMa";
-            this.lblCNMa.Size = new System.Drawing.Size(62, 16);
+            this.lblCNMa.Size = new System.Drawing.Size(43, 13);
             this.lblCNMa.TabIndex = 5;
             this.lblCNMa.Text = "Mã CN:";
             // 
@@ -158,14 +157,14 @@
             // 
             this.txtTen.Location = new System.Drawing.Point(110, 57);
             this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(180, 22);
+            this.txtTen.Size = new System.Drawing.Size(180, 20);
             this.txtTen.TabIndex = 6;
             // 
             // txtSdt
             // 
             this.txtSdt.Location = new System.Drawing.Point(110, 87);
             this.txtSdt.Name = "txtSdt";
-            this.txtSdt.Size = new System.Drawing.Size(180, 22);
+            this.txtSdt.Size = new System.Drawing.Size(180, 20);
             this.txtSdt.TabIndex = 7;
             // 
             // cbGioiTinh
@@ -176,14 +175,14 @@
             "Nữ"});
             this.cbGioiTinh.Location = new System.Drawing.Point(390, 57);
             this.cbGioiTinh.Name = "cbGioiTinh";
-            this.cbGioiTinh.Size = new System.Drawing.Size(140, 24);
+            this.cbGioiTinh.Size = new System.Drawing.Size(140, 21);
             this.cbGioiTinh.TabIndex = 8;
             // 
             // txtCNMa
             // 
             this.txtCNMa.Location = new System.Drawing.Point(390, 87);
             this.txtCNMa.Name = "txtCNMa";
-            this.txtCNMa.Size = new System.Drawing.Size(140, 22);
+            this.txtCNMa.Size = new System.Drawing.Size(140, 20);
             this.txtCNMa.TabIndex = 9;
             // 
             // btnThem
@@ -233,11 +232,13 @@
             this.Controls.Add(this.dgvNhanVien);
             this.Controls.Add(this.lblTitle);
             this.Name = "QuanLyNhanVien";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Nhân Viên";
             this.Load += new System.EventHandler(this.QuanLyNhanVien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

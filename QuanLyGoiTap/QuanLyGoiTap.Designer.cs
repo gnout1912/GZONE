@@ -31,16 +31,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DanhSachGoiTap = new System.Windows.Forms.Label();
             this.dgvDSGoiTap = new System.Windows.Forms.DataGridView();
+            this.btnThemGT = new System.Windows.Forms.Button();
+            this.btnDelAll = new System.Windows.Forms.Button();
             this.colMaGoiTap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTenGoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThoiHan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChinhSua = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colXoaGoiTap = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnThemGT = new System.Windows.Forms.Button();
-            this.btnDelAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSGoiTap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,6 +85,33 @@
             this.dgvDSGoiTap.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvDSGoiTap.Size = new System.Drawing.Size(891, 534);
             this.dgvDSGoiTap.TabIndex = 1;
+            this.dgvDSGoiTap.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSGoiTap_CellContentClick);
+            // 
+            // btnThemGT
+            // 
+            this.btnThemGT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnThemGT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnThemGT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnThemGT.Location = new System.Drawing.Point(699, 29);
+            this.btnThemGT.Name = "btnThemGT";
+            this.btnThemGT.Size = new System.Drawing.Size(112, 21);
+            this.btnThemGT.TabIndex = 2;
+            this.btnThemGT.Text = "Thêm Gói Tập";
+            this.btnThemGT.UseVisualStyleBackColor = false;
+            this.btnThemGT.Click += new System.EventHandler(this.btnThemGT_Click);
+            // 
+            // btnDelAll
+            // 
+            this.btnDelAll.BackColor = System.Drawing.Color.Red;
+            this.btnDelAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelAll.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDelAll.Location = new System.Drawing.Point(817, 27);
+            this.btnDelAll.Name = "btnDelAll";
+            this.btnDelAll.Size = new System.Drawing.Size(109, 23);
+            this.btnDelAll.TabIndex = 3;
+            this.btnDelAll.Text = "Xóa Tất Cả";
+            this.btnDelAll.UseVisualStyleBackColor = false;
+            this.btnDelAll.Click += new System.EventHandler(this.btnDelAll_Click);
             // 
             // colMaGoiTap
             // 
@@ -116,6 +144,9 @@
             // colGia
             // 
             this.colGia.DataPropertyName = "Gia";
+            dataGridViewCellStyle2.Format = "C0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colGia.DefaultCellStyle = dataGridViewCellStyle2;
             this.colGia.Frozen = true;
             this.colGia.HeaderText = "Giá Gói Tập";
             this.colGia.Name = "colGia";
@@ -124,10 +155,10 @@
             // 
             // colChinhSua
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            this.colChinhSua.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            this.colChinhSua.DefaultCellStyle = dataGridViewCellStyle3;
             this.colChinhSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colChinhSua.Frozen = true;
             this.colChinhSua.HeaderText = "Chỉnh Sửa";
@@ -137,39 +168,15 @@
             // 
             // colXoaGoiTap
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            this.colXoaGoiTap.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.colXoaGoiTap.DefaultCellStyle = dataGridViewCellStyle4;
             this.colXoaGoiTap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colXoaGoiTap.HeaderText = "Xóa Gói Tập";
             this.colXoaGoiTap.Name = "colXoaGoiTap";
             this.colXoaGoiTap.Text = "Xóa";
             this.colXoaGoiTap.UseColumnTextForButtonValue = true;
-            // 
-            // btnThemGT
-            // 
-            this.btnThemGT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btnThemGT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnThemGT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnThemGT.Location = new System.Drawing.Point(699, 29);
-            this.btnThemGT.Name = "btnThemGT";
-            this.btnThemGT.Size = new System.Drawing.Size(112, 21);
-            this.btnThemGT.TabIndex = 2;
-            this.btnThemGT.Text = "Thêm Gói Tập";
-            this.btnThemGT.UseVisualStyleBackColor = false;
-            // 
-            // btnDelAll
-            // 
-            this.btnDelAll.BackColor = System.Drawing.Color.Red;
-            this.btnDelAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelAll.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnDelAll.Location = new System.Drawing.Point(817, 27);
-            this.btnDelAll.Name = "btnDelAll";
-            this.btnDelAll.Size = new System.Drawing.Size(109, 23);
-            this.btnDelAll.TabIndex = 3;
-            this.btnDelAll.Text = "Xóa Tất Cả";
-            this.btnDelAll.UseVisualStyleBackColor = false;
             // 
             // QuanLyGoiTap
             // 
@@ -182,6 +189,7 @@
             this.Controls.Add(this.DanhSachGoiTap);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "QuanLyGoiTap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý gói tập";
             this.Load += new System.EventHandler(this.QuanLyGoiTap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSGoiTap)).EndInit();
@@ -194,14 +202,14 @@
 
         private System.Windows.Forms.Label DanhSachGoiTap;
         private System.Windows.Forms.DataGridView dgvDSGoiTap;
+        private System.Windows.Forms.Button btnThemGT;
+        private System.Windows.Forms.Button btnDelAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaGoiTap;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTenGoi;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThoiHan;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGia;
         private System.Windows.Forms.DataGridViewButtonColumn colChinhSua;
         private System.Windows.Forms.DataGridViewButtonColumn colXoaGoiTap;
-        private System.Windows.Forms.Button btnThemGT;
-        private System.Windows.Forms.Button btnDelAll;
     }
 }
 
