@@ -71,6 +71,41 @@ namespace GZone.models
             }
             return danhSachGoiTap;
         }
+
+        public GoiTap GetGoiTapByMa(string ma)
+        {
+            GoiTap goiTap = null;
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    string query = "SELECT GT_Ma, GT_Ten, GT_Gia, GT_ThoiHan FROM Goi_Tap WHERE GT_Ma = @Ma";
+                    SqlCommand com = new SqlCommand(query, clsDatabase.con);
+                    com.Parameters.AddWithValue("@Ma", ma);
+                    SqlDataReader reader = com.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        goiTap = new GoiTap
+                        {
+                            Ma = reader["GT_Ma"].ToString(),
+                            Ten = reader["GT_Ten"].ToString(),
+                            Gia = Convert.ToDecimal(reader["GT_Gia"]),
+                            ThoiHan = Convert.ToInt32(reader["GT_ThoiHan"])
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi lấy thông tin gói tập: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+            return goiTap;
+        }
         public int AddGoiTap(GoiTap goiTap)
         {
             if (clsDatabase.OpenConnection())

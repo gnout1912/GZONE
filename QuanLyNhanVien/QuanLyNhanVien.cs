@@ -78,5 +78,15 @@ namespace GZone
                 LoadNhanVien();
             }
         }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

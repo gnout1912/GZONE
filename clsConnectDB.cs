@@ -17,7 +17,7 @@ namespace GZone
             try
             {
 
-                string connectionString = $"Data Source={Environment.MachineName}\\SQLEXPRESS;" + "Database=QuanLyPhongGym;" + "Integrated Security=True;" + "TrustServerCertificate=True;";
+                string connectionString = $"Data Source=DTV;" + "Database=QuanLyPhongGym;" + "Integrated Security=True;" + "TrustServerCertificate=True;";
 
                 con = new SqlConnection(connectionString);
                 con.Open();
