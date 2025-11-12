@@ -1,25 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 
 namespace GZone.models
 {
     public class TaiKhoan
     {
-        public string Ma { get; set; }        // TK_Ma CHAR(10)
-        public string Ten { get; set; }       // TK_Ten
-        public string MatKhau { get; set; }   // TK_MatKhau
-        public bool TrangThai { get; set; }   // TK_TrangThai
-        public string Quyen { get; set; }     // TK_Quyen
-
-        // Khóa ngoại liên kết đến ChiNhanh
-        public string MaChiNhanh { get; set; } // SỬA: CN_Ma CHAR(10) NULL
+        public string Ma { get; set; }      
+        public string Ten { get; set; }      
+        public string MatKhau { get; set; }   
+        public bool TrangThai { get; set; }   
+        public string Quyen { get; set; }     
+        public string MaChiNhanh { get; set; } 
     }
 
     public class TaiKhoanDAL
     {
-        // Lấy toàn bộ danh sách tài khoản
+        private string HashPassword(string plainText)
+        {
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(plainText);
+                byte[] hash = sha.ComputeHash(bytes);
+                return BitConverter.ToString(hash).Replace("-", "").ToLower();
+            }
+        }
+
+        public string GenerateNewMaTaiKhoan()
+        {
+            string newMa = "TK001";
+
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    string query = "SELECT TOP 1 TK_Ma FROM TAI_KHOAN ORDER BY TK_Ma DESC";
+                    SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        string lastMa = result.ToString();
+                        int number = int.Parse(lastMa.Substring(2));
+                        newMa = "TK" + (number + 1).ToString("D3");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tạo mã tài khoản mới: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+
+            return newMa;
+        }
         public List<TaiKhoan> GetAllTaiKhoan()
         {
             List<TaiKhoan> list = new List<TaiKhoan>();
@@ -40,7 +80,7 @@ namespace GZone.models
                             MatKhau = reader["TK_MatKhau"]?.ToString(),
                             TrangThai = Convert.ToBoolean(reader["TK_TrangThai"]),
                             Quyen = reader["TK_Quyen"]?.ToString(),
-                            MaChiNhanh = reader["CN_Ma"] == DBNull.Value ? null : reader["CN_Ma"].ToString() // SỬA
+                            MaChiNhanh = reader["CN_Ma"] == DBNull.Value ? null : reader["CN_Ma"].ToString()
                         };
                         list.Add(tk);
                     }
@@ -58,23 +98,24 @@ namespace GZone.models
             return list;
         }
 
-        // Thêm tài khoản
         public void AddTaiKhoan(TaiKhoan tk)
         {
             if (clsDatabase.OpenConnection())
             {
                 try
                 {
+                    string matKhauMaHoa = HashPassword(tk.MatKhau);
+
                     string query = "INSERT INTO TAI_KHOAN (TK_Ma, TK_Ten, TK_MatKhau, TK_TrangThai, TK_Quyen, CN_Ma) " +
                                    "VALUES (@Ma, @Ten, @MatKhau, @TrangThai, @Quyen, @CNMa)";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
 
                     cmd.Parameters.AddWithValue("@Ma", tk.Ma);
                     cmd.Parameters.AddWithValue("@Ten", tk.Ten ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@MatKhau", tk.MatKhau ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MatKhau", matKhauMaHoa);
                     cmd.Parameters.AddWithValue("@TrangThai", tk.TrangThai);
                     cmd.Parameters.AddWithValue("@Quyen", tk.Quyen ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CNMa", (object)tk.MaChiNhanh ?? DBNull.Value); // SỬA
+                    cmd.Parameters.AddWithValue("@CNMa", (object)tk.MaChiNhanh ?? DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Thêm tài khoản thành công!");
@@ -90,7 +131,36 @@ namespace GZone.models
             }
         }
 
-        // Xóa tài khoản
+        public void UpdateTaiKhoan(TaiKhoan tk)
+        {
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    string query = "UPDATE TAI_KHOAN SET TK_Ten = @Ten, TK_TrangThai = @TrangThai, " +
+                                   "TK_Quyen = @Quyen, CN_Ma = @CNMa WHERE TK_Ma = @Ma";
+                    SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+
+                    cmd.Parameters.AddWithValue("@Ten", tk.Ten ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@TrangThai", tk.TrangThai);
+                    cmd.Parameters.AddWithValue("@Quyen", tk.Quyen ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CNMa", (object)tk.MaChiNhanh ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Ma", tk.Ma);
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Cập nhật thông tin tài khoản thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi cập nhật tài khoản: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+        }
+
         public void DeleteTaiKhoan(string maTK)
         {
             if (clsDatabase.OpenConnection())
@@ -115,31 +185,28 @@ namespace GZone.models
             }
         }
 
-        // Cập nhật tài khoản
-        public void UpdateTaiKhoan(TaiKhoan tk)
+        public void ResetMatKhau(string maTaiKhoan, string matKhauMoi)
         {
             if (clsDatabase.OpenConnection())
             {
                 try
                 {
-                    string query = "UPDATE TAI_KHOAN SET TK_Ten = @Ten, TK_MatKhau = @MatKhau, " +
-                                   "TK_TrangThai = @TrangThai, TK_Quyen = @Quyen, CN_Ma = @CNMa " +
-                                   "WHERE TK_Ma = @Ma";
+                    string matKhauMaHoa = HashPassword(matKhauMoi);
+
+                    string query = "UPDATE TAI_KHOAN SET TK_MatKhau = @MatKhau WHERE TK_Ma = @Ma";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+                    cmd.Parameters.AddWithValue("@MatKhau", matKhauMaHoa);
+                    cmd.Parameters.AddWithValue("@Ma", maTaiKhoan);
 
-                    cmd.Parameters.AddWithValue("@Ten", tk.Ten ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@MatKhau", tk.MatKhau ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@TrangThai", tk.TrangThai);
-                    cmd.Parameters.AddWithValue("@Quyen", tk.Quyen ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@CNMa", (object)tk.MaChiNhanh ?? DBNull.Value); // SỬA
-                    cmd.Parameters.AddWithValue("@Ma", tk.Ma);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Cập nhật thông tin thành công!");
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows > 0)
+                        MessageBox.Show("Reset mật khẩu thành công!");
+                    else
+                        MessageBox.Show("Không tìm thấy tài khoản để reset mật khẩu!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi cập nhật tài khoản: " + ex.Message);
+                    MessageBox.Show("Lỗi khi reset mật khẩu: " + ex.Message);
                 }
                 finally
                 {
@@ -148,7 +215,40 @@ namespace GZone.models
             }
         }
 
-        // (Các hàm khác như ResetMatKhau, GetCountByQuyen... giữ nguyên)
-        // ...
+        public bool CheckLogin(string tenDangNhap, string matKhauNhap)
+        {
+            bool isValid = false;
+
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    string query = "SELECT TK_MatKhau FROM TAI_KHOAN WHERE TK_Ten = @Ten";
+                    SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+                    cmd.Parameters.AddWithValue("@Ten", tenDangNhap);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        string matKhauDaBam = result.ToString();
+                        string matKhauNhapBam = HashPassword(matKhauNhap);
+
+                        if (matKhauDaBam == matKhauNhapBam)
+                            isValid = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi kiểm tra đăng nhập: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+
+            return isValid;
+        }
     }
 }

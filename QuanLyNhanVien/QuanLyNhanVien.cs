@@ -105,5 +105,10 @@
                     txtCNMa.Text = row.Cells["colCNMa"].Value?.ToString();
                 }
             }
+
+        private void dgvNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
+    }
     }

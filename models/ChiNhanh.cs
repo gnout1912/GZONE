@@ -7,16 +7,15 @@ namespace GZone.models
 {
     public class ChiNhanh
     {
-        public string Ma { get; set; }           // SỬA: CN_Ma CHAR(10)
-        public string Ten { get; set; }          // CN_Ten
-        public string DiaChi { get; set; }       // CN_Diachi
-        public string Sdt { get; set; }          // CN_Sdt
-        public DateTime? NgayThanhLap { get; set; } // CN_NgayThanhLap
+        public string Ma { get; set; }         
+        public string Ten { get; set; }          
+        public string DiaChi { get; set; }       
+        public string Sdt { get; set; }
+        public DateTime? NgayThanhLap { get; set; }
     }
 
     public class ChiNhanhDAL
     {
-        // Lấy toàn bộ danh sách chi nhánh
         public List<ChiNhanh> GetAllChiNhanh()
         {
             List<ChiNhanh> list = new List<ChiNhanh>();
@@ -32,7 +31,7 @@ namespace GZone.models
                     {
                         ChiNhanh cn = new ChiNhanh
                         {
-                            Ma = reader["CN_Ma"].ToString(), // SỬA: Đọc Ma là string
+                            Ma = reader["CN_Ma"].ToString(),
                             Ten = reader["CN_Ten"]?.ToString(),
                             DiaChi = reader["CN_Diachi"]?.ToString(),
                             Sdt = reader["CN_Sdt"]?.ToString(),
@@ -54,18 +53,16 @@ namespace GZone.models
             return list;
         }
 
-        // Thêm chi nhánh
         public void AddChiNhanh(ChiNhanh cn)
         {
             if (clsDatabase.OpenConnection())
             {
                 try
                 {
-                    // Đảm bảo phải INSERT cả Ma vì nó không phải IDENTITY
                     string query = "INSERT INTO CHI_NHANH (CN_Ma, CN_Ten, CN_Diachi, CN_Sdt, CN_NgayThanhLap) VALUES (@Ma, @Ten, @DiaChi, @Sdt, @NgayThanhLap)";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
 
-                    cmd.Parameters.AddWithValue("@Ma", cn.Ma); // SỬA: Thêm Ma
+                    cmd.Parameters.AddWithValue("@Ma", cn.Ma);
                     cmd.Parameters.AddWithValue("@Ten", cn.Ten ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@DiaChi", cn.DiaChi ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@Sdt", cn.Sdt ?? (object)DBNull.Value);
@@ -84,9 +81,7 @@ namespace GZone.models
                 }
             }
         }
-
-        // Xóa chi nhánh
-        public void DeleteChiNhanh(string maCN) // SỬA: maCN là string
+        public void DeleteChiNhanh(string maCN)
         {
             if (clsDatabase.OpenConnection())
             {
@@ -110,7 +105,6 @@ namespace GZone.models
             }
         }
 
-        // Cập nhật chi nhánh
         public void UpdateChiNhanh(ChiNhanh cn)
         {
             if (clsDatabase.OpenConnection())

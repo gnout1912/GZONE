@@ -7,11 +7,11 @@ namespace GZone.models
 {
     public class NhanVien
     {
-        public string Ma { get; set; }           // SỬA: NV_Ma CHAR(10)
+        public int Ma { get; set; }              // NV_Ma (tự tăng)
         public string Ten { get; set; }          // NV_Ten
         public string Sdt { get; set; }          // NV_Sdt
         public string GioiTinh { get; set; }     // NV_GioiTinh
-        public string MaChiNhanh { get; set; }   // CN_Ma CHAR(10)
+        public string MaChiNhanh { get; set; }   // CN_Ma
     }
 
     public class NhanVienDAL
@@ -32,7 +32,7 @@ namespace GZone.models
                     {
                         NhanVien nv = new NhanVien
                         {
-                            Ma = reader["NV_Ma"].ToString(), // SỬA: Đọc Ma là string
+                            Ma = Convert.ToInt32(reader["NV_Ma"]),
                             Ten = reader["NV_Ten"].ToString(),
                             Sdt = reader["NV_Sdt"].ToString(),
                             GioiTinh = reader["NV_GioiTinh"].ToString(),
@@ -61,9 +61,8 @@ namespace GZone.models
             {
                 try
                 {
-                    string query = "INSERT INTO NHAN_VIEN (NV_Ma, NV_Ten, NV_Sdt, NV_GioiTinh, CN_Ma) VALUES (@Ma, @Ten, @Sdt, @GioiTinh, @CNMa)"; // SỬA
+                    string query = "INSERT INTO NHAN_VIEN (NV_Ten, NV_Sdt, NV_GioiTinh, CN_Ma) VALUES (@Ten, @Sdt, @GioiTinh, @CNMa)";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
-                    cmd.Parameters.AddWithValue("@Ma", nv.Ma); // SỬA
                     cmd.Parameters.AddWithValue("@Ten", nv.Ten);
                     cmd.Parameters.AddWithValue("@Sdt", nv.Sdt ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@GioiTinh", nv.GioiTinh ?? (object)DBNull.Value);
@@ -84,7 +83,7 @@ namespace GZone.models
         }
 
         // Xóa nhân viên
-        public void DeleteNhanVien(string maNV) // SỬA: maNV là string
+        public void DeleteNhanVien(int maNV)
         {
             if (clsDatabase.OpenConnection())
             {

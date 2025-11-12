@@ -29,18 +29,9 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblTitle.Location = new System.Drawing.Point(250, 15);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(178, 20);
+            this.lblTitle.Size = new System.Drawing.Size(198, 25);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Quản Lý Chấm Công";
-            // 
-            // lblMaNV
-            // 
-            this.lblMaNV.AutoSize = true;
-            this.lblMaNV.Location = new System.Drawing.Point(40, 65);
-            this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(63, 16);
-            this.lblMaNV.TabIndex = 1;
-            this.lblMaNV.Text = "Mã NV:";
             // 
             // txtMaNV
             // 
@@ -48,6 +39,15 @@
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(200, 22);
             this.txtMaNV.TabIndex = 2;
+            // 
+            // lblMaNV
+            // 
+            this.lblMaNV.AutoSize = true;
+            this.lblMaNV.Location = new System.Drawing.Point(40, 65);
+            this.lblMaNV.Name = "lblMaNV";
+            this.lblMaNV.Size = new System.Drawing.Size(51, 16);
+            this.lblMaNV.TabIndex = 1;
+            this.lblMaNV.Text = "Mã NV:";
             // 
             // btnCheckIn
             // 
@@ -76,8 +76,10 @@
             this.dgvChamCong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChamCong.Location = new System.Drawing.Point(25, 110);
             this.dgvChamCong.Name = "dgvChamCong";
+            this.dgvChamCong.RowHeadersWidth = 51;
             this.dgvChamCong.Size = new System.Drawing.Size(600, 300);
             this.dgvChamCong.TabIndex = 5;
+            this.dgvChamCong.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChamCong_CellContentClick);
             // 
             // QuanLyChamCong
             // 
@@ -94,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvChamCong)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

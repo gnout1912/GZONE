@@ -44,5 +44,10 @@ namespace GZone
             _chamCongDAL.CheckOut(txtMaNV.Text);
             LoadChamCong();
         }
+
+        private void dgvChamCong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

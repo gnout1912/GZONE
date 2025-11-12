@@ -1,4 +1,4 @@
-﻿using GZone.models; // Sử dụng namespace models của bạn
+﻿using GZone.models; // Đảm bảo using models của bạn
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,208 +9,202 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GZone.QuanLyChiNhanh
+namespace GZone
 {
-    // Đây là class logic tương ứng với file Designer.cs của bạn
     public partial class QuanLyChiNhanh : Form
     {
-        private TaiKhoanDAL _taiKhoanDAL;
         private ChiNhanhDAL _chiNhanhDAL;
-        private List<TaiKhoan> _toanBoTaiKhoan; // Danh sách cache
-        private List<ChiNhanh> _danhSachChiNhanh; // Danh sách cache
+        private YeuCauDAL _yeuCauDAL;
+        private List<ChiNhanh> _danhSachChiNhanh;
 
         public QuanLyChiNhanh()
         {
-            InitializeComponent(); // Hàm này nằm trong file Designer.cs
-            _taiKhoanDAL = new TaiKhoanDAL();
+            InitializeComponent();
             _chiNhanhDAL = new ChiNhanhDAL();
+            _yeuCauDAL = new YeuCauDAL();
         }
 
         private void QuanLyChiNhanh_Load(object sender, EventArgs e)
         {
-            SetupDataGridView();
-            LoadData();
+            LoadDanhSachChiNhanhLenList();
+            SetupDgvYeuCauColumns(); // Cấu hình lưới yêu cầu
         }
 
-        private void SetupDataGridView()
+        /// <summary>
+        /// Tải danh sách chi nhánh lên ListBox bên trái
+        /// </summary>
+        private void LoadDanhSachChiNhanhLenList()
         {
-            // Cấu hình các cột cho DataGridView
-            dgvTaiKhoan.AutoGenerateColumns = false;
-            dgvTaiKhoan.Columns.Clear();
-
-            dgvTaiKhoan.Columns.Add(new DataGridViewTextBoxColumn
+            try
             {
-                Name = "colMa",
-                HeaderText = "ID (Mã TK)",
-                DataPropertyName = "Ma", // Phải trùng với tên thuộc tính của class TaiKhoan
-                Width = 120
-            });
+                _danhSachChiNhanh = _chiNhanhDAL.GetAllChiNhanh();
 
-            dgvTaiKhoan.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "colTen",
-                HeaderText = "Tên đăng nhập",
-                DataPropertyName = "Ten", // Phải trùng với tên thuộc tính của class TaiKhoan
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            });
+                lstChiNhanh.DataSource = null;
+                lstChiNhanh.DataSource = _danhSachChiNhanh;
+                lstChiNhanh.DisplayMember = "Ten"; // Hiển thị tên
+                lstChiNhanh.ValueMember = "Ma";   // Giữ giá trị là Mã
 
-            dgvTaiKhoan.Columns.Add(new DataGridViewTextBoxColumn
+                lstChiNhanh.SelectedIndex = -1; // Bỏ chọn mặc định
+                ClearDetails(); // Xóa trống thông tin bên phải
+            }
+            catch (Exception ex)
             {
-                Name = "colQuyen",
-                HeaderText = "Quyền hạn",
-                DataPropertyName = "Quyen", // Phải trùng với tên thuộc tính của class TaiKhoan
-                Width = 150
-            });
-
-            dgvTaiKhoan.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                Name = "colTrangThai",
-                HeaderText = "Trạng thái",
-                DataPropertyName = "TrangThai", // Phải trùng với tên thuộc tính của class TaiKhoan
-                Width = 100
-            });
+                MessageBox.Show("Lỗi khi tải danh sách chi nhánh: " + ex.Message);
+            }
         }
 
-        private void LoadData()
+        /// <summary>
+        /// Sự kiện quan trọng: Xảy ra khi người dùng chọn một chi nhánh bên trái
+        /// </summary>
+        private void lstChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Load danh sách chi nhánh
-            _danhSachChiNhanh = _chiNhanhDAL.GetAllChiNhanh();
-            // Thêm mục "Tất cả" vào đầu danh sách
-            _danhSachChiNhanh.Insert(0, new ChiNhanh { Ma = 0, Ten = "--- Tất cả chi nhánh ---" });
-
-            lstChiNhanh.DataSource = null; // Xóa datasource cũ
-            lstChiNhanh.DataSource = _danhSachChiNhanh;
-            lstChiNhanh.DisplayMember = "Ten";
-            lstChiNhanh.ValueMember = "Ma";
-
-            // Load toàn bộ tài khoản
-            _toanBoTaiKhoan = _taiKhoanDAL.GetAllTaiKhoan();
-
-            // Lọc danh sách tài khoản theo lựa chọn
-            FilterTaiKhoanGrid();
-        }
-
-        private void FilterTaiKhoanGrid()
-        {
-            if (lstChiNhanh.SelectedItem == null || _toanBoTaiKhoan == null)
+            if (lstChiNhanh.SelectedItem == null)
+            {
+                ClearDetails();
                 return;
+            }
+
+            // Lấy chi nhánh được chọn
+            var selectedChiNhanh = lstChiNhanh.SelectedItem as ChiNhanh;
+            if (selectedChiNhanh == null) return;
+
+            // 1. Tải thông tin chi tiết lên Tab 1
+            LoadThongTinChiTiet(selectedChiNhanh);
+
+            // 2. Tải danh sách yêu cầu lên Tab 2 (dùng hàm mới)
+            LoadYeuCauChiNhanh(selectedChiNhanh.Ma);
+        }
+
+        /// <summary>
+        /// Hiển thị thông tin chi tiết của chi nhánh lên các TextBox
+        /// </summary>
+        private void LoadThongTinChiTiet(ChiNhanh cn)
+        {
+            txtMaChiNhanh.Text = cn.Ma;
+            txtTenChiNhanh.Text = cn.Ten;
+            txtDiaChi.Text = cn.DiaChi;
+            txtSoDienThoai.Text = cn.Sdt;
+            txtNgayThanhLap.Text = cn.NgayThanhLap?.ToShortDateString() ?? "";
+        }
+
+        /// <summary>
+        /// Lọc và hiển thị các yêu cầu của chi nhánh
+        /// </summary>
+        private void LoadYeuCauChiNhanh(string maChiNhanh)
+        {
+            try
+            {
+                // Gọi hàm DAL mới mà chúng ta vừa tạo
+                List<YeuCau> yeuCauList = _yeuCauDAL.GetYeuCauTheoChiNhanh(maChiNhanh);
+
+                dgvYeuCau.DataSource = null;
+                dgvYeuCau.DataSource = yeuCauList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải danh sách yêu cầu: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Cấu hình các cột cho lưới Yêu cầu (chỉ cần chạy 1 lần)
+        /// </summary>
+        private void SetupDgvYeuCauColumns()
+        {
+            dgvYeuCau.AutoGenerateColumns = false; // Rất quan trọng
+
+            // Định nghĩa các cột
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Ma", HeaderText = "Mã YC", Width = 60 });
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TieuDe", HeaderText = "Tiêu Đề", Width = 150, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TrangThai", HeaderText = "Trạng Thái", Width = 100 });
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NgayGui", HeaderText = "Ngày Gửi", Width = 120 });
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PhanHoi", HeaderText = "Phản Hồi", Width = 150, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            dgvYeuCau.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NgayXuLy", HeaderText = "Ngày Xử Lý", Width = 120 });
+
+            // Ẩn các cột không cần thiết
+            // (Nếu bạn dùng AutoGenerateColumns = false, bạn không cần ẩn gì cả)
+        }
+
+
+        private void ClearDetails()
+        {
+            txtMaChiNhanh.Text = "";
+            txtTenChiNhanh.Text = "";
+            txtDiaChi.Text = "";
+            txtSoDienThoai.Text = "";
+            txtNgayThanhLap.Text = "";
+            dgvYeuCau.DataSource = null;
+        }
+
+
+        private void btnSuaChiTiet_Click(object sender, EventArgs e)
+        {
+            if (lstChiNhanh.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng chọn một chi nhánh để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var selectedChiNhanh = lstChiNhanh.SelectedItem as ChiNhanh;
 
-            List<TaiKhoan> filteredList;
-
-            if (selectedChiNhanh.Ma == 0) // "Tất cả chi nhánh"
+            if (selectedChiNhanh.Ma == null)
             {
-                filteredList = _toanBoTaiKhoan;
-                lblTieuDeTaiKhoan.Text = "TÀI KHOẢN TẤT CẢ CHI NHÁNH";
-            }
-            else
-            {
-                // Lọc tài khoản theo MaChiNhanh
-                filteredList = _toanBoTaiKhoan
-                    .Where(tk => tk.MaChiNhanh == selectedChiNhanh.Ma)
-                    .ToList();
-                lblTieuDeTaiKhoan.Text = $"TÀI KHOẢN CHI NHÁNH {selectedChiNhanh.Ten.ToUpper()}";
-            }
-
-            dgvTaiKhoan.DataSource = null;
-            // Sử dụng BindingList để DataGridView tự động cập nhật khi có thay đổi
-            dgvTaiKhoan.DataSource = new BindingList<TaiKhoan>(filteredList);
-        }
-
-        private void lstChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Khi chọn chi nhánh khác, lọc lại Grid
-            FilterTaiKhoanGrid();
-        }
-
-        private void btnLamMoi_Click(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            // Chức năng này cần một Form/Dialog mới để nhập thông tin
-            // Ví dụ:
-            // frmChiTietTaiKhoan frmThem = new frmChiTietTaiKhoan(_danhSachChiNhanh);
-            // if (frmThem.ShowDialog() == DialogResult.OK)
-            // {
-            //    LoadData(); // Tải lại dữ liệu nếu thêm thành công
-            // }
-            MessageBox.Show("Chức năng 'Thêm mới' cần một Form chi tiết (chưa được cài đặt).");
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            if (dgvTaiKhoan.CurrentRow == null)
-            {
-                MessageBox.Show("Vui lòng chọn một tài khoản để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một chi nhánh cụ thể để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var selectedTK = dgvTaiKhoan.CurrentRow.DataBoundItem as TaiKhoan;
-            if (selectedTK == null) return;
+            ChinhSuaChiNhanhForm frmSuaCN = new ChinhSuaChiNhanhForm(selectedChiNhanh);
+            DialogResult result = frmSuaCN.ShowDialog();
 
-            // Chức năng này cần một Form/Dialog mới để sửa thông tin
-            // Ví dụ:
-            // frmChiTietTaiKhoan frmSua = new frmChiTietTaiKhoan(selectedTK, _danhSachChiNhanh);
-            // if (frmSua.ShowDialog() == DialogResult.OK)
-            // {
-            //    LoadData(); // Tải lại dữ liệu nếu sửa thành công
-            // }
-            MessageBox.Show($"Chức năng 'Sửa' tài khoản: {selectedTK.Ma} (chưa được cài đặt).");
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnPheDuyet_Click(object sender, EventArgs e)
         {
-            if (dgvTaiKhoan.CurrentRow == null)
+            XuLyYeuCau(true);
+        }
+
+        private void btnTuChoi_Click(object sender, EventArgs e)
+        {
+            XuLyYeuCau(false);
+        }
+
+        private void XuLyYeuCau(bool isApproved)
+        {
+            if (dgvYeuCau.CurrentRow == null)
             {
-                MessageBox.Show("Vui lòng chọn một tài khoản để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một yêu cầu để xử lý.", "Chưa chọn yêu cầu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var selectedTK = dgvTaiKhoan.CurrentRow.DataBoundItem as TaiKhoan;
-            if (selectedTK == null) return;
+            var yeuCau = dgvYeuCau.CurrentRow.DataBoundItem as YeuCau;
+            if (yeuCau == null) return;
 
-            var confirm = MessageBox.Show($"Bạn có chắc chắn muốn xóa tài khoản '{selectedTK.Ten}' (Mã: {selectedTK.Ma})?",
-                                          "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
+            if (yeuCau.TrangThai != "Chờ duyệt")
             {
-                _taiKhoanDAL.DeleteTaiKhoan(selectedTK.Ma);
-                // Lớp DAL của bạn đã tự hiển thị MessageBox
-                LoadData(); // Tải lại dữ liệu sau khi xóa
-            }
-        }
-
-        private void btnResetMatKhau_Click(object sender, EventArgs e)
-        {
-            if (dgvTaiKhoan.CurrentRow == null)
-            {
-                MessageBox.Show("Vui lòng chọn một tài khoản để reset mật khẩu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Yêu cầu này đã được xử lý.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            var selectedTK = dgvTaiKhoan.CurrentRow.DataBoundItem as TaiKhoan;
-            if (selectedTK == null) return;
+            string phanHoi = isApproved ? "Đã duyệt" : "Đã từ chối";
 
-            // Trong thực tế, bạn nên dùng InputBox hoặc 1 form nhỏ để nhập mật khẩu mới
-            // Ở đây, ta reset về một mật khẩu mặc định, ví dụ "123456"
-            string matKhauMoi = "123456";
+            yeuCau.TrangThai = isApproved ? "Đã duyệt" : "Đã từ chối";
+            yeuCau.PhanHoi = phanHoi;
+            yeuCau.NgayXuLy = DateTime.Now;
 
-            var confirm = MessageBox.Show($"Bạn có chắc muốn reset mật khẩu cho tài khoản '{selectedTK.Ma}' về '{matKhauMoi}'?",
-                                          "Xác nhận Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
+            try
             {
-                // Giả sử bạn có hàm mã hóa mật khẩu, hãy mã hóa 'matKhauMoi' trước khi gọi DAL
-                // Ví dụ: string hashedMk = MaHoaMatKhau(matKhauMoi);
-                // _taiKhoanDAL.ResetMatKhau(selectedTK.Ma, hashedMk);
-
-                _taiKhoanDAL.ResetMatKhau(selectedTK.Ma, matKhauMoi);
-                // Lớp DAL của bạn đã tự hiển thị MessageBox
+                _yeuCauDAL.UpdateYeuCau(yeuCau);
+                LoadYeuCauChiNhanh(yeuCau.MaChiNhanh);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật yêu cầu: " + ex.Message);
+            }
+        }
+
+        private void dgvYeuCau_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
