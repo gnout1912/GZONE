@@ -55,10 +55,10 @@
             this.lblTitle.Size = new System.Drawing.Size(207, 25);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Danh Sách Nhân Viên";
-            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // dgvNhanVien
             // 
+            this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             this.dgvNhanVien.AllowUserToAddRows = false;
             this.dgvNhanVien.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -133,7 +133,6 @@
             this.lblTen.Size = new System.Drawing.Size(56, 16);
             this.lblTen.TabIndex = 2;
             this.lblTen.Text = "Tên NV:";
-            this.lblTen.Click += new System.EventHandler(this.lblTen_Click);
             // 
             // lblSdt
             // 

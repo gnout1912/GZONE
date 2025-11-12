@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <Compile Include="models\CoSoVatChat.cs" />
     <Compile Include="models\ThanhVien.cs" />
     <Compile Include="models\ThanhVienGoiTap.cs" />
     <Compile Include="Program.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="models\ChamCong.cs" />
     <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.Designer.cs">
+      <DependentUpon>QuanLyCoSoVatChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuanLyGoiTap\ChinhSuaGoiTapForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +112,16 @@
     </Compile>
     <EmbeddedResource Include="QuanLyGoiTap\QuanLyGoiTap.resx">
       <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
+    </EmbeddedResource>
+    <!-- ===================== QUẢN LÝ CƠ SỞ VẬT CHẤT ===================== -->
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.Designer.cs">
+      <DependentUpon>QuanLyCoSoVatChat.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.resx">
+      <DependentUpon>QuanLyCoSoVatChat.cs</DependentUpon>
     </EmbeddedResource>
     <!-- ===================== THÊM GÓI TẬP ===================== -->
     <Compile Include="QuanLyGoiTap\ThemGoiTapForm.cs">
