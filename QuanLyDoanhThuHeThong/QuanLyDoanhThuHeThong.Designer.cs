@@ -30,21 +30,27 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTongHop = new System.Windows.Forms.Button();
             this.btnInDoanhThu = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbTangGiam = new System.Windows.Forms.ComboBox();
+            this.cbSapXepTheo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cbx2Thang = new System.Windows.Forms.ComboBox();
+            this.dgvThongKe = new System.Windows.Forms.DataGridView();
+            this.cbChiNhanh = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbTongHopTheo = new System.Windows.Forms.ComboBox();
+            this.cHINHANHBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.quanLyPhongGymDataSet2 = new GZone.QuanLyPhongGymDataSet2();
             this.cHINHANHBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.quanLyPhongGymDataSet1 = new GZone.QuanLyPhongGymDataSet1();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbxNgay = new System.Windows.Forms.ComboBox();
             this.quanLyPhongGymDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.quanLyPhongGymDataSet = new GZone.QuanLyPhongGymDataSet();
             this.cHI_NHANHTableAdapter = new GZone.QuanLyPhongGymDataSet1TableAdapters.CHI_NHANHTableAdapter();
+            this.cHI_NHANHTableAdapter1 = new GZone.QuanLyPhongGymDataSet2TableAdapters.CHI_NHANHTableAdapter();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cHINHANHBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cHINHANHBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSetBindingSource)).BeginInit();
@@ -53,20 +59,34 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTongHop);
             this.groupBox1.Controls.Add(this.btnInDoanhThu);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.cbTangGiam);
+            this.groupBox1.Controls.Add(this.cbSapXepTheo);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Controls.Add(this.cbx2Thang);
+            this.groupBox1.Controls.Add(this.dgvThongKe);
+            this.groupBox1.Controls.Add(this.cbChiNhanh);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cbxNgay);
+            this.groupBox1.Controls.Add(this.cbTongHopTheo);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(746, 450);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tổng Hợp Doanh Thu";
+            // 
+            // btnTongHop
+            // 
+            this.btnTongHop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnTongHop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTongHop.ForeColor = System.Drawing.Color.White;
+            this.btnTongHop.Location = new System.Drawing.Point(507, 48);
+            this.btnTongHop.Name = "btnTongHop";
+            this.btnTongHop.Size = new System.Drawing.Size(80, 23);
+            this.btnTongHop.TabIndex = 8;
+            this.btnTongHop.Text = "Tổng hợp";
+            this.btnTongHop.UseVisualStyleBackColor = false;
+            this.btnTongHop.Click += new System.EventHandler(this.btnTongHop_Click);
             // 
             // btnInDoanhThu
             // 
@@ -81,29 +101,21 @@
             this.btnInDoanhThu.UseVisualStyleBackColor = false;
             this.btnInDoanhThu.Click += new System.EventHandler(this.btnInDoanhThu_Click);
             // 
-            // comboBox2
+            // cbTangGiam
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Ngày",
-            "Tháng",
-            "Năm"});
-            this.comboBox2.Location = new System.Drawing.Point(223, 50);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(93, 21);
-            this.comboBox2.TabIndex = 6;
+            this.cbTangGiam.FormattingEnabled = true;
+            this.cbTangGiam.Location = new System.Drawing.Point(223, 50);
+            this.cbTangGiam.Name = "cbTangGiam";
+            this.cbTangGiam.Size = new System.Drawing.Size(93, 21);
+            this.cbTangGiam.TabIndex = 6;
             // 
-            // comboBox1
+            // cbSapXepTheo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Ngày",
-            "Tháng",
-            "Năm"});
-            this.comboBox1.Location = new System.Drawing.Point(108, 50);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(93, 21);
-            this.comboBox1.TabIndex = 5;
+            this.cbSapXepTheo.FormattingEnabled = true;
+            this.cbSapXepTheo.Location = new System.Drawing.Point(108, 50);
+            this.cbSapXepTheo.Name = "cbSapXepTheo";
+            this.cbSapXepTheo.Size = new System.Drawing.Size(93, 21);
+            this.cbSapXepTheo.TabIndex = 5;
             // 
             // label2
             // 
@@ -114,35 +126,21 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Sắp xếp theo:";
             // 
-            // dataGridView1
+            // dgvThongKe
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(25, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(697, 356);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvThongKe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvThongKe.Location = new System.Drawing.Point(25, 77);
+            this.dgvThongKe.Name = "dgvThongKe";
+            this.dgvThongKe.Size = new System.Drawing.Size(697, 356);
+            this.dgvThongKe.TabIndex = 3;
             // 
-            // cbx2Thang
+            // cbChiNhanh
             // 
-            this.cbx2Thang.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.cHINHANHBindingSource, "CN_Ten", true));
-            this.cbx2Thang.DataSource = this.cHINHANHBindingSource;
-            this.cbx2Thang.DisplayMember = "CN_Ten";
-            this.cbx2Thang.FormattingEnabled = true;
-            this.cbx2Thang.Location = new System.Drawing.Point(223, 23);
-            this.cbx2Thang.Name = "cbx2Thang";
-            this.cbx2Thang.Size = new System.Drawing.Size(124, 21);
-            this.cbx2Thang.TabIndex = 2;
-            this.cbx2Thang.ValueMember = "CN_Ma";
-            // 
-            // cHINHANHBindingSource
-            // 
-            this.cHINHANHBindingSource.DataMember = "CHI_NHANH";
-            this.cHINHANHBindingSource.DataSource = this.quanLyPhongGymDataSet1;
-            // 
-            // quanLyPhongGymDataSet1
-            // 
-            this.quanLyPhongGymDataSet1.DataSetName = "QuanLyPhongGymDataSet1";
-            this.quanLyPhongGymDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.cbChiNhanh.FormattingEnabled = true;
+            this.cbChiNhanh.Location = new System.Drawing.Point(223, 23);
+            this.cbChiNhanh.Name = "cbChiNhanh";
+            this.cbChiNhanh.Size = new System.Drawing.Size(124, 21);
+            this.cbChiNhanh.TabIndex = 2;
             // 
             // label1
             // 
@@ -153,17 +151,33 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Tổng hợp theo:";
             // 
-            // cbxNgay
+            // cbTongHopTheo
             // 
-            this.cbxNgay.FormattingEnabled = true;
-            this.cbxNgay.Items.AddRange(new object[] {
-            "Ngày",
-            "Tháng",
-            "Năm"});
-            this.cbxNgay.Location = new System.Drawing.Point(108, 23);
-            this.cbxNgay.Name = "cbxNgay";
-            this.cbxNgay.Size = new System.Drawing.Size(93, 21);
-            this.cbxNgay.TabIndex = 0;
+            this.cbTongHopTheo.FormattingEnabled = true;
+            this.cbTongHopTheo.Location = new System.Drawing.Point(108, 23);
+            this.cbTongHopTheo.Name = "cbTongHopTheo";
+            this.cbTongHopTheo.Size = new System.Drawing.Size(93, 21);
+            this.cbTongHopTheo.TabIndex = 0;
+            // 
+            // cHINHANHBindingSource1
+            // 
+            this.cHINHANHBindingSource1.DataMember = "CHI_NHANH";
+            this.cHINHANHBindingSource1.DataSource = this.quanLyPhongGymDataSet2;
+            // 
+            // quanLyPhongGymDataSet2
+            // 
+            this.quanLyPhongGymDataSet2.DataSetName = "QuanLyPhongGymDataSet2";
+            this.quanLyPhongGymDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // cHINHANHBindingSource
+            // 
+            this.cHINHANHBindingSource.DataMember = "CHI_NHANH";
+            this.cHINHANHBindingSource.DataSource = this.quanLyPhongGymDataSet1;
+            // 
+            // quanLyPhongGymDataSet1
+            // 
+            this.quanLyPhongGymDataSet1.DataSetName = "QuanLyPhongGymDataSet1";
+            this.quanLyPhongGymDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // quanLyPhongGymDataSetBindingSource
             // 
@@ -179,6 +193,10 @@
             // 
             this.cHI_NHANHTableAdapter.ClearBeforeFill = true;
             // 
+            // cHI_NHANHTableAdapter1
+            // 
+            this.cHI_NHANHTableAdapter1.ClearBeforeFill = true;
+            // 
             // QuanLyDoanhThuHeThong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,7 +208,9 @@
             this.Load += new System.EventHandler(this.QuanLyDoanhThuHeThong_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cHINHANHBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cHINHANHBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.quanLyPhongGymDataSetBindingSource)).EndInit();
@@ -202,18 +222,22 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cbxNgay;
-        private System.Windows.Forms.ComboBox cbx2Thang;
+        private System.Windows.Forms.ComboBox cbTongHopTheo;
+        private System.Windows.Forms.ComboBox cbChiNhanh;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource quanLyPhongGymDataSetBindingSource;
         private QuanLyPhongGymDataSet quanLyPhongGymDataSet;
         private QuanLyPhongGymDataSet1 quanLyPhongGymDataSet1;
         private System.Windows.Forms.BindingSource cHINHANHBindingSource;
         private QuanLyPhongGymDataSet1TableAdapters.CHI_NHANHTableAdapter cHI_NHANHTableAdapter;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvThongKe;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnInDoanhThu;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbTangGiam;
+        private System.Windows.Forms.ComboBox cbSapXepTheo;
+        private QuanLyPhongGymDataSet2 quanLyPhongGymDataSet2;
+        private System.Windows.Forms.BindingSource cHINHANHBindingSource1;
+        private QuanLyPhongGymDataSet2TableAdapters.CHI_NHANHTableAdapter cHI_NHANHTableAdapter1;
+        private System.Windows.Forms.Button btnTongHop;
     }
 }

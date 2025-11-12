@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data; // Thêm using này để dùng DBNull.Value
+
+// (Tôi giả sử class clsDatabase của bạn nằm trong GZone)
+using GZone;
 
 namespace GZone.models
 {
     public class ChiNhanh
     {
-        public string Ma { get; set; }         
-        public string Ten { get; set; }          
-        public string DiaChi { get; set; }       
+        public string Ma { get; set; }
+        public string Ten { get; set; }
+        public string DiaChi { get; set; }
         public string Sdt { get; set; }
         public DateTime? NgayThanhLap { get; set; }
     }
@@ -33,13 +37,16 @@ namespace GZone.models
                         {
                             Ma = reader["CN_Ma"].ToString(),
                             Ten = reader["CN_Ten"]?.ToString(),
-                            DiaChi = reader["CN_Diachi"]?.ToString(),
+
+                            // === ĐÃ SỬA LỖI TYPO (Diachi -> DiaChi) ===
+                            DiaChi = reader["CN_DiaChi"]?.ToString(),
+
                             Sdt = reader["CN_Sdt"]?.ToString(),
                             NgayThanhLap = reader["CN_NgayThanhLap"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["CN_NgayThanhLap"])
                         };
                         list.Add(cn);
                     }
-                    reader.Close();
+                    reader.Close(); // Đóng reader sau khi dùng xong
                 }
                 catch (Exception ex)
                 {
@@ -59,7 +66,8 @@ namespace GZone.models
             {
                 try
                 {
-                    string query = "INSERT INTO CHI_NHANH (CN_Ma, CN_Ten, CN_Diachi, CN_Sdt, CN_NgayThanhLap) VALUES (@Ma, @Ten, @DiaChi, @Sdt, @NgayThanhLap)";
+                    // === ĐÃ SỬA LỖI TYPO (Diachi -> DiaChi) ===
+                    string query = "INSERT INTO CHI_NHANH (CN_Ma, CN_Ten, CN_DiaChi, CN_Sdt, CN_NgayThanhLap) VALUES (@Ma, @Ten, @DiaChi, @Sdt, @NgayThanhLap)";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
 
                     cmd.Parameters.AddWithValue("@Ma", cn.Ma);
@@ -111,7 +119,8 @@ namespace GZone.models
             {
                 try
                 {
-                    string query = "UPDATE CHI_NHANH SET CN_Ten = @Ten, CN_Diachi = @DiaChi, CN_Sdt = @Sdt, CN_NgayThanhLap = @NgayThanhLap WHERE CN_Ma = @Ma";
+                    // === ĐÃ SỬA LỖI TYPO (Diachi -> DiaChi) ===
+                    string query = "UPDATE CHI_NHANH SET CN_Ten = @Ten, CN_DiaChi = @DiaChi, CN_Sdt = @Sdt, CN_NgayThanhLap = @NgayThanhLap WHERE CN_Ma = @Ma";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
 
                     cmd.Parameters.AddWithValue("@Ten", cn.Ten ?? (object)DBNull.Value);

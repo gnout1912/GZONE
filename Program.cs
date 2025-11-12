@@ -16,7 +16,7 @@ namespace GZone
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuanLyDoanhThuHeThong());
+            Application.Run(new QuanLyDoanhThuHeThong.QuanLyDoanhThuHeThong());
         }
     }
 }

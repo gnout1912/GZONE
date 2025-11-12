@@ -28,13 +28,12 @@ namespace GZone.QuanLyLamViec
 
         private void LoadDanhSachNhanVien()
         {
-            // Lấy danh sách NV (kèm tên chi nhánh)
+         
             List<NhanVien> dsNhanVien = _nhanVienDAL.GetAllNhanVienWithChiNhanh();
             dgvNhanVien.DataSource = dsNhanVien;
 
-            // Cấu hình cột
-            dgvNhanVien.Columns["Ma"].Visible = false; // Ẩn Mã NV
-            dgvNhanVien.Columns["MaChiNhanh"].Visible = false; // Ẩn Mã CN
+            dgvNhanVien.Columns["Ma"].Visible = false; 
+            dgvNhanVien.Columns["MaChiNhanh"].Visible = false; 
 
             dgvNhanVien.Columns["Ten"].HeaderText = "Tên Nhân Viên";
             dgvNhanVien.Columns["Ten"].Width = 200;
@@ -52,12 +51,11 @@ namespace GZone.QuanLyLamViec
         {
             if (e.RowIndex >= 0)
             {
-                // Lấy nhân viên được chọn từ dòng
+
                 NhanVien selectedNhanVien = dgvNhanVien.Rows[e.RowIndex].DataBoundItem as NhanVien;
 
                 if (selectedNhanVien != null)
                 {
-                    // Mở form xếp lịch và truyền nhân viên qua
                     frmXepLichNhanVien formXepLich = new frmXepLichNhanVien(selectedNhanVien);
                     formXepLich.ShowDialog();
                 }
