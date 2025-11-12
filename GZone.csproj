@@ -47,12 +47,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <Compile Include="models\ChiNhanh.cs" />
+    <Compile Include="models\TaiKhoan.cs" />
+    <Compile Include="models\ThanhVien.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChamCong.cs" />
     <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
+    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
+      <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyChiNhanh\QuanLyChiNhanh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyChiNhanh\QuanLyChiNhanh.Designer.cs">
+      <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuanLyGoiTap\ChinhSuaGoiTapForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +81,9 @@
     <Compile Include="QuanLyNhanVien\QuanLyNhanVien.Designer.cs">
       <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
+      <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuanLyGoiTap\ChinhSuaGoiTapForm.resx">
       <DependentUpon>ChinhSuaGoiTapForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,5 +144,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

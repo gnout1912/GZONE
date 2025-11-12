@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -7,7 +7,7 @@ namespace GZone.models
 {
     public class ChiNhanh
     {
-        public int Ma { get; set; }           // CN_Ma
+        public string Ma { get; set; }           // SỬA: CN_Ma CHAR(10)
         public string Ten { get; set; }          // CN_Ten
         public string DiaChi { get; set; }       // CN_Diachi
         public string Sdt { get; set; }          // CN_Sdt
@@ -16,7 +16,7 @@ namespace GZone.models
 
     public class ChiNhanhDAL
     {
-        // L?y to�n b? danh s�ch chi nh�nh
+        // Lấy toàn bộ danh sách chi nhánh
         public List<ChiNhanh> GetAllChiNhanh()
         {
             List<ChiNhanh> list = new List<ChiNhanh>();
@@ -32,7 +32,7 @@ namespace GZone.models
                     {
                         ChiNhanh cn = new ChiNhanh
                         {
-                            Ma = Convert.ToInt32(reader["CN_Ma"]),
+                            Ma = reader["CN_Ma"].ToString(), // SỬA: Đọc Ma là string
                             Ten = reader["CN_Ten"]?.ToString(),
                             DiaChi = reader["CN_Diachi"]?.ToString(),
                             Sdt = reader["CN_Sdt"]?.ToString(),
@@ -44,7 +44,7 @@ namespace GZone.models
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("L?i khi t?i d? li?u chi nh�nh: " + ex.Message);
+                    MessageBox.Show("Lỗi khi tải dữ liệu chi nhánh: " + ex.Message);
                 }
                 finally
                 {
@@ -54,28 +54,29 @@ namespace GZone.models
             return list;
         }
 
-        // Th�m chi nh�nh
+        // Thêm chi nhánh
         public void AddChiNhanh(ChiNhanh cn)
         {
             if (clsDatabase.OpenConnection())
             {
                 try
                 {
-                    string query = "INSERT INTO CHI_NHANH (CN_Ten, CN_Diachi, CN_Sdt, CN_NgayThanhLap) VALUES (@Ten, @DiaChi, @Sdt, @NgayThanhLap)";
+                    // Đảm bảo phải INSERT cả Ma vì nó không phải IDENTITY
+                    string query = "INSERT INTO CHI_NHANH (CN_Ma, CN_Ten, CN_Diachi, CN_Sdt, CN_NgayThanhLap) VALUES (@Ma, @Ten, @DiaChi, @Sdt, @NgayThanhLap)";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
 
+                    cmd.Parameters.AddWithValue("@Ma", cn.Ma); // SỬA: Thêm Ma
                     cmd.Parameters.AddWithValue("@Ten", cn.Ten ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@DiaChi", cn.DiaChi ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@Sdt", cn.Sdt ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@NgayThanhLap", cn.NgayThanhLap ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Th�m chi nh�nh th�nh c�ng!");
+                    MessageBox.Show("Thêm chi nhánh thành công!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("L?i khi th�m chi nh�nh: " + ex.Message);
+                    MessageBox.Show("Lỗi khi thêm chi nhánh: " + ex.Message);
                 }
                 finally
                 {
@@ -84,8 +85,8 @@ namespace GZone.models
             }
         }
 
-        // X�a chi nh�nh
-        public void DeleteChiNhanh(int maCN)
+        // Xóa chi nhánh
+        public void DeleteChiNhanh(string maCN) // SỬA: maCN là string
         {
             if (clsDatabase.OpenConnection())
             {
@@ -96,11 +97,11 @@ namespace GZone.models
                     cmd.Parameters.AddWithValue("@Ma", maCN);
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("X�a chi nh�nh th�nh c�ng!");
+                    MessageBox.Show("Xóa chi nhánh thành công!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("L?i khi x�a chi nh�nh: " + ex.Message);
+                    MessageBox.Show("Lỗi khi xóa chi nhánh: " + ex.Message);
                 }
                 finally
                 {
@@ -109,7 +110,7 @@ namespace GZone.models
             }
         }
 
-        // C?p nh?t chi nh�nh
+        // Cập nhật chi nhánh
         public void UpdateChiNhanh(ChiNhanh cn)
         {
             if (clsDatabase.OpenConnection())
@@ -126,12 +127,11 @@ namespace GZone.models
                     cmd.Parameters.AddWithValue("@Ma", cn.Ma);
 
                     cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("C?p nh?t th�ng tin th�nh c�ng!");
+                    MessageBox.Show("Cập nhật thông tin thành công!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("L?i khi c?p nh?t chi nh�nh: " + ex.Message);
+                    MessageBox.Show("Lỗi khi cập nhật chi nhánh: " + ex.Message);
                 }
                 finally
                 {
