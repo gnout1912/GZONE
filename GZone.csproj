@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
-	<Compile Include="Program.cs" />
+    <Compile Include="Program.cs" />
     <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChiNhanh.cs" />
     <Compile Include="models\TaiKhoan.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="models\ChamCong.cs" />
     <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
-	<!-- ===================== QUẢN LÝ CHI NHÁNH ===================== -->
+    <!-- ===================== QUẢN LÝ CHI NHÁNH ===================== -->
     <Compile Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +84,22 @@
     <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
       <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.Designer.cs">
+      <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyPhongGymDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyPhongGymDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyPhongGymDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyPhongGymDataSet1.xsd</DependentUpon>
+    </Compile>
     <!-- ===================== QUẢN LÝ Tài Khoản ===================== -->
     <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.cs">
       <SubType>Form</SubType>
@@ -96,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
       <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.resx">
+      <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.resx">
       <DependentUpon>ChinhSuaTaiKhoanForm.cs</DependentUpon>
@@ -210,6 +229,28 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="models\.editorconfig" />
+    <None Include="QuanLyPhongGymDataSet.xsc">
+      <DependentUpon>QuanLyPhongGymDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyPhongGymDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyPhongGymDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyPhongGymDataSet.xss">
+      <DependentUpon>QuanLyPhongGymDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyPhongGymDataSet1.xsc">
+      <DependentUpon>QuanLyPhongGymDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyPhongGymDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyPhongGymDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyPhongGymDataSet1.xss">
+      <DependentUpon>QuanLyPhongGymDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
