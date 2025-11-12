@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+	<Compile Include="Program.cs" />
     <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChiNhanh.cs" />
     <Compile Include="models\TaiKhoan.cs" />
@@ -60,11 +61,11 @@
     <Compile Include="models\ThanhVien.cs" />
     <Compile Include="models\ThanhVienGoiTap.cs" />
     <Compile Include="models\YeuCau.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="models\ChamCong.cs" />
     <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
+	<!-- ===================== QUẢN LÝ CHI NHÁNH ===================== -->
     <Compile Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +84,7 @@
     <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
       <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
     </Compile>
-    <!-- ===================== QUẢN LÝ CHI NHÁNH ===================== -->
+    <!-- ===================== QUẢN LÝ Tài Khoản ===================== -->
     <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>

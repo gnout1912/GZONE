@@ -26,8 +26,38 @@ namespace GZone
 
         private void QuanLyChiNhanh_Load(object sender, EventArgs e)
         {
+            // MỚI: Gọi hàm để cài đặt giao diện "chỉ xem"
+            SetupReadOnlyTextBoxes();
+
             LoadDanhSachChiNhanhLenList();
             SetupDgvYeuCauColumns(); // Cấu hình lưới yêu cầu
+        }
+
+        // MỚI: Thêm hàm helper này
+        /// <summary>
+        /// Cài đặt các TextBox thông tin chi tiết thành dạng chỉ xem (Read-Only)
+        /// và chỉnh lại kiểu dáng cho đẹp (bỏ viền, đổi màu nền)
+        /// </summary>
+        private void SetupReadOnlyTextBoxes()
+        {
+            // Tạo một danh sách các TextBox cần chỉnh
+            var textBoxes = new List<TextBox>
+            {
+                txtMaChiNhanh,
+                txtTenChiNhanh,
+                txtDiaChi,
+                txtSoDienThoai,
+                txtNgayThanhLap
+            };
+
+            // Duyệt qua từng TextBox và chỉnh thuộc tính
+            foreach (var txt in textBoxes)
+            {
+                txt.ReadOnly = true;                 // Không cho phép gõ chữ
+                txt.BorderStyle = BorderStyle.None;  // Bỏ viền
+                txt.BackColor = Color.White;         // Đặt nền màu trắng (hoặc SystemColors.Control nếu nền form của bạn màu xám)
+                txt.TabStop = false;                 // Bỏ qua khi nhấn phím Tab
+            }
         }
 
         /// <summary>
@@ -136,6 +166,22 @@ namespace GZone
             dgvYeuCau.DataSource = null;
         }
 
+        // >>> HÀM MỚI CHO BUTTON BẠN VỪA THÊM <<<
+        private void btnThemChiNhanh_Click(object sender, EventArgs e)
+        {
+            // 1. Mở form thêm mới
+            // (Giả sử Form của bạn tên là ThemChiNhanhForm)
+            ThemChiNhanhForm frmThem = new ThemChiNhanhForm();
+            DialogResult result = frmThem.ShowDialog();
+
+            // 2. Nếu form báo OK (tức là đã thêm thành công)
+            // (Form ThemChiNhanhForm của bạn nên trả về DialogResult.OK khi thành công)
+            if (result == DialogResult.OK)
+            {
+                // 3. Tải lại danh sách chi nhánh để cập nhật list bên trái
+                LoadDanhSachChiNhanhLenList();
+            }
+        }
 
         private void btnSuaChiTiet_Click(object sender, EventArgs e)
         {
@@ -156,6 +202,22 @@ namespace GZone
             ChinhSuaChiNhanhForm frmSuaCN = new ChinhSuaChiNhanhForm(selectedChiNhanh);
             DialogResult result = frmSuaCN.ShowDialog();
 
+            // MỚI: Thêm phần này để load lại danh sách nếu có chỉnh sửa
+            // (Bạn chưa có phần này, mình thêm vào cho hoàn chỉnh)
+            if (result == DialogResult.OK)
+            {
+                // Lưu lại index đang chọn
+                int selectedIndex = lstChiNhanh.SelectedIndex;
+
+                // Tải lại danh sách chi nhánh
+                LoadDanhSachChiNhanhLenList();
+
+                // Chọn lại đúng chi nhánh vừa sửa
+                if (selectedIndex >= 0 && selectedIndex < lstChiNhanh.Items.Count)
+                {
+                    lstChiNhanh.SelectedIndex = selectedIndex;
+                }
+            }
         }
 
         private void btnPheDuyet_Click(object sender, EventArgs e)
