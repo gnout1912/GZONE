@@ -24,7 +24,7 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblTitle = new System.Windows.Forms.Label();
             this.dgvNhanVien = new System.Windows.Forms.DataGridView();
             this.colMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,22 +52,23 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblTitle.Location = new System.Drawing.Point(180, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(167, 20);
+            this.lblTitle.Size = new System.Drawing.Size(207, 25);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Danh Sách Nhân Viên";
             // 
             // dgvNhanVien
             // 
+            this.dgvNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellClick);
             this.dgvNhanVien.AllowUserToAddRows = false;
             this.dgvNhanVien.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNhanVien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNhanVien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaNV,
@@ -78,6 +79,7 @@
             this.dgvNhanVien.EnableHeadersVisualStyles = false;
             this.dgvNhanVien.Location = new System.Drawing.Point(25, 170);
             this.dgvNhanVien.Name = "dgvNhanVien";
+            this.dgvNhanVien.RowHeadersWidth = 51;
             this.dgvNhanVien.RowTemplate.Height = 24;
             this.dgvNhanVien.Size = new System.Drawing.Size(550, 220);
             this.dgvNhanVien.TabIndex = 1;
@@ -86,6 +88,7 @@
             // 
             this.colMaNV.DataPropertyName = "Ma";
             this.colMaNV.HeaderText = "Mã NV";
+            this.colMaNV.MinimumWidth = 6;
             this.colMaNV.Name = "colMaNV";
             this.colMaNV.ReadOnly = true;
             this.colMaNV.Width = 70;
@@ -94,6 +97,7 @@
             // 
             this.colTenNV.DataPropertyName = "Ten";
             this.colTenNV.HeaderText = "Tên Nhân Viên";
+            this.colTenNV.MinimumWidth = 6;
             this.colTenNV.Name = "colTenNV";
             this.colTenNV.Width = 150;
             // 
@@ -101,12 +105,15 @@
             // 
             this.colSdt.DataPropertyName = "Sdt";
             this.colSdt.HeaderText = "SĐT";
+            this.colSdt.MinimumWidth = 6;
             this.colSdt.Name = "colSdt";
+            this.colSdt.Width = 125;
             // 
             // colGioiTinh
             // 
             this.colGioiTinh.DataPropertyName = "GioiTinh";
             this.colGioiTinh.HeaderText = "Giới Tính";
+            this.colGioiTinh.MinimumWidth = 6;
             this.colGioiTinh.Name = "colGioiTinh";
             this.colGioiTinh.Width = 80;
             // 
@@ -114,6 +121,7 @@
             // 
             this.colCNMa.DataPropertyName = "MaChiNhanh";
             this.colCNMa.HeaderText = "Mã CN";
+            this.colCNMa.MinimumWidth = 6;
             this.colCNMa.Name = "colCNMa";
             this.colCNMa.Width = 80;
             // 
@@ -122,7 +130,7 @@
             this.lblTen.AutoSize = true;
             this.lblTen.Location = new System.Drawing.Point(40, 60);
             this.lblTen.Name = "lblTen";
-            this.lblTen.Size = new System.Drawing.Size(47, 13);
+            this.lblTen.Size = new System.Drawing.Size(56, 16);
             this.lblTen.TabIndex = 2;
             this.lblTen.Text = "Tên NV:";
             // 
@@ -131,7 +139,7 @@
             this.lblSdt.AutoSize = true;
             this.lblSdt.Location = new System.Drawing.Point(40, 90);
             this.lblSdt.Name = "lblSdt";
-            this.lblSdt.Size = new System.Drawing.Size(32, 13);
+            this.lblSdt.Size = new System.Drawing.Size(37, 16);
             this.lblSdt.TabIndex = 3;
             this.lblSdt.Text = "SĐT:";
             // 
@@ -140,7 +148,7 @@
             this.lblGioiTinh.AutoSize = true;
             this.lblGioiTinh.Location = new System.Drawing.Point(320, 60);
             this.lblGioiTinh.Name = "lblGioiTinh";
-            this.lblGioiTinh.Size = new System.Drawing.Size(54, 13);
+            this.lblGioiTinh.Size = new System.Drawing.Size(63, 16);
             this.lblGioiTinh.TabIndex = 4;
             this.lblGioiTinh.Text = "Giới Tính:";
             // 
@@ -149,7 +157,7 @@
             this.lblCNMa.AutoSize = true;
             this.lblCNMa.Location = new System.Drawing.Point(320, 90);
             this.lblCNMa.Name = "lblCNMa";
-            this.lblCNMa.Size = new System.Drawing.Size(43, 13);
+            this.lblCNMa.Size = new System.Drawing.Size(51, 16);
             this.lblCNMa.TabIndex = 5;
             this.lblCNMa.Text = "Mã CN:";
             // 
@@ -157,14 +165,14 @@
             // 
             this.txtTen.Location = new System.Drawing.Point(110, 57);
             this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(180, 20);
+            this.txtTen.Size = new System.Drawing.Size(180, 22);
             this.txtTen.TabIndex = 6;
             // 
             // txtSdt
             // 
             this.txtSdt.Location = new System.Drawing.Point(110, 87);
             this.txtSdt.Name = "txtSdt";
-            this.txtSdt.Size = new System.Drawing.Size(180, 20);
+            this.txtSdt.Size = new System.Drawing.Size(180, 22);
             this.txtSdt.TabIndex = 7;
             // 
             // cbGioiTinh
@@ -175,14 +183,14 @@
             "Nữ"});
             this.cbGioiTinh.Location = new System.Drawing.Point(390, 57);
             this.cbGioiTinh.Name = "cbGioiTinh";
-            this.cbGioiTinh.Size = new System.Drawing.Size(140, 21);
+            this.cbGioiTinh.Size = new System.Drawing.Size(140, 24);
             this.cbGioiTinh.TabIndex = 8;
             // 
             // txtCNMa
             // 
             this.txtCNMa.Location = new System.Drawing.Point(390, 87);
             this.txtCNMa.Name = "txtCNMa";
-            this.txtCNMa.Size = new System.Drawing.Size(140, 20);
+            this.txtCNMa.Size = new System.Drawing.Size(140, 22);
             this.txtCNMa.TabIndex = 9;
             // 
             // btnThem

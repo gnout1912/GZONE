@@ -33,6 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.7.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>packages\QRCoder.1.7.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,23 +49,27 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
+    <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChiNhanh.cs" />
     <Compile Include="models\TaiKhoan.cs" />
+    <Compile Include="models\CoSoVatChat.cs" />
     <Compile Include="models\ThanhVien.cs" />
+    <Compile Include="models\ThanhVienGoiTap.cs" />
+    <Compile Include="models\YeuCau.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChamCong.cs" />
     <Compile Include="models\NhanVien.cs" />
     <Compile Include="models\GoiTap.cs" />
-    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.cs">
+    <Compile Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
-      <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
+    <Compile Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.Designer.cs">
+      <DependentUpon>ChinhSuaChiNhanhForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QuanLyChiNhanh\QuanLyChiNhanh.cs">
       <SubType>Form</SubType>
@@ -68,12 +77,72 @@
     <Compile Include="QuanLyChiNhanh\QuanLyChiNhanh.Designer.cs">
       <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
+      <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
+    </Compile>
+    <!-- ===================== QUẢN LÝ CHI NHÁNH ===================== -->
+    <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.Designer.cs">
+      <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.resx">
+      <DependentUpon>ChinhSuaChiNhanhForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
+      <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.resx">
+      <DependentUpon>ChinhSuaTaiKhoanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyTaiKhoan\QuanLyTaiKhoan.resx">
+      <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <!-- ===================== QUẢN LÝ CƠ SỞ VẬT CHẤT ===================== -->
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.Designer.cs">
+      <DependentUpon>QuanLyCoSoVatChat.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QuanLyChiNhanh\ThemChiNhanhForm.resx">
+      <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyCoSoVatChat\QuanLyCoSoVatChat.resx">
+      <DependentUpon>QuanLyCoSoVatChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <!-- ===================== QUẢN LÝ GÓI TẬP ===================== -->
     <Compile Include="QuanLyGoiTap\ChinhSuaGoiTapForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="QuanLyGoiTap\ChinhSuaGoiTapForm.Designer.cs">
       <DependentUpon>ChinhSuaGoiTapForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyGoiTap\QuanLyGoiTap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyGoiTap\QuanLyGoiTap.Designer.cs">
+      <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyGoiTap\ThemGoiTapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyGoiTap\ThemGoiTapForm.Designer.cs">
+      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QuanLyGoiTap\ChinhSuaGoiTapForm.resx">
+      <DependentUpon>ChinhSuaGoiTapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyGoiTap\QuanLyGoiTap.resx">
+      <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyGoiTap\ThemGoiTapForm.resx">
+      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
+    </EmbeddedResource>
     <!-- ===================== QUẢN LÝ NHÂN VIÊN ===================== -->
     <Compile Include="QuanLyNhanVien\QuanLyNhanVien.cs">
       <SubType>Form</SubType>
@@ -81,14 +150,33 @@
     <Compile Include="QuanLyNhanVien\QuanLyNhanVien.Designer.cs">
       <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
-      <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuanLyGoiTap\ChinhSuaGoiTapForm.resx">
-      <DependentUpon>ChinhSuaGoiTapForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="QuanLyNhanVien\QuanLyNhanVien.resx">
       <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.Designer.cs">
+      <DependentUpon>ChinhSuaTaiKhoanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan\ThemTaiKhoanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan\ThemTaiKhoanForm.Designer.cs">
+      <DependentUpon>ThemTaiKhoanForm.cs</DependentUpon>
+    </Compile>
+    <!-- ===================== QUẢN LÝ THÀNH VIÊN ===================== -->
+    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.Designer.cs">
+      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="QuanLyTaiKhoan\ThemTaiKhoanForm.resx">
+      <DependentUpon>ThemTaiKhoanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyThanhVien\QuanLyThanhVien.resx">
+      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
     </EmbeddedResource>
     <!-- ===================== QUẢN LÝ CHẤM CÔNG ===================== -->
     <Compile Include="QuanLyChamCong\QuanLyChamCong.cs">
@@ -100,26 +188,6 @@
     <EmbeddedResource Include="QuanLyChamCong\QuanLyChamCong.resx">
       <DependentUpon>QuanLyChamCong.cs</DependentUpon>
     </EmbeddedResource>
-    <!-- ===================== QUẢN LÝ GÓI TẬP ===================== -->
-    <Compile Include="QuanLyGoiTap\QuanLyGoiTap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyGoiTap\QuanLyGoiTap.Designer.cs">
-      <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="QuanLyGoiTap\QuanLyGoiTap.resx">
-      <DependentUpon>QuanLyGoiTap.cs</DependentUpon>
-    </EmbeddedResource>
-    <!-- ===================== THÊM GÓI TẬP ===================== -->
-    <Compile Include="QuanLyGoiTap\ThemGoiTapForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyGoiTap\ThemGoiTapForm.Designer.cs">
-      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="QuanLyGoiTap\ThemGoiTapForm.resx">
-      <DependentUpon>ThemGoiTapForm.cs</DependentUpon>
-    </EmbeddedResource>
     <!-- ===================== PROPERTIES ===================== -->
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -130,6 +198,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

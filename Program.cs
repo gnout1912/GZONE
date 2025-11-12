@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GZone.QuanLyChiNhanh; // <-- THÊM DÒNG NÀY (Để nó tìm thấy Form)
 
 namespace GZone
 {
@@ -17,9 +16,7 @@ namespace GZone
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            // SỬA LẠI DÒNG NÀY:
-            Application.Run(new QuanLyChiNhanh.QuanLyChiNhanh()); // Chạy Form 'QuanLyChiNhanh.cs'
+            Application.Run(new QuanLyChiNhanh());
         }
     }
 }
