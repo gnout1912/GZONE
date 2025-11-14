@@ -1,8 +1,12 @@
-﻿    using GZone.models;
-    using System;
-    using System.Windows.Forms;
+﻿using GZone.models;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
-    namespace GZone
+namespace GZone
     {
         public partial class QuanLyNhanVien : Form
         {
@@ -64,7 +68,7 @@
 
                 NhanVien nv = new NhanVien
                 {
-                    Ma = Convert.ToInt32(dgvNhanVien.CurrentRow.Cells["colMaNV"].Value),
+                    Ma = dgvNhanVien.CurrentRow.Cells["colMaNV"].Value.ToString(),
                     Ten = txtTen.Text.Trim(),
                     Sdt = txtSdt.Text.Trim(),
                     GioiTinh = cbGioiTinh.SelectedItem?.ToString(),
@@ -84,8 +88,8 @@
                     return;
                 }
 
-                int maNV = Convert.ToInt32(dgvNhanVien.CurrentRow.Cells["colMaNV"].Value);
-                if (MessageBox.Show("Bạn có chắc muốn xóa nhân viên này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            string maNV = dgvNhanVien.CurrentRow.Cells["colMaNV"].Value.ToString();
+            if (MessageBox.Show("Bạn có chắc muốn xóa nhân viên này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     _dal.DeleteNhanVien(maNV);
                     LoadNhanVien();
