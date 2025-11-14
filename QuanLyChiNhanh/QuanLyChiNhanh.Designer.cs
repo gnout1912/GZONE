@@ -73,7 +73,7 @@
             this.splitMain.Panel1.Controls.Add(this.lstChiNhanh);
             this.splitMain.Panel1.Controls.Add(this.btnThemChiNhanh);
             this.splitMain.Panel1.Controls.Add(this.lblTieuDeTrai);
-            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10);
             // 
             // splitMain.Panel2
             // 
@@ -150,7 +150,7 @@
             this.tabPageThongTin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageThongTin.Location = new System.Drawing.Point(4, 26);
             this.tabPageThongTin.Name = "tabPageThongTin";
-            this.tabPageThongTin.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.tabPageThongTin.Padding = new System.Windows.Forms.Padding(15);
             this.tabPageThongTin.Size = new System.Drawing.Size(786, 550);
             this.tabPageThongTin.TabIndex = 0;
             this.tabPageThongTin.Text = "Thông tin Chi tiết";
@@ -269,7 +269,7 @@
             this.tabPageYeuCau.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageYeuCau.Location = new System.Drawing.Point(4, 26);
             this.tabPageYeuCau.Name = "tabPageYeuCau";
-            this.tabPageYeuCau.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.tabPageYeuCau.Padding = new System.Windows.Forms.Padding(10);
             this.tabPageYeuCau.Size = new System.Drawing.Size(786, 550);
             this.tabPageYeuCau.TabIndex = 1;
             this.tabPageYeuCau.Text = "Quản lý Yêu cầu";
