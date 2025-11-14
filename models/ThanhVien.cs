@@ -17,6 +17,7 @@ namespace GZone.models
         public string TV_GioiTinh { get; set; }
         public string TV_Sdt { get; set; }
         public string CN_Ma { get; set; }
+        public string TenChiNhanh { get; set; }
     }
 
     public class ThanhVienDAL
@@ -30,21 +31,20 @@ namespace GZone.models
                 try
                 {
                     string query = @"
-                SELECT 
-                    TV_Ma AS [Mã TV],
-                    TV_HoTen AS [Họ Tên],
-                    CONVERT(VARCHAR(10), TV_NgaySinh, 103) AS [Ngày sinh],
-                    TV_GioiTinh AS [Giới tính],
-                    TV_Sdt AS [Số điện thoại],
-                    CN_Ma AS [Mã chi nhánh]
-                FROM THANH_VIEN
-                WHERE CN_Ma = @MaCN
-            ";
+        SELECT 
+            TV_Ma AS [Mã TV],
+            TV_HoTen AS [Họ Tên],
+            CONVERT(VARCHAR(10), TV_NgaySinh, 103) AS [Ngày sinh],
+            TV_GioiTinh AS [Giới tính],
+            TV_Sdt AS [Số điện thoại],
+            CN_Ma AS [Mã chi nhánh]
+        FROM THANH_VIEN
+        WHERE CN_Ma = @MaCN
+    ";
 
-                    // Nếu searchTerm khác rỗng mới thêm điều kiện tìm kiếm
                     if (!string.IsNullOrWhiteSpace(searchTerm))
                     {
-                        query += " AND TV_HoTen LIKE @SearchPattern";
+                        query += " AND (TV_HoTen LIKE @SearchPattern OR TV_Ma LIKE @SearchPattern)";
                     }
 
                     query += " ORDER BY TV_HoTen";
@@ -83,7 +83,17 @@ namespace GZone.models
             {
                 try
                 {
-                    string query = "SELECT * FROM THANH_VIEN WHERE TV_Ma = @Ma";
+                    string query = @"
+                SELECT 
+                    TV.*, 
+                    CN.CN_Ten 
+                FROM 
+                    THANH_VIEN TV
+                LEFT JOIN -- Dùng LEFT JOIN phòng trường hợp TV chưa có chi nhánh
+                    CHI_NHANH CN ON TV.CN_Ma = CN.CN_Ma
+                WHERE 
+                    TV.TV_Ma = @Ma";
+
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
                     cmd.Parameters.AddWithValue("@Ma", maTV);
 
@@ -97,7 +107,11 @@ namespace GZone.models
                             TV_NgaySinh = Convert.ToDateTime(reader["TV_NgaySinh"]),
                             TV_GioiTinh = reader["TV_GioiTinh"].ToString(),
                             TV_Sdt = reader["TV_Sdt"].ToString(),
-                            CN_Ma = reader["CN_Ma"].ToString()
+                            CN_Ma = reader["CN_Ma"].ToString(),
+
+                            TenChiNhanh = reader["CN_Ten"] == DBNull.Value
+                                           ? "Không có"
+                                           : reader["CN_Ten"].ToString()
                         };
                     }
                     reader.Close();

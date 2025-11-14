@@ -1,4 +1,5 @@
 ﻿using GZone.models;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,6 @@ namespace GZone.QuanLyThanhVien
         ThanhVienDAL tvDAL;
         ThanhVienGoiTapDAL tvgtDAL;
 
-        // Lưu mã hội viên đang được chọn
         private string currentMaTV = null;
 
         public QuanLyThanhVien()
@@ -29,13 +29,10 @@ namespace GZone.QuanLyThanhVien
 
         private void LoadDanhSachThanhVien()
         {
-            // Lấy mã chi nhánh của nhân viên từ Session
             string maCN = Session.MaChiNhanh;
             string searchTerm = txtTimKiem.Text.Trim();
             dgvHoiVien.AutoGenerateColumns = true;
-
-
-            // Gọi hàm DAL đã được nâng cấp (ở Bước 1)
+            
             dgvHoiVien.DataSource = tvDAL.GetAllThanhVien(maCN, searchTerm);
         }
 
@@ -45,111 +42,93 @@ namespace GZone.QuanLyThanhVien
             LoadDanhSachThanhVien();
         }
 
-        // === Tải danh sách Master (DataGridView chính) ===
-
         #region Tải Dữ Liệu (Hàm Helper
-        
 
-        // === Tải Tab 1: Thông tin chi tiết ===
         private void LoadThongTinChiTiet(string maHV)
         {
-            // Gọi hàm DAL mới (ở Bước 1)
             ThanhVien tv = tvDAL.GetThanhVienByMa(maHV);
+
             if (tv != null)
             {
-                // Binding dữ liệu lên các TextBox (đang ở chế độ ReadOnly)
                 txtMaHV.Text = tv.TV_Ma;
                 txtHoTen.Text = tv.TV_HoTen;
                 txtNgaySinh.Text = tv.TV_NgaySinh.ToString("dd/MM/yyyy");
                 txtGioiTinh.Text = tv.TV_GioiTinh;
                 txtSdt.Text = tv.TV_Sdt;
-                txtChiNhanh.Text = tv.CN_Ma; // (Có thể đổi thành Tên Chi Nhánh nếu JOIN)
+
+                txtChiNhanh.Text = tv.TenChiNhanh; 
             }
         }
 
         private void SetupGoiTapColumns()
         {
-            // Tắt tự động tạo cột
             dgvGoiTap.AutoGenerateColumns = false;
-            dgvGoiTap.Columns.Clear(); // Xóa các cột cũ (nếu có)
-
-            // Thêm cột ID (ẩn đi, nhưng cần cho logic)
+            dgvGoiTap.Columns.Clear();
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "TVGT_ID",
-                DataPropertyName = "TVGT_ID", // Tên cột từ CSDL
+                DataPropertyName = "TVGT_ID",
                 HeaderText = "ID",
-                Visible = false // Ẩn cột này
+                Visible = false 
             });
-
-            // Thêm cột Mã Gói (ẩn nếu muốn)
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "GT_Ma",
-                DataPropertyName = "GT_Ma", // Tên cột từ CSDL
+                DataPropertyName = "GT_Ma", 
                 HeaderText = "Mã Gói",
                 Width = 80
             });
 
-            // Thêm cột Tên Gói
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "GT_Ten",
-                DataPropertyName = "GT_Ten", // Tên cột từ CSDL
-                HeaderText = "Tên Gói Tập", // Tên "đẹp"
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill // Tự co giãn
+                DataPropertyName = "GT_Ten",
+                HeaderText = "Tên Gói Tập",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
             });
 
-            // Thêm cột Thời Hạn (từ CSDL)
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "GT_ThoiHan",
-                DataPropertyName = "GT_ThoiHan", // Tên cột từ CSDL
-                HeaderText = "Thời Hạn (Tháng)", // Tên "đẹp"
+                DataPropertyName = "GT_ThoiHan", 
+                HeaderText = "Thời Hạn (Tháng)", 
                 Width = 80
             });
 
-            // Thêm cột Ngày Đăng Ký
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "NgayDangKy",
-                DataPropertyName = "NgayDangKy", // Tên cột từ CSDL
-                HeaderText = "Ngày Đăng Ký", // Tên "đẹp"
+                DataPropertyName = "NgayDangKy", 
+                HeaderText = "Ngày Đăng Ký", 
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" },
                 Width = 110
             });
 
-            // Thêm cột Ngày Hết Hạn
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "NgayHetHan",
-                DataPropertyName = "NgayHetHan", // Tên cột từ CSDL
-                HeaderText = "Ngày Hết Hạn", // Tên "đẹp"
+                DataPropertyName = "NgayHetHan", 
+                HeaderText = "Ngày Hết Hạn", 
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" },
                 Width = 110
             });
 
-            // Thêm cột Trạng Thái
             dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "TrangThai",
-                DataPropertyName = "TrangThai", // Tên cột từ CSDL
-                HeaderText = "Trạng Thái", // Tên "đẹp"
+                DataPropertyName = "TrangThai", 
+                HeaderText = "Trạng Thái", 
                 Width = 110
             });
         }
 
-        // === Tải Tab 2: Thông tin dịch vụ (Gói tập) ===
         private void LoadThongTinDichVu(string maTV)
         {
-            // Hàm này của bạn đã có và trả về DataTable, rất tốt
             dgvGoiTap.DataSource = tvgtDAL.GetGoiTapByThanhVien(maTV);
         }
 
-        // === Xóa trắng các Tab chi tiết ===
         private void ClearDetailTabs()
         {
-            // Tab 1
             txtMaHV.Text = "";
             txtHoTen.Text = "";
             txtNgaySinh.Text = "";
@@ -157,7 +136,6 @@ namespace GZone.QuanLyThanhVien
             txtSdt.Text = "";
             txtChiNhanh.Text = "";
 
-            // Tab 2
             dgvGoiTap.DataSource = null;
 
             currentMaTV = null;
@@ -232,16 +210,14 @@ namespace GZone.QuanLyThanhVien
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             LoadDanhSachThanhVien();
-            ClearDetailTabs();
         }
 
-        // (UX: Cho phép nhấn Enter để tìm kiếm)
         private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
                 btnTimKiem_Click(sender, e);
-                e.Handled = true; // Ngăn tiếng "bíp"
+                e.Handled = true;
             }
         }
 
@@ -251,7 +227,6 @@ namespace GZone.QuanLyThanhVien
 
             if (fThem.ShowDialog() == DialogResult.OK)
             {
-                // Nếu thêm thành công, tải lại danh sách
                 LoadDanhSachThanhVien();
             }
         }
@@ -264,12 +239,10 @@ namespace GZone.QuanLyThanhVien
                 return;
             }
 
-            // Mở form modal ở chế độ "Sửa" (truyền Mã HV)
             ThemThanhVien fSua = new ThemThanhVien(currentMaTV);
 
             if (fSua.ShowDialog() == DialogResult.OK)
             {
-                // Nếu sửa thành công, tải lại cả danh sách và chi tiết
                 LoadDanhSachThanhVien();
                 LoadThongTinChiTiet(currentMaTV);
             }
@@ -283,15 +256,12 @@ namespace GZone.QuanLyThanhVien
                 return;
             }
 
-            // Lấy Tên hội viên từ tab 1
             string tenHV = txtHoTen.Text;
 
-            // Mở form modal Đăng Ký Gói (bạn tự tạo form này)
             DangKiGoiTap fDK = new DangKiGoiTap(currentMaTV, tenHV);
 
             if (fDK.ShowDialog() == DialogResult.OK)
             {
-                // Nếu đăng ký thành công, chỉ cần tải lại Tab 2
                 LoadThongTinDichVu(currentMaTV);
             }
         }
@@ -305,12 +275,10 @@ namespace GZone.QuanLyThanhVien
                 return;
             }
 
-            // 2. Lấy thông tin từ dòng được chọn
             DataGridViewRow row = dgvGoiTap.SelectedRows[0];
             string tenGoi = row.Cells["GT_Ten"].Value.ToString();
             DateTime ngayHetHanCu = Convert.ToDateTime(row.Cells["NgayHetHan"].Value);
 
-            // 3. Hỏi xác nhận
             DialogResult dr = MessageBox.Show($"Bạn có chắc muốn gia hạn cho gói '{tenGoi}' không?\n" +
                                               $"Ngày hết hạn cũ: {ngayHetHanCu.ToString("dd/MM/yyyy")}",
                                               "Xác nhận gia hạn",
@@ -319,48 +287,37 @@ namespace GZone.QuanLyThanhVien
 
             if (dr == DialogResult.No)
             {
-                return; // Người dùng không đồng ý
+                return;
             }
 
             try
             {
-                // 4. Lấy các thông số cần thiết để tính toán
                 int tvgtID = Convert.ToInt32(row.Cells["TVGT_ID"].Value);
 
-                // Lấy thời hạn gốc của gói (ví dụ: 3 tháng, 12 tháng)
-                // (Hàm GetGoiTapByThanhVien của bạn đã JOIN và lấy được GT_ThoiHan)
                 int thoiHanGoi_TheoThang = Convert.ToInt32(row.Cells["GT_ThoiHan"].Value);
 
-                // 5. === Logic Tính Ngày Hết Hạn Mới (Quan trọng) ===
 
                 DateTime today = DateTime.Now.Date;
                 DateTime startDate;
 
-                // Nếu gói đã hết hạn (ngày hết hạn < hôm nay),
-                // thì ngày bắt đầu mới là TỪ HÔM NAY.
                 if (ngayHetHanCu < today)
                 {
                     startDate = today;
                 }
                 else
                 {
-                    // Nếu gói vẫn còn hạn,
-                    // thì gia hạn tiếp TỪ NGÀY HẾT HẠN CŨ (cộng dồn).
                     startDate = ngayHetHanCu;
                 }
 
-                // Tính ngày hết hạn mới
                 DateTime ngayHetHanMoi = startDate.AddMonths(thoiHanGoi_TheoThang);
 
-                // 6. Tạo đối tượng để cập nhật CSDL
                 ThanhVienGoiTap tvgt_Update = new ThanhVienGoiTap
                 {
                     TVGT_ID = tvgtID,
                     NgayHetHan = ngayHetHanMoi,
-                    TrangThai = "Còn hiệu lực" // Khi gia hạn, chắc chắn là "Còn hiệu lực"
+                    TrangThai = "Còn hiệu lực"
                 };
 
-                // 7. Gọi DAL để cập nhật
                 int result = tvgtDAL.UpdateThanhVienGoiTap(tvgt_Update);
 
                 if (result > 0)
@@ -368,8 +325,6 @@ namespace GZone.QuanLyThanhVien
                     MessageBox.Show($"Gia hạn thành công!\nNgày hết hạn mới: {ngayHetHanMoi.ToString("dd/MM/yyyy")}",
                                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 8. Tải lại danh sách gói tập trong Tab 2
-                    // (currentMaHV là biến lưu mã hội viên đang được chọn)
                     LoadThongTinDichVu(this.currentMaTV);
                 }
                 else
@@ -392,26 +347,164 @@ namespace GZone.QuanLyThanhVien
         {
             if (dgvHoiVien.SelectedRows.Count > 0)
             {
-                // Lỗi là ở đây: Bạn phải dùng Alias "Mã TV"
-                // mà bạn đã đặt trong file ThanhVien.cs
                 string maTV = dgvHoiVien.SelectedRows[0].Cells["Mã TV"].Value.ToString();
 
                 if (maTV != currentMaTV)
                 {
                     currentMaTV = maTV;
 
-                    // 2. Tải dữ liệu chi tiết
                     LoadThongTinChiTiet(currentMaTV);
                     LoadThongTinDichVu(currentMaTV);
-
-                    // 3. Mặc định active tab 1
-                    // (Bạn nên có 1 TabControl tên là tabChiTiet
-                    // và TabPage tên là tabThongTin)
-                    // tabChiTiet.SelectedTab = tabThongTin; 
                 }
             }
         }
 
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dgvHoiVien.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn thành viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string maTV = dgvHoiVien.SelectedRows[0].Cells["Mã TV"].Value.ToString();
+            string tenTV = dgvHoiVien.SelectedRows[0].Cells["Họ Tên"].Value.ToString(); 
+
+            DialogResult confirm = MessageBox.Show($"Bạn có chắc chắn muốn xóa thành viên '{tenTV}' ({maTV})?",
+                                                "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                try
+                {
+                    int result = tvDAL.DeleteThanhVien(maTV);
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Xóa thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadDanhSachThanhVien();
+                        ClearDetailTabs(); 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
         #endregion
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ClearDetailTabs();
+            dgvHoiVien.ClearSelection();
+            txtTimKiem.Text = "";
+        }
+
+        private void printCardDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                string maTV = txtMaHV.Text;
+                string hoTen = txtHoTen.Text;
+                string ngaySinh = txtNgaySinh.Text;
+                string gioiTinh = txtGioiTinh.Text;
+                string sdt = txtSdt.Text;
+                string chiNhanh = txtChiNhanh.Text;
+
+                StringBuilder qrDataBuilder = new StringBuilder();
+                qrDataBuilder.AppendLine($"Chi Nhánh: {chiNhanh}");
+                qrDataBuilder.AppendLine("--- GÓI TẬP HIỆN CÓ ---");
+
+                DataTable dtGoiTap = tvgtDAL.GetGoiTapByThanhVien(maTV);
+                int soGoiConHan = 0;
+
+                if (dtGoiTap != null)
+                {
+                    foreach (DataRow row in dtGoiTap.Rows)
+                    {
+                        if (row["TrangThai"].ToString() == "Còn hiệu lực")
+                        {
+                            string tenGoi = row["GT_Ten"].ToString();
+                            DateTime ngayHH = Convert.ToDateTime(row["NgayHetHan"]);
+                            qrDataBuilder.AppendLine($"- {tenGoi} (HSD: {ngayHH:dd/MM/yyyy})");
+                            soGoiConHan++;
+                        }
+                    }
+                }
+                if (soGoiConHan == 0)
+                {
+                    qrDataBuilder.AppendLine("Không có gói tập nào còn hiệu lực.");
+                }
+
+                string qrData = qrDataBuilder.ToString();
+
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = new Bitmap(qrCode.GetGraphic(3), new Size(150, 150));
+
+                Font titleFont = new Font("Arial", 16, FontStyle.Bold);
+                Font labelFont = new Font("Arial", 10, FontStyle.Bold);
+                Font infoFont = new Font("Arial", 10);
+                SolidBrush brush = new SolidBrush(Color.Black);
+                Pen blackPen = new Pen(Color.Black, 2);
+                int startX = 100, startY = 100, cardWidth = 400, cardHeight = 250;
+
+                e.Graphics.DrawRectangle(blackPen, startX, startY, cardWidth, cardHeight);
+                e.Graphics.DrawString("THẺ THÀNH VIÊN", titleFont, brush, startX + 75, startY + 15);
+                e.Graphics.DrawImage(qrCodeImage, startX + 20, startY + 60);
+
+                float infoX_Label = startX + qrCodeImage.Width + 30;
+                float infoX_Text = infoX_Label + 80;
+                float infoY = startY + 60;
+
+                e.Graphics.DrawString("Mã TV:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(maTV, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Họ tên:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(hoTen, infoFont, brush, new RectangleF(infoX_Text, infoY, 150, 40));
+                infoY += 30;
+                e.Graphics.DrawString("Ngày sinh:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(ngaySinh, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Giới tính:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(gioiTinh, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("SĐT:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(sdt, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Chi Nhánh:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(chiNhanh, infoFont, brush, infoX_Text, infoY);
+
+                qrCodeImage.Dispose();
+                titleFont.Dispose();
+                labelFont.Dispose();
+                infoFont.Dispose();
+                brush.Dispose();
+                blackPen.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi vẽ thẻ: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void btnInThe_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaHV.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một thành viên để in thẻ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            printCardPreviewDialog.Document = printCardDocument;
+
+            printCardPreviewDialog.ShowDialog();
+
+        }
     }
 }
