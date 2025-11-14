@@ -53,8 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConnectDB.cs" />
-    <Compile Include="models\Ca.cs" />
-    <Compile Include="models\DangKiLichLam.cs" />
     <Compile Include="Program.cs" />
     <!-- ===================== MODELS ===================== -->
     <Compile Include="models\ChiNhanh.cs" />
@@ -86,24 +84,14 @@
     <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
       <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuanLyDangNhap\DangNhap.cs">
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuanLyDangNhap\DangNhap.Designer.cs">
-      <DependentUpon>DangNhap.cs</DependentUpon>
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhap.Designer.cs">
+      <DependentUpon>QuanLyDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuanLyDoanhThuChiNhanh\BieuDoDoanhThuChiNhanh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyDoanhThuChiNhanh\BieuDoDoanhThuChiNhanh.Designer.cs">
-      <DependentUpon>BieuDoDoanhThuChiNhanh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuanLyDoanhThuChiNhanh\QuanLyDoanhThuChiNhanh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyDoanhThuChiNhanh\QuanLyDoanhThuChiNhanh.Designer.cs">
-      <DependentUpon>QuanLyDoanhThuChiNhanh.cs</DependentUpon>
-    </Compile>
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhapDAL.cs" />
+    <Compile Include="QuanLyDangNhap\Session.cs" />
     <Compile Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,18 +99,6 @@
       <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>
     </Compile>
     <Compile Include="models\ThongKeDAL.cs" />
-    <Compile Include="QuanLyLamViec\frmXepLichNhanVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyLamViec\frmXepLichNhanVien.Designer.cs">
-      <DependentUpon>frmXepLichNhanVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="QuanLyLamViec\Quanlylamviec.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyLamViec\Quanlylamviec.Designer.cs">
-      <DependentUpon>Quanlylamviec.cs</DependentUpon>
-    </Compile>
     <Compile Include="QuanLyPhongGymDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,14 +127,11 @@
     <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
       <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuanLyDangNhap\DangNhap.resx">
-      <DependentUpon>DangNhap.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyDangNhap\QuanLyDangNhap.resx">
+      <DependentUpon>QuanLyDangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.resx">
       <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuanLyLamViec\frmXepLichNhanVien.resx">
-      <DependentUpon>frmXepLichNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.resx">
       <DependentUpon>ChinhSuaTaiKhoanForm.cs</DependentUpon>
