@@ -143,3 +143,43 @@ ADD CN_Ma CHAR(10) NULL;
 ALTER TABLE THANH_VIEN
 ADD CONSTRAINT FK_THANHVIEN_CHINHANH
 FOREIGN KEY (CN_Ma) REFERENCES CHI_NHANH(CN_Ma);
+
+
+CREATE TABLE CA_LAM_VIEC (
+    CA_Ma CHAR(10) NOT NULL PRIMARY KEY,
+    CA_Ten NVARCHAR(100) NOT NULL,
+    CA_ThoiGianBD TIME NOT NULL, -- Kiểu TIME chuẩn
+    CA_ThoiGianKT TIME NOT NULL, -- Kiểu TIME chuẩn
+    CONSTRAINT CHK_ThoiGianHopLe CHECK (CA_ThoiGianKT > CA_ThoiGianBD)
+);
+GO
+
+-- Thêm 3 ca làm (6h - 23h, không trùng)
+INSERT INTO CA_LAM_VIEC (CA_Ma, CA_Ten, CA_ThoiGianBD, CA_ThoiGianKT)
+VALUES
+('CA_SANG', N'Ca Sáng', '06:00:00', '12:00:00'),
+('CA_CHIEU', N'Ca Chiều', '12:00:00', '18:00:00'),
+('CA_TOI', N'Ca Tối', '18:00:00', '23:00:00');
+GO
+
+CREATE TABLE DANG_KI_LICH_LAM (
+    DK_Ma INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    NV_Ma CHAR(10) NOT NULL, -- Liên kết với NHAN_VIEN
+    CA_Ma CHAR(10) NOT NULL, -- Liên kết với CA_LAM_VIEC
+    
+    -- Cột này chứa (Ngày, Tháng, Năm)
+    -- Từ cột này ta có thể TÍNH TOÁN ra Thứ và Tuần
+    DK_NgayDangKy DATE NOT NULL, 
+    
+    -- Cột này là cột "Chấm công" bạn muốn (BIT = Boolean: 0 là vắng, 1 là có đi làm)
+    DK_DaChamCong BIT NOT NULL DEFAULT 0, 
+    
+    -- Khóa ngoại
+    CONSTRAINT FK_DANG_KI_NHAN_VIEN FOREIGN KEY (NV_Ma) REFERENCES NHAN_VIEN(NV_Ma),
+    CONSTRAINT FK_DANG_KI_CA_LAM_VIEC FOREIGN KEY (CA_Ma) REFERENCES CA_LAM_VIEC(CA_Ma),
+    
+    -- Ràng buộc logic
+    CONSTRAINT UK_NHAN_VIEN_CA_NGAY UNIQUE (NV_Ma, CA_Ma, DK_NgayDangKy)
+);
+GO
+

@@ -16,7 +16,11 @@ namespace GZone
         {
             try
             {
-                string connectionString = "Data Source=localhost\\SQLEXPRESS;Database=QuanLyPhongGym;Integrated Security=True;TrustServerCertificate=True;";
+
+                string connectionString = $"Data Source=localhost;" +
+                  "Database=QuanLyPhongGym;" +
+                  "Integrated Security=True;" +
+                  "TrustServerCertificate=True;";
 
                 con = new SqlConnection(connectionString);
                 con.Open();

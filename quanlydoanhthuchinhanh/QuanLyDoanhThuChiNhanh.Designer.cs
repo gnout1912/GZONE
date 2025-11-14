@@ -94,7 +94,7 @@
             this.btnXemBieuDo.Name = "btnXemBieuDo";
             this.btnXemBieuDo.Size = new System.Drawing.Size(160, 30);
             this.btnXemBieuDo.TabIndex = 8;
-            this.btnXemBieuDo.Text = "Xem biểu đồ doanh thu";
+            this.btnXemBieuDo.Text = "Biểu Đồ Doanh Thu";
             this.btnXemBieuDo.UseVisualStyleBackColor = false;
             this.btnXemBieuDo.Click += new System.EventHandler(this.btnXemBieuDo_Click);
             // 
