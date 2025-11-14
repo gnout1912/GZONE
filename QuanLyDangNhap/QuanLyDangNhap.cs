@@ -67,9 +67,10 @@ namespace GZone.QuanLyDangNhap
                     }
                     else if (taiKhoan.Quyen == "Manager") 
                     {
-                        MessageBox.Show("Bạn đã đăng nhập với quyền Manager. Chức năng quản lý chi nhánh không khả dụng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.DialogResult = DialogResult.OK; 
-                        this.Close(); 
+                        TrangChuChiNhanh frmTrangChuChiNhanh = new TrangChuChiNhanh();
+                        this.Hide();
+                        frmTrangChuChiNhanh.ShowDialog();
+                        this.Close();
                     }
                     else
                     {
