@@ -84,12 +84,14 @@
     <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
       <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuanLyDangNhap\DangNhap.cs">
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuanLyDangNhap\DangNhap.Designer.cs">
-      <DependentUpon>DangNhap.cs</DependentUpon>
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhap.Designer.cs">
+      <DependentUpon>QuanLyDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyDangNhap\QuanLyDangNhapDAL.cs" />
+    <Compile Include="QuanLyDangNhap\Session.cs" />
     <Compile Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,8 +127,8 @@
     <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
       <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="QuanLyDangNhap\DangNhap.resx">
-      <DependentUpon>DangNhap.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyDangNhap\QuanLyDangNhap.resx">
+      <DependentUpon>QuanLyDangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.resx">
       <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>

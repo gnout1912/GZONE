@@ -52,13 +52,13 @@
             // 
             this.splitMain.Panel1.Controls.Add(this.lstChiNhanh);
             this.splitMain.Panel1.Controls.Add(this.lblDanhSachChiNhanh);
-            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10);
             // 
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.dgvTaiKhoan);
             this.splitMain.Panel2.Controls.Add(this.lblTieuDeTaiKhoan);
-            this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(10);
             this.splitMain.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitMain_Panel2_Paint);
             this.splitMain.Size = new System.Drawing.Size(984, 503);
             this.splitMain.SplitterDistance = 259;
