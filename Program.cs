@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GZone.QuanLyThanhVien;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace GZone
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuanLyDoanhThuHeThong.QuanLyDoanhThuHeThong());
+            Application.Run(new DangNhap());
         }
     }
 }

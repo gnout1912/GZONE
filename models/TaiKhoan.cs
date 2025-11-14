@@ -29,6 +29,48 @@ namespace GZone.models
             }
         }
 
+        public TaiKhoan GetAccountLogin(string tenDangNhap, string matKhau)
+        {
+            TaiKhoan tk = null;
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    string matKhauDaBam = HashPassword(matKhau);
+                    string query = @"SELECT TK_Ma, TK_Ten, TK_TrangThai, TK_Quyen, CN_Ma 
+                             FROM TAI_KHOAN 
+                             WHERE TK_Ten = @Ten AND TK_MatKhau = @MatKhau AND TK_TrangThai = 1";
+
+                    SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+                    cmd.Parameters.AddWithValue("@Ten", tenDangNhap);
+                    cmd.Parameters.AddWithValue("@MatKhau", matKhauDaBam);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        tk = new TaiKhoan
+                        {
+                            Ma = reader["TK_Ma"].ToString(),
+                            Ten = reader["TK_Ten"].ToString(),
+                            TrangThai = Convert.ToBoolean(reader["TK_TrangThai"]),
+                            Quyen = reader["TK_Quyen"].ToString(),
+                            MaChiNhanh = reader["CN_Ma"] == DBNull.Value ? null : reader["CN_Ma"].ToString()
+                        };
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi lấy tài khoản: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+            return tk;
+        }
+
         public string GenerateNewMaTaiKhoan()
         {
             string newMa = "TK001";

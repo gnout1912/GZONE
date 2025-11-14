@@ -106,6 +106,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuanLyPhongGymDataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyTaiKhoan\DangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan\DangNhap.Designer.cs">
+      <DependentUpon>DangNhap.cs</DependentUpon>
+    </Compile>
     <!-- ===================== QUẢN LÝ Tài Khoản ===================== -->
     <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.cs">
       <SubType>Form</SubType>
@@ -113,6 +119,25 @@
     <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.Designer.cs">
       <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyThanhVien\DangKiGoiTap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\DangKiGoiTap.Designer.cs">
+      <DependentUpon>DangKiGoiTap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.Designer.cs">
+      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\ThemThanhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\ThemThanhVien.Designer.cs">
+      <DependentUpon>ThemThanhVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs" />
     <EmbeddedResource Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.resx">
       <DependentUpon>ChinhSuaChiNhanhForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyTaiKhoan\ChinhSuaTaiKhoanForm.resx">
       <DependentUpon>ChinhSuaTaiKhoanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyTaiKhoan\DangNhap.resx">
+      <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyTaiKhoan\QuanLyTaiKhoan.resx">
       <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
@@ -192,17 +220,8 @@
       <DependentUpon>ThemTaiKhoanForm.cs</DependentUpon>
     </Compile>
     <!-- ===================== QUẢN LÝ THÀNH VIÊN ===================== -->
-    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuanLyThanhVien\QuanLyThanhVien.Designer.cs">
-      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="QuanLyTaiKhoan\ThemTaiKhoanForm.resx">
       <DependentUpon>ThemTaiKhoanForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="QuanLyThanhVien\QuanLyThanhVien.resx">
-      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
     </EmbeddedResource>
     <!-- ===================== QUẢN LÝ CHẤM CÔNG ===================== -->
     <Compile Include="QuanLyChamCong\QuanLyChamCong.cs">
@@ -224,6 +243,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuanLyThanhVien\DangKiGoiTap.resx">
+      <DependentUpon>DangKiGoiTap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyThanhVien\QuanLyThanhVien.resx">
+      <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyThanhVien\ThemThanhVien.resx">
+      <DependentUpon>ThemThanhVien.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
