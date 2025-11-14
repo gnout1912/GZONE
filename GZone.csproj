@@ -84,6 +84,12 @@
     <Compile Include="QuanLyChiNhanh\ThemChiNhanhForm.Designer.cs">
       <DependentUpon>ThemChiNhanhForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyDangNhap\DangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyDangNhap\DangNhap.Designer.cs">
+      <DependentUpon>DangNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyChiNhanh\QuanLyChiNhanh.resx">
       <DependentUpon>QuanLyChiNhanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyDangNhap\DangNhap.resx">
+      <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyDoanhThuHeThong\QuanLyDoanhThuHeThong.resx">
       <DependentUpon>QuanLyDoanhThuHeThong.cs</DependentUpon>
@@ -223,6 +232,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -272,6 +282,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\gymlogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
