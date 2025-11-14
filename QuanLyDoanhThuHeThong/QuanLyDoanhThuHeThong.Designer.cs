@@ -257,6 +257,7 @@
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.groupBox1);
             this.Name = "QuanLyDoanhThuHeThong";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Doanh Thu Hệ Thống";
             this.Load += new System.EventHandler(this.QuanLyDoanhThuHeThong_Load);
             this.groupBox1.ResumeLayout(false);

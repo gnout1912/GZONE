@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.lstChiNhanh = new System.Windows.Forms.ListBox();
@@ -51,6 +52,7 @@
             this.panelYeuCauTop = new System.Windows.Forms.Panel();
             this.btnTuChoi = new System.Windows.Forms.Button();
             this.btnPheDuyet = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -79,8 +81,8 @@
             // 
             this.splitMain.Panel2.Controls.Add(this.tabChiTiet);
             this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(5, 10, 10, 10);
-            this.splitMain.Size = new System.Drawing.Size(1112, 600);
-            this.splitMain.SplitterDistance = 299;
+            this.splitMain.Size = new System.Drawing.Size(1015, 600);
+            this.splitMain.SplitterDistance = 272;
             this.splitMain.TabIndex = 0;
             // 
             // lstChiNhanh
@@ -92,7 +94,7 @@
             this.lstChiNhanh.ItemHeight = 20;
             this.lstChiNhanh.Location = new System.Drawing.Point(10, 82);
             this.lstChiNhanh.Name = "lstChiNhanh";
-            this.lstChiNhanh.Size = new System.Drawing.Size(279, 508);
+            this.lstChiNhanh.Size = new System.Drawing.Size(252, 508);
             this.lstChiNhanh.TabIndex = 1;
             this.lstChiNhanh.SelectedIndexChanged += new System.EventHandler(this.lstChiNhanh_SelectedIndexChanged);
             // 
@@ -104,7 +106,7 @@
             this.btnThemChiNhanh.ForeColor = System.Drawing.Color.White;
             this.btnThemChiNhanh.Location = new System.Drawing.Point(10, 42);
             this.btnThemChiNhanh.Name = "btnThemChiNhanh";
-            this.btnThemChiNhanh.Size = new System.Drawing.Size(279, 40);
+            this.btnThemChiNhanh.Size = new System.Drawing.Size(252, 40);
             this.btnThemChiNhanh.TabIndex = 11;
             this.btnThemChiNhanh.Text = "+ Thêm Chi Nhánh Mới";
             this.btnThemChiNhanh.UseVisualStyleBackColor = false;
@@ -131,7 +133,7 @@
             this.tabChiTiet.Location = new System.Drawing.Point(5, 10);
             this.tabChiTiet.Name = "tabChiTiet";
             this.tabChiTiet.SelectedIndex = 0;
-            this.tabChiTiet.Size = new System.Drawing.Size(794, 580);
+            this.tabChiTiet.Size = new System.Drawing.Size(724, 580);
             this.tabChiTiet.TabIndex = 0;
             // 
             // tabPageThongTin
@@ -151,7 +153,7 @@
             this.tabPageThongTin.Location = new System.Drawing.Point(4, 26);
             this.tabPageThongTin.Name = "tabPageThongTin";
             this.tabPageThongTin.Padding = new System.Windows.Forms.Padding(15);
-            this.tabPageThongTin.Size = new System.Drawing.Size(786, 550);
+            this.tabPageThongTin.Size = new System.Drawing.Size(716, 550);
             this.tabPageThongTin.TabIndex = 0;
             this.tabPageThongTin.Text = "Thông tin Chi tiết";
             this.tabPageThongTin.UseVisualStyleBackColor = true;
@@ -176,7 +178,7 @@
             this.txtNgayThanhLap.Location = new System.Drawing.Point(135, 184);
             this.txtNgayThanhLap.Name = "txtNgayThanhLap";
             this.txtNgayThanhLap.ReadOnly = true;
-            this.txtNgayThanhLap.Size = new System.Drawing.Size(636, 25);
+            this.txtNgayThanhLap.Size = new System.Drawing.Size(566, 25);
             this.txtNgayThanhLap.TabIndex = 9;
             // 
             // lblNgayThanhLap
@@ -195,7 +197,7 @@
             this.txtSoDienThoai.Location = new System.Drawing.Point(135, 143);
             this.txtSoDienThoai.Name = "txtSoDienThoai";
             this.txtSoDienThoai.ReadOnly = true;
-            this.txtSoDienThoai.Size = new System.Drawing.Size(636, 25);
+            this.txtSoDienThoai.Size = new System.Drawing.Size(566, 25);
             this.txtSoDienThoai.TabIndex = 7;
             // 
             // lblSoDienThoai
@@ -214,7 +216,7 @@
             this.txtDiaChi.Location = new System.Drawing.Point(135, 102);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.ReadOnly = true;
-            this.txtDiaChi.Size = new System.Drawing.Size(636, 25);
+            this.txtDiaChi.Size = new System.Drawing.Size(566, 25);
             this.txtDiaChi.TabIndex = 5;
             // 
             // lblDiaChi
@@ -233,7 +235,7 @@
             this.txtTenChiNhanh.Location = new System.Drawing.Point(135, 61);
             this.txtTenChiNhanh.Name = "txtTenChiNhanh";
             this.txtTenChiNhanh.ReadOnly = true;
-            this.txtTenChiNhanh.Size = new System.Drawing.Size(636, 25);
+            this.txtTenChiNhanh.Size = new System.Drawing.Size(566, 25);
             this.txtTenChiNhanh.TabIndex = 3;
             // 
             // lblTenChiNhanh
@@ -270,7 +272,7 @@
             this.tabPageYeuCau.Location = new System.Drawing.Point(4, 26);
             this.tabPageYeuCau.Name = "tabPageYeuCau";
             this.tabPageYeuCau.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPageYeuCau.Size = new System.Drawing.Size(786, 550);
+            this.tabPageYeuCau.Size = new System.Drawing.Size(716, 550);
             this.tabPageYeuCau.TabIndex = 1;
             this.tabPageYeuCau.Text = "Quản lý Yêu cầu";
             this.tabPageYeuCau.UseVisualStyleBackColor = true;
@@ -299,7 +301,7 @@
             this.dgvYeuCau.RowHeadersWidth = 51;
             this.dgvYeuCau.RowTemplate.Height = 28;
             this.dgvYeuCau.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvYeuCau.Size = new System.Drawing.Size(766, 485);
+            this.dgvYeuCau.Size = new System.Drawing.Size(696, 485);
             this.dgvYeuCau.TabIndex = 1;
             this.dgvYeuCau.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvYeuCau_CellContentClick);
             // 
@@ -310,7 +312,7 @@
             this.panelYeuCauTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelYeuCauTop.Location = new System.Drawing.Point(10, 10);
             this.panelYeuCauTop.Name = "panelYeuCauTop";
-            this.panelYeuCauTop.Size = new System.Drawing.Size(766, 45);
+            this.panelYeuCauTop.Size = new System.Drawing.Size(696, 45);
             this.panelYeuCauTop.TabIndex = 0;
             // 
             // btnTuChoi
@@ -319,7 +321,7 @@
             this.btnTuChoi.BackColor = System.Drawing.Color.Tomato;
             this.btnTuChoi.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuChoi.ForeColor = System.Drawing.Color.White;
-            this.btnTuChoi.Location = new System.Drawing.Point(653, 3);
+            this.btnTuChoi.Location = new System.Drawing.Point(583, 3);
             this.btnTuChoi.Name = "btnTuChoi";
             this.btnTuChoi.Size = new System.Drawing.Size(110, 40);
             this.btnTuChoi.TabIndex = 1;
@@ -333,7 +335,7 @@
             this.btnPheDuyet.BackColor = System.Drawing.Color.SeaGreen;
             this.btnPheDuyet.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPheDuyet.ForeColor = System.Drawing.Color.White;
-            this.btnPheDuyet.Location = new System.Drawing.Point(528, 3);
+            this.btnPheDuyet.Location = new System.Drawing.Point(458, 3);
             this.btnPheDuyet.Name = "btnPheDuyet";
             this.btnPheDuyet.Size = new System.Drawing.Size(110, 40);
             this.btnPheDuyet.TabIndex = 0;
@@ -341,14 +343,20 @@
             this.btnPheDuyet.UseVisualStyleBackColor = false;
             this.btnPheDuyet.Click += new System.EventHandler(this.btnPheDuyet_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // QuanLyChiNhanh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1112, 600);
+            this.ClientSize = new System.Drawing.Size(1015, 600);
             this.Controls.Add(this.splitMain);
             this.Name = "QuanLyChiNhanh";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Chi Nhánh";
             this.Load += new System.EventHandler(this.QuanLyChiNhanh_Load);
             this.splitMain.Panel1.ResumeLayout(false);
@@ -390,5 +398,6 @@
         private System.Windows.Forms.Button btnTuChoi;
         private System.Windows.Forms.Button btnPheDuyet;
         private System.Windows.Forms.Button btnThemChiNhanh;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

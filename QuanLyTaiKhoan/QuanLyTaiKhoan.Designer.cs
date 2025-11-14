@@ -201,6 +201,7 @@
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.panelTop);
             this.Name = "QuanLyTaiKhoan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Tài Khoản Chi Nhánh";
             this.Load += new System.EventHandler(this.QuanLyChiNhanh_Load);
             this.splitMain.Panel1.ResumeLayout(false);
