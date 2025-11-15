@@ -17,6 +17,8 @@ namespace GZone.models
         public DateTime NgayDangKy { get; set; }
         public DateTime NgayHetHan { get; set; }
         public string TrangThai { get; set; }
+
+        public string CN_Ma { get; set; }
     }
 
     public class ThanhVienGoiTapDAL
@@ -43,8 +45,8 @@ namespace GZone.models
                         return 0; 
                     }
 
-                    string query = @"INSERT INTO THANH_VIEN_GOI_TAP(TV_Ma, GT_Ma, NgayDangKy, NgayHetHan, TrangThai)
-                             VALUES (@TV, @GT, @NgayDK, @NgayHH, @TrangThai)";
+                    string query = @"INSERT INTO THANH_VIEN_GOI_TAP(TV_Ma, GT_Ma, NgayDangKy, NgayHetHan, TrangThai, CN_Ma)
+                             VALUES (@TV, @GT, @NgayDK, @NgayHH, @TrangThai, @CNMa)";
 
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
                     cmd.Parameters.AddWithValue("@TV", tvgt.TV_Ma);
@@ -52,6 +54,7 @@ namespace GZone.models
                     cmd.Parameters.AddWithValue("@NgayDK", tvgt.NgayDangKy);
                     cmd.Parameters.AddWithValue("@NgayHH", tvgt.NgayHetHan);
                     cmd.Parameters.AddWithValue("@TrangThai", tvgt.TrangThai);
+                    cmd.Parameters.AddWithValue("@CNMa", tvgt.CN_Ma);
 
                     int result = cmd.ExecuteNonQuery();
                     return result;

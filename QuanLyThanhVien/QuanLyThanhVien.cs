@@ -1,4 +1,5 @@
 ﻿using GZone.models;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,160 +9,178 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QRCoder;
-using System.Drawing.Printing;
 
 namespace GZone.QuanLyThanhVien
 {
     public partial class QuanLyThanhVien : Form
     {
-        private ThanhVienDAL tvDAL = new ThanhVienDAL();
-        private ThanhVienGoiTapDAL tvgtDAL = new ThanhVienGoiTapDAL();
-        private GoiTapDAL gtDAL = new GoiTapDAL();
+        ThanhVienDAL tvDAL;
+        ThanhVienGoiTapDAL tvgtDAL;
+
+        private string currentMaTV = null;
+
         public QuanLyThanhVien()
         {
             InitializeComponent();
+            tvDAL = new ThanhVienDAL();
+            tvgtDAL = new ThanhVienGoiTapDAL();
+
         }
 
         private void LoadDanhSachThanhVien()
         {
-            DataTable dt = tvDAL.GetAllThanhVien();
-            dgvThanhVien.DataSource = dt;
+            string maCN = Session.MaChiNhanh;
+            string searchTerm = txtTimKiem.Text.Trim();
+            dgvHoiVien.AutoGenerateColumns = true;
+            
+            dgvHoiVien.DataSource = tvDAL.GetAllThanhVien(maCN, searchTerm);
+        }
 
-            try
+        private void QuanLyThanhVien_Load(object sender, EventArgs e)
+        {
+            SetupGoiTapColumns();
+            LoadDanhSachThanhVien();
+        }
+
+        #region Tải Dữ Liệu (Hàm Helper
+
+        private void LoadThongTinChiTiet(string maHV)
+        {
+            ThanhVien tv = tvDAL.GetThanhVienByMa(maHV);
+
+            if (tv != null)
             {
-                if (dgvThanhVien.Columns["TV_Ma"] != null)
-                {
-                    dgvThanhVien.Columns["TV_Ma"].HeaderText = "Mã Thành Viên";
-                    dgvThanhVien.Columns["TV_Ma"].Width = 180; 
-                }
+                txtMaHV.Text = tv.TV_Ma;
+                txtHoTen.Text = tv.TV_HoTen;
+                txtNgaySinh.Text = tv.TV_NgaySinh.ToString("dd/MM/yyyy");
+                txtGioiTinh.Text = tv.TV_GioiTinh;
+                txtSdt.Text = tv.TV_Sdt;
 
-                if (dgvThanhVien.Columns["TV_HoTen"] != null)
-                {
-                    dgvThanhVien.Columns["TV_HoTen"].HeaderText = "Họ và Tên";
-                    dgvThanhVien.Columns["TV_HoTen"].Width = 120;
-                }
-
-                if (dgvThanhVien.Columns["TV_NgaySinh"] != null)
-                {
-                    dgvThanhVien.Columns["TV_NgaySinh"].HeaderText = "Ngày Sinh";
-                    dgvThanhVien.Columns["TV_NgaySinh"].Width = 100;
-                }
-
-                if (dgvThanhVien.Columns["TV_GioiTinh"] != null)
-                {
-                    dgvThanhVien.Columns["TV_GioiTinh"].HeaderText = "Giới Tính";
-                    dgvThanhVien.Columns["TV_Ma"].Width = 120;
-                }
-
-                if (dgvThanhVien.Columns["TV_Sdt"] != null)
-                {
-                    dgvThanhVien.Columns["TV_Sdt"].HeaderText = "Số Điện Thoại";
-                    dgvThanhVien.Columns["TV_Sdt"].Width = 120;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tùy chỉnh cột: " + ex.Message);
+                txtChiNhanh.Text = tv.TenChiNhanh; 
             }
         }
 
-        private void LoadGoiTapComboBox()
+        private void SetupGoiTapColumns()
         {
-            List<GoiTap> listGT = gtDAL.GetAllGoiTap();
-            cboGoiTap.DataSource = listGT;
-            cboGoiTap.DisplayMember = "Ten"; 
-            cboGoiTap.ValueMember = "Ma";    
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void printCardDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            try
+            dgvGoiTap.AutoGenerateColumns = false;
+            dgvGoiTap.Columns.Clear();
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
-                string maTV = txtMa.Text;
-                string hoTen = txtHoTen.Text;
-
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(maTV, QRCodeGenerator.ECCLevel.Q);
-                QRCode qrCode = new QRCode(qrCodeData);
-                Bitmap qrCodeImage = qrCode.GetGraphic(5);
-
-                Font titleFont = new Font("Arial", 16, FontStyle.Bold);
-                Font infoFont = new Font("Arial", 12);
-                SolidBrush brush = new SolidBrush(Color.Black);
-                Pen blackPen = new Pen(Color.Black, 2);
-
-                int startX = 100;
-                int startY = 100;
-                int cardWidth = 350; 
-                int cardHeight = 220; 
-
-                e.Graphics.DrawRectangle(blackPen, startX, startY, cardWidth, cardHeight);
-
-                e.Graphics.DrawString("THẺ THÀNH VIÊN", titleFont, brush, startX + 50, startY + 15);
-
-                e.Graphics.DrawImage(qrCodeImage, startX + 20, startY + 50);
-
-                float infoX = startX + qrCodeImage.Width + 30; 
-                float infoY = startY + 60;
-                e.Graphics.DrawString("Mã TV:", infoFont, brush, infoX, infoY);
-                e.Graphics.DrawString(maTV, infoFont, brush, infoX, infoY + 25);
-
-                e.Graphics.DrawString("Họ tên:", infoFont, brush, infoX, infoY + 60);
-
-                e.Graphics.DrawString(hoTen, infoFont, brush, new RectangleF(infoX, infoY + 85, 150, 50));
-
-                qrCodeImage.Dispose();
-                titleFont.Dispose();
-                infoFont.Dispose();
-                brush.Dispose();
-                blackPen.Dispose();
-            }
-            catch (Exception ex)
+                Name = "TVGT_ID",
+                DataPropertyName = "TVGT_ID",
+                HeaderText = "ID",
+                Visible = false 
+            });
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
-                MessageBox.Show("Lỗi khi vẽ thẻ: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+                Name = "GT_Ma",
+                DataPropertyName = "GT_Ma", 
+                HeaderText = "Mã Gói",
+                Width = 80
+            });
 
-        private void btnInThe_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMa.Text))
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
             {
-                MessageBox.Show("Vui lòng chọn một thành viên để in thẻ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                Name = "GT_Ten",
+                DataPropertyName = "GT_Ten",
+                HeaderText = "Tên Gói Tập",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+            });
 
-            printCardPreviewDialog.Document = printCardDocument;
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "GT_ThoiHan",
+                DataPropertyName = "GT_ThoiHan", 
+                HeaderText = "Thời Hạn (Tháng)", 
+                Width = 80
+            });
 
-            printCardPreviewDialog.ShowDialog();
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "NgayDangKy",
+                DataPropertyName = "NgayDangKy", 
+                HeaderText = "Ngày Đăng Ký", 
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" },
+                Width = 110
+            });
+
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "NgayHetHan",
+                DataPropertyName = "NgayHetHan", 
+                HeaderText = "Ngày Hết Hạn", 
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" },
+                Width = 110
+            });
+
+            dgvGoiTap.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TrangThai",
+                DataPropertyName = "TrangThai", 
+                HeaderText = "Trạng Thái", 
+                Width = 110
+            });
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        private void LoadThongTinDichVu(string maTV)
+        {
+            dgvGoiTap.DataSource = tvgtDAL.GetGoiTapByThanhVien(maTV);
+        }
+
+        private void ClearDetailTabs()
+        {
+            txtMaHV.Text = "";
+            txtHoTen.Text = "";
+            txtNgaySinh.Text = "";
+            txtGioiTinh.Text = "";
+            txtSdt.Text = "";
+            txtChiNhanh.Text = "";
+
+            dgvGoiTap.DataSource = null;
+
+            currentMaTV = null;
+        }
+
+        #endregion
+
+        #region Sự kiện Click (Nút bấm)
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void gbThongTin_Enter(object sender, EventArgs e)
+        private void txtMaHV_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lblNgaySinh_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtChiNhanh_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGioiTinh_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSdt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNgaySinh_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -171,176 +190,188 @@ namespace GZone.QuanLyThanhVien
 
         }
 
-        private void QuanLyThanhVien_Load(object sender, EventArgs e)
+        private void lblSdt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNgaySinh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblMaHV_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
         {
             LoadDanhSachThanhVien();
-            LoadGoiTapComboBox();
         }
 
-        private void ClearMemberInputs()
+        private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            txtMa.Text = "Mã (Tự động)";
-            txtHoTen.Text = "Họ tên";
-            txtSdt.Text = "Số điện thoại";
-            dtpNgaySinh.Value = DateTime.Now;
-            cboGioiTinh.SelectedIndex = -1;
-            dgvGoiTap.DataSource = null;
-        }
-
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            try
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                string maTV = tvDAL.GetNewMaThanhVien();
-
-                ThanhVien tv = new ThanhVien
-                {
-                    TV_Ma = maTV,
-                    TV_HoTen = txtHoTen.Text,
-                    TV_NgaySinh = dtpNgaySinh.Value,
-                    TV_GioiTinh = cboGioiTinh.Text,
-                    TV_Sdt = txtSdt.Text
-                };
-
-                int result = tvDAL.AddThanhVien(tv);
-
-                if (result > 0)
-                {
-                    MessageBox.Show("Thêm thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDanhSachThanhVien(); 
-                    ClearMemberInputs();
-                }
-                else
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi thêm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnTimKiem_Click(sender, e);
+                e.Handled = true;
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnThemHoiVien_Click(object sender, EventArgs e)
         {
+            ThemThanhVien fThem = new ThemThanhVien(null);
 
+            if (fThem.ShowDialog() == DialogResult.OK)
+            {
+                LoadDanhSachThanhVien();
+            }
+        }
+
+        private void btnSuaThongTin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(currentMaTV))
+            {
+                MessageBox.Show("Vui lòng chọn hội viên từ danh sách.");
+                return;
+            }
+
+            ThemThanhVien fSua = new ThemThanhVien(currentMaTV);
+
+            if (fSua.ShowDialog() == DialogResult.OK)
+            {
+                LoadDanhSachThanhVien();
+                LoadThongTinChiTiet(currentMaTV);
+            }
+        }
+
+        private void btnDangKyGoi_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(currentMaTV))
+            {
+                MessageBox.Show("Vui lòng chọn hội viên từ danh sách.");
+                return;
+            }
+
+            string tenHV = txtHoTen.Text;
+
+            DangKiGoiTap fDK = new DangKiGoiTap(currentMaTV, tenHV);
+
+            if (fDK.ShowDialog() == DialogResult.OK)
+            {
+                LoadThongTinDichVu(currentMaTV);
+            }
         }
 
         private void btnGiaHan_Click(object sender, EventArgs e)
         {
             if (dgvGoiTap.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Vui lòng chọn một gói tập đã đăng ký (ở bảng dưới) để gia hạn.", "Chưa chọn gói tập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một gói tập từ danh sách để gia hạn.",
+                                "Chưa chọn gói", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             DataGridViewRow row = dgvGoiTap.SelectedRows[0];
-            int tvgtID = Convert.ToInt32(row.Cells["TVGT_ID"].Value);
-            DateTime ngayHienTai = Convert.ToDateTime(row.Cells["NgayHetHan"].Value);
-            int thoiHan = Convert.ToInt32(row.Cells["GT_ThoiHan"].Value); 
-            string maTV = txtMa.Text; 
+            string tenGoi = row.Cells["GT_Ten"].Value.ToString();
+            DateTime ngayHetHanCu = Convert.ToDateTime(row.Cells["NgayHetHan"].Value);
 
-            DateTime ngayHHMoi;
-            if (ngayHienTai < DateTime.Now)
-            {
-                ngayHHMoi = DateTime.Now.AddMonths(thoiHan);
-            }
-            else 
-            {
-                ngayHHMoi = ngayHienTai.AddMonths(thoiHan);
-            }
+            DialogResult dr = MessageBox.Show($"Bạn có chắc muốn gia hạn cho gói '{tenGoi}' không?\n" +
+                                              $"Ngày hết hạn cũ: {ngayHetHanCu.ToString("dd/MM/yyyy")}",
+                                              "Xác nhận gia hạn",
+                                              MessageBoxButtons.YesNo,
+                                              MessageBoxIcon.Question);
 
-            ThanhVienGoiTap tvgt = new ThanhVienGoiTap
+            if (dr == DialogResult.No)
             {
-                TVGT_ID = tvgtID,
-                NgayHetHan = ngayHHMoi,
-                TrangThai = "Còn hiệu lực"
-            };
-
-            int result = tvgtDAL.UpdateThanhVienGoiTap(tvgt);
-            if (result > 0)
-            {
-                MessageBox.Show($"Gia hạn thành công.\nNgày hết hạn mới: {ngayHHMoi:dd/MM/yyyy}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadGoiTapForMember(maTV);
-            }
-            else
-            {
-                MessageBox.Show("Gia hạn thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LoadGoiTapForMember(string maTV)
-        {
-            dgvGoiTap.DataSource = tvgtDAL.GetGoiTapByThanhVien(maTV);
-            if (dgvGoiTap.Columns["TVGT_ID"] != null) dgvGoiTap.Columns["TVGT_ID"].HeaderText = "ID";
-            if (dgvGoiTap.Columns["GT_Ten"] != null) dgvGoiTap.Columns["GT_Ten"].HeaderText = "Tên Gói Tập";
-            if (dgvGoiTap.Columns["NgayDangKy"] != null) dgvGoiTap.Columns["NgayDangKy"].HeaderText = "Ngày ĐK";
-            if (dgvGoiTap.Columns["NgayHetHan"] != null) dgvGoiTap.Columns["NgayHetHan"].HeaderText = "Ngày HH";
-            if (dgvGoiTap.Columns["TrangThai"] != null) dgvGoiTap.Columns["TrangThai"].HeaderText = "Trạng Thái";
-            if (dgvGoiTap.Columns["GT_Ma"] != null) dgvGoiTap.Columns["GT_Ma"].Visible = false;
-            if (dgvGoiTap.Columns["GT_ThoiHan"] != null) dgvGoiTap.Columns["GT_ThoiHan"].Visible = false;
-
-        }
-
-        private void dgvThanhVien_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvThanhVien.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dgvThanhVien.SelectedRows[0];
-                txtMa.Text = row.Cells["TV_Ma"].Value.ToString();
-                txtHoTen.Text = row.Cells["TV_HoTen"].Value.ToString();
-                txtSdt.Text = row.Cells["TV_Sdt"].Value.ToString();
-                cboGioiTinh.SelectedItem = row.Cells["TV_GioiTinh"].Value.ToString();
-                dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["TV_NgaySinh"].Value);
-
-                LoadGoiTapForMember(txtMa.Text);
-            }
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
             try
             {
-                ThanhVien tv = new ThanhVien
+                int tvgtID = Convert.ToInt32(row.Cells["TVGT_ID"].Value);
+
+                int thoiHanGoi_TheoThang = Convert.ToInt32(row.Cells["GT_ThoiHan"].Value);
+
+
+                DateTime today = DateTime.Now.Date;
+                DateTime startDate;
+
+                if (ngayHetHanCu < today)
                 {
-                    TV_Ma = txtMa.Text,
-                    TV_HoTen = txtHoTen.Text,
-                    TV_NgaySinh = dtpNgaySinh.Value,
-                    TV_GioiTinh = cboGioiTinh.Text,
-                    TV_Sdt = txtSdt.Text
+                    startDate = today;
+                }
+                else
+                {
+                    startDate = ngayHetHanCu;
+                }
+
+                DateTime ngayHetHanMoi = startDate.AddMonths(thoiHanGoi_TheoThang);
+
+                ThanhVienGoiTap tvgt_Update = new ThanhVienGoiTap
+                {
+                    TVGT_ID = tvgtID,
+                    NgayHetHan = ngayHetHanMoi,
+                    TrangThai = "Còn hiệu lực"
                 };
 
-                int result = tvDAL.UpdateThanhVien(tv);
+                int result = tvgtDAL.UpdateThanhVienGoiTap(tvgt_Update);
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadDanhSachThanhVien(); 
-                    ClearMemberInputs(); 
+                    MessageBox.Show($"Gia hạn thành công!\nNgày hết hạn mới: {ngayHetHanMoi.ToString("dd/MM/yyyy")}",
+                                    "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LoadThongTinDichVu(this.currentMaTV);
+                }
+                else
+                {
+                    MessageBox.Show("Gia hạn thất bại do lỗi CSDL.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi cập nhật: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Đã xảy ra lỗi trong quá trình gia hạn: " + ex.Message,
+                                "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region Sự kiện DataGridView
+
+        private void dgvHoiVien_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvHoiVien.SelectedRows.Count > 0)
+            {
+                string maTV = dgvHoiVien.SelectedRows[0].Cells["Mã TV"].Value.ToString();
+
+                if (maTV != currentMaTV)
+                {
+                    currentMaTV = maTV;
+
+                    LoadThongTinChiTiet(currentMaTV);
+                    LoadThongTinDichVu(currentMaTV);
+                }
             }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            string maTV = txtMa.Text;
-            if (string.IsNullOrEmpty(maTV))
+            if (dgvHoiVien.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Vui lòng chọn thành viên cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DialogResult confirm = MessageBox.Show("Bạn có chắc chắn muốn xóa thành viên " + maTV + "?",
-                                                  "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string maTV = dgvHoiVien.SelectedRows[0].Cells["Mã TV"].Value.ToString();
+            string tenTV = dgvHoiVien.SelectedRows[0].Cells["Họ Tên"].Value.ToString(); 
+
+            DialogResult confirm = MessageBox.Show($"Bạn có chắc chắn muốn xóa thành viên '{tenTV}' ({maTV})?",
+                                                "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirm == DialogResult.Yes)
             {
@@ -352,7 +383,7 @@ namespace GZone.QuanLyThanhVien
                     {
                         MessageBox.Show("Xóa thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadDanhSachThanhVien();
-                        ClearMemberInputs(); 
+                        ClearDetailTabs(); 
                     }
                 }
                 catch (Exception ex)
@@ -362,42 +393,118 @@ namespace GZone.QuanLyThanhVien
             }
         }
 
-        private void btnDangKy_Click(object sender, EventArgs e)
+
+        #endregion
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ClearDetailTabs();
+            dgvHoiVien.ClearSelection();
+            txtTimKiem.Text = "";
+        }
+
+        private void printCardDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             try
             {
-                string maTV = txtMa.Text; 
-                string maGT = cboGoiTap.SelectedValue.ToString();
+                string maTV = txtMaHV.Text;
+                string hoTen = txtHoTen.Text;
+                string ngaySinh = txtNgaySinh.Text;
+                string gioiTinh = txtGioiTinh.Text;
+                string sdt = txtSdt.Text;
+                string chiNhanh = txtChiNhanh.Text;
 
-                GoiTap selectedGT = gtDAL.GetGoiTapByMa(maGT);
-                if (selectedGT == null)
+                StringBuilder qrDataBuilder = new StringBuilder();
+                qrDataBuilder.AppendLine($"Chi Nhánh: {chiNhanh}");
+                qrDataBuilder.AppendLine("--- GÓI TẬP HIỆN CÓ ---");
+
+                DataTable dtGoiTap = tvgtDAL.GetGoiTapByThanhVien(maTV);
+                int soGoiConHan = 0;
+
+                if (dtGoiTap != null)
                 {
-                    MessageBox.Show("Không tìm thấy gói tập!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    foreach (DataRow row in dtGoiTap.Rows)
+                    {
+                        if (row["TrangThai"].ToString() == "Còn hiệu lực")
+                        {
+                            string tenGoi = row["GT_Ten"].ToString();
+                            DateTime ngayHH = Convert.ToDateTime(row["NgayHetHan"]);
+                            qrDataBuilder.AppendLine($"- {tenGoi} (HSD: {ngayHH:dd/MM/yyyy})");
+                            soGoiConHan++;
+                        }
+                    }
+                }
+                if (soGoiConHan == 0)
+                {
+                    qrDataBuilder.AppendLine("Không có gói tập nào còn hiệu lực.");
                 }
 
-                ThanhVienGoiTap tvgt = new ThanhVienGoiTap
-                {
-                    TV_Ma = maTV,
-                    GT_Ma = maGT,
-                    NgayDangKy = DateTime.Now,
-                    NgayHetHan = DateTime.Now.AddMonths(selectedGT.ThoiHan),
-                    TrangThai = "Còn hiệu lực"
-                };
+                string qrData = qrDataBuilder.ToString();
 
-                int result = tvgtDAL.AddThanhVienGoiTap(tvgt);
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrData, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = new Bitmap(qrCode.GetGraphic(3), new Size(150, 150));
 
-                if (result > 0)
-                {
-                    MessageBox.Show("Thêm gói tập cho thành viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DataTable dtGoiTap = tvgtDAL.GetGoiTapByThanhVien(maTV);
-                    dgvGoiTap.DataSource = dtGoiTap;
-                }
+                Font titleFont = new Font("Arial", 16, FontStyle.Bold);
+                Font labelFont = new Font("Arial", 10, FontStyle.Bold);
+                Font infoFont = new Font("Arial", 10);
+                SolidBrush brush = new SolidBrush(Color.Black);
+                Pen blackPen = new Pen(Color.Black, 2);
+                int startX = 100, startY = 100, cardWidth = 400, cardHeight = 250;
+
+                e.Graphics.DrawRectangle(blackPen, startX, startY, cardWidth, cardHeight);
+                e.Graphics.DrawString("THẺ THÀNH VIÊN", titleFont, brush, startX + 75, startY + 15);
+                e.Graphics.DrawImage(qrCodeImage, startX + 20, startY + 60);
+
+                float infoX_Label = startX + qrCodeImage.Width + 30;
+                float infoX_Text = infoX_Label + 80;
+                float infoY = startY + 60;
+
+                e.Graphics.DrawString("Mã TV:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(maTV, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Họ tên:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(hoTen, infoFont, brush, new RectangleF(infoX_Text, infoY, 150, 40));
+                infoY += 30;
+                e.Graphics.DrawString("Ngày sinh:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(ngaySinh, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Giới tính:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(gioiTinh, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("SĐT:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(sdt, infoFont, brush, infoX_Text, infoY);
+                infoY += 30;
+                e.Graphics.DrawString("Chi Nhánh:", labelFont, brush, infoX_Label, infoY);
+                e.Graphics.DrawString(chiNhanh, infoFont, brush, infoX_Text, infoY);
+
+                qrCodeImage.Dispose();
+                titleFont.Dispose();
+                labelFont.Dispose();
+                infoFont.Dispose();
+                brush.Dispose();
+                blackPen.Dispose();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi thêm gói tập: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi khi vẽ thẻ: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        private void btnInThe_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaHV.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một thành viên để in thẻ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            printCardPreviewDialog.Document = printCardDocument;
+
+            printCardPreviewDialog.ShowDialog();
+
         }
     }
 }
