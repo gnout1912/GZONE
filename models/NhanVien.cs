@@ -185,22 +185,22 @@ namespace GZone.models
                 }
             }
         }
-        public List<NhanVien> GetAllNhanVienWithChiNhanh()
+        public List<NhanVien> GetNhanVienByChiNhanh(string maChiNhanh)
         {
             List<NhanVien> list = new List<NhanVien>();
             if (clsDatabase.OpenConnection())
             {
                 try
                 {
-                    string query = @"
-                        SELECT 
-                            N.NV_Ma, N.NV_Ten, N.NV_Sdt, N.NV_GioiTinh, N.CN_Ma, C.CN_Ten 
-                        FROM NHAN_VIEN N
-                        LEFT JOIN CHI_NHANH C ON N.CN_Ma = C.CN_Ma
-                        ORDER BY C.CN_Ten, N.NV_Ten";
-
+                    // Thay đổi query: Thêm WHERE CN_Ma = @CNMa
+                    string query = "SELECT * FROM NHAN_VIEN WHERE CN_Ma = @CNMa";
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+
+                    // Thêm tham số cho mã chi nhánh
+                    cmd.Parameters.AddWithValue("@CNMa", maChiNhanh);
+
                     SqlDataReader reader = cmd.ExecuteReader();
+
                     while (reader.Read())
                     {
                         NhanVien nv = new NhanVien
@@ -209,14 +209,20 @@ namespace GZone.models
                             Ten = reader["NV_Ten"].ToString(),
                             Sdt = reader["NV_Sdt"].ToString(),
                             GioiTinh = reader["NV_GioiTinh"].ToString(),
-                            MaChiNhanh = reader["CN_Ma"]?.ToString(),
+                            MaChiNhanh = reader["CN_Ma"]?.ToString()
                         };
                         list.Add(nv);
                     }
                     reader.Close();
                 }
-                catch (Exception ex) { MessageBox.Show("Lỗi khi tải danh sách nhân viên: " + ex.Message); }
-                finally { clsDatabase.CloseConnection(); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tải dữ liệu nhân viên theo chi nhánh: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
             }
             return list;
         }
