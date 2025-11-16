@@ -10,14 +10,14 @@ namespace GZone.QuanLyDoanhThuChiNhanh
     public partial class QuanLyDoanhThuChiNhanh : Form
     {
         private ThongKeDAL thongKeDAL;
-        private string maChiNhanhHienTai = "CN01";
+        private string maChiNhanhHienTai;
         private bool isLoading = true;
 
-        public QuanLyDoanhThuChiNhanh()
+        public QuanLyDoanhThuChiNhanh(string maChiNhanh)
         {
             InitializeComponent();
+            this.maChiNhanhHienTai = maChiNhanh;
             thongKeDAL = new ThongKeDAL();
-
             cbThang.SelectedIndexChanged += new EventHandler(Filter_Changed);
             cbNam.SelectedIndexChanged += new EventHandler(Filter_Changed);
             cbSapXep.SelectedIndexChanged += new EventHandler(Filter_Changed);
@@ -281,6 +281,11 @@ namespace GZone.QuanLyDoanhThuChiNhanh
             {
                 MessageBox.Show("Không có dữ liệu để xuất!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void cbNam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

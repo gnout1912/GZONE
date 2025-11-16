@@ -61,15 +61,16 @@
             // 
             this.cbNam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNam.FormattingEnabled = true;
-            this.cbNam.Location = new System.Drawing.Point(230, 43);
+            this.cbNam.Location = new System.Drawing.Point(195, 43);
             this.cbNam.Name = "cbNam";
             this.cbNam.Size = new System.Drawing.Size(80, 24);
             this.cbNam.TabIndex = 10;
+            this.cbNam.SelectedIndexChanged += new System.EventHandler(this.cbNam_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(180, 47);
+            this.label3.Location = new System.Drawing.Point(158, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 17);
             this.label3.TabIndex = 9;
@@ -79,7 +80,7 @@
             // 
             this.cbThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbThang.FormattingEnabled = true;
-            this.cbThang.Location = new System.Drawing.Point(90, 43);
+            this.cbThang.Location = new System.Drawing.Point(72, 43);
             this.cbThang.Name = "cbThang";
             this.cbThang.Size = new System.Drawing.Size(80, 24);
             this.cbThang.TabIndex = 0;
@@ -116,17 +117,17 @@
             // 
             this.cbSapXep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSapXep.FormattingEnabled = true;
-            this.cbSapXep.Location = new System.Drawing.Point(340, 43);
+            this.cbSapXep.Location = new System.Drawing.Point(308, 43);
             this.cbSapXep.Name = "cbSapXep";
-            this.cbSapXep.Size = new System.Drawing.Size(80, 24);
+            this.cbSapXep.Size = new System.Drawing.Size(99, 24);
             this.cbSapXep.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(315, 47);
+            this.label2.Location = new System.Drawing.Point(281, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 17);
+            this.label2.Size = new System.Drawing.Size(30, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "SX:";
             // 

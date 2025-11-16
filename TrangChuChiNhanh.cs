@@ -21,29 +21,37 @@ namespace GZone
 
         private void btnQuanLyChamCong_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyChamCong
             QuanLyChamCong frm = new QuanLyChamCong();
             frm.ShowDialog();
         }
 
         private void btnQuanLyCoSoVatChat_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyCoSoVatChat
             QuanLyCoSoVatChat frm = new QuanLyCoSoVatChat();
             frm.ShowDialog();
         }
 
         private void btnQuanLyDoanhThuChiNhanh_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyDoanhThuChiNhanh
-            GZone.QuanLyDoanhThuChiNhanh.QuanLyDoanhThuChiNhanh frm = new GZone.QuanLyDoanhThuChiNhanh.QuanLyDoanhThuChiNhanh();
-            frm.ShowDialog();
 
+            var manager = GZone.Session.LoggedInUser;
+            if (manager == null || string.IsNullOrEmpty(manager.MaChiNhanh))
+            {
+                MessageBox.Show("Lỗi: Tài khoản của bạn không được gán vào chi nhánh nào.",
+                                "Lỗi Phân Quyền", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string maChiNhanhCuaManager = manager.MaChiNhanh;
+
+            GZone.QuanLyDoanhThuChiNhanh.QuanLyDoanhThuChiNhanh frm =
+                new GZone.QuanLyDoanhThuChiNhanh.QuanLyDoanhThuChiNhanh(maChiNhanhCuaManager);
+
+            frm.ShowDialog();
         }
 
         private void btnQuanLyGoiTap_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyGoiTap
             QuanLyGoiTap frm = new QuanLyGoiTap();
             frm.ShowDialog();
         }
@@ -58,10 +66,7 @@ namespace GZone
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
-            // 1. Lấy thông tin manager từ session
             var manager = GZone.Session.LoggedInUser;
-
-            // 2. Kiểm tra xem manager có được gán chi nhánh không
             if (manager == null || string.IsNullOrEmpty(manager.MaChiNhanh))
             {
                 MessageBox.Show("Lỗi: Tài khoản của bạn không được gán vào chi nhánh nào.",
@@ -69,11 +74,8 @@ namespace GZone
                 return;
             }
 
-            // 3. Lấy mã chi nhánh
             string maChiNhanhCuaManager = manager.MaChiNhanh;
 
-            // 4. Mở form QuanLyNhanVien và "truyền" mã chi nhánh này vào
-            // (Chúng ta sẽ tạo constructor mới này ở Bước 2)
             QuanLyNhanVien frm = new QuanLyNhanVien(maChiNhanhCuaManager);
             frm.ShowDialog();
         }
@@ -84,6 +86,19 @@ namespace GZone
             //QuanLyThanhVien frm = new QuanLyThanhVien();
             // frm.ShowDialog();
             MessageBox.Show("Chức năng 'Quản lý Thành viên' đang được phát triển.");
+        }
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                                                  "Xác nhận Đăng xuất",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                GZone.Session.LoggedInUser = null;
+                this.Close();
+            }
         }
     }
 }
