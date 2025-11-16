@@ -1,4 +1,5 @@
-﻿using GZone.models; 
+﻿using GZone.models;
+using GZone.QuanLyThanhVien;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,33 +56,36 @@ namespace GZone.QuanLyDangNhap
                     MessageBox.Show($"Chào mừng {taiKhoan.Quyen} {taiKhoan.Ten}!", "Đăng nhập thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     GZone.Session.LoggedInUser = taiKhoan;
-                    GZone.Session.MaTaiKhoan = taiKhoan.Ma; // Ví dụ: taiKhoan.MaTaiKhoan
-                    GZone.Session.TenTaiKhoan = taiKhoan.Ten; // Ví dụ: taiKhoan.TenHienThi
-                    GZone.Session.MaChiNhanh = taiKhoan.MaChiNhanh; // << QUAN TRỌNG NHẤT
+                    GZone.Session.MaTaiKhoan = taiKhoan.Ma;
+                    GZone.Session.TenTaiKhoan = taiKhoan.Ten; 
+                    GZone.Session.MaChiNhanh = taiKhoan.MaChiNhanh; 
                     GZone.Session.Quyen = taiKhoan.Quyen;
 
+                    this.Hide();
 
                     if (taiKhoan.Quyen == "Admin") 
                     {
       
                         TrangChuAdmin frmTrangChuAdmin = new TrangChuAdmin(); 
-                        this.Hide();
-                        frmTrangChuAdmin.ShowDialog(); 
-                        this.Close(); 
+
+                        frmTrangChuAdmin.ShowDialog();
                     }
                     else if (taiKhoan.Quyen == "Manager") 
                     {
-                        TrangChuChiNhanh frmTrangChuChiNhanh = new TrangChuChiNhanh();
-                        this.Hide();
+                        TrangChuManager frmTrangChuChiNhanh = new TrangChuManager();
                         frmTrangChuChiNhanh.ShowDialog();
-                        this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Bạn đã đăng nhập thành công với quyền hạn thấp hơn.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.DialogResult = DialogResult.OK; 
-                        this.Close(); 
+                        QuanLyThanhVien.QuanLyThanhVien frmQuanLyThanhVien = new QuanLyThanhVien.QuanLyThanhVien();
+                        frmQuanLyThanhVien.ShowDialog();
+
                     }
+                    txtMatKhau.Text = "";
+                    txtTenDangNhap.Text = "";
+                    this.Show();
+                    txtTenDangNhap.Focus();
+
                 }
             }
             catch (Exception ex)

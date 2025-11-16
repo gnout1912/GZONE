@@ -151,12 +151,48 @@
     <Compile Include="QuanLyTaiKhoan\QuanLyTaiKhoan.Designer.cs">
       <DependentUpon>QuanLyTaiKhoan.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyThanhVien\DangKiGoiTap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\DangKiGoiTap.Designer.cs">
+      <DependentUpon>DangKiGoiTap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\ThemThanhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyThanhVien\ThemThanhVien.Designer.cs">
+      <DependentUpon>ThemThanhVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangChuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TrangChuAdmin.Designer.cs">
       <DependentUpon>TrangChuAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="TrangChuManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChuManager.Designer.cs">
+      <DependentUpon>TrangChuManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="obj\Debug\GZone.ChinhSuaChiNhanhForm.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.ChinhSuaGoiTapForm.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.ChinhSuaTaiKhoanForm.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.frmThemGoiTap.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.Properties.Resources.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyChamCong.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyChiNhanh.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyCoSoVatChat.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyDangNhap.QuanLyDangNhap.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyDoanhThuHeThong.QuanLyDoanhThuHeThong.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyGoiTap.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyLamViec.frmXepLichNhanVien.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyNhanVien.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyTaiKhoan.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.QuanLyThanhVien.QuanLyThanhVien.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.ThemChiNhanhForm.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.ThemTaiKhoanForm.resources" />
+    <EmbeddedResource Include="obj\Debug\GZone.TrangChuAdmin.resources" />
     <EmbeddedResource Include="QuanLyChiNhanh\ChinhSuaChiNhanhForm.resx">
       <DependentUpon>ChinhSuaChiNhanhForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +287,9 @@
     <EmbeddedResource Include="QuanLyTaiKhoan\ThemTaiKhoanForm.resx">
       <DependentUpon>ThemTaiKhoanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyThanhVien\DangKiGoiTap.resx">
+      <DependentUpon>DangKiGoiTap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuanLyThanhVien\QuanLyThanhVien.resx">
       <DependentUpon>QuanLyThanhVien.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,10 +314,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuanLyThanhVien\ThemThanhVien.resx">
+      <DependentUpon>ThemThanhVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrangChuAdmin.resx">
       <DependentUpon>TrangChuAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TrangChuManager.resx">
+      <DependentUpon>TrangChuManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\GZone.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\GZone.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\GZone.csproj.GenerateResource.cache" />
+    <None Include="obj\Release\GZone.csproj.AssemblyReference.cache" />
     <None Include="packages.config" />
+    <None Include="packages\QRCoder.1.7.0\.signature.p7s" />
+    <None Include="packages\QRCoder.1.7.0\QRCoder.1.7.0.nupkg" />
+    <None Include="packages\QRCoder.1.7.0\README.md" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -328,6 +381,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gymlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\GZone.csproj.FileListAbsolute.txt" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net35\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net35\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net40\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net40\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net5.0\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net5.0\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net6.0\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\net6.0\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard1.3\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard1.3\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard2.0\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard2.0\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard2.1\QRCoder.dll" />
+    <Content Include="packages\QRCoder.1.7.0\lib\netstandard2.1\QRCoder.xml" />
+    <Content Include="packages\QRCoder.1.7.0\nuget-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

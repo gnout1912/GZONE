@@ -90,8 +90,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabChiTiet);
-            this.splitContainer1.Size = new System.Drawing.Size(1042, 450);
-            this.splitContainer1.SplitterDistance = 546;
+            this.splitContainer1.Size = new System.Drawing.Size(1060, 578);
+            this.splitContainer1.SplitterDistance = 555;
             this.splitContainer1.TabIndex = 0;
             // 
             // dgvHoiVien
@@ -106,7 +106,7 @@
             this.dgvHoiVien.ReadOnly = true;
             this.dgvHoiVien.RowHeadersWidth = 51;
             this.dgvHoiVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHoiVien.Size = new System.Drawing.Size(546, 393);
+            this.dgvHoiVien.Size = new System.Drawing.Size(555, 521);
             this.dgvHoiVien.TabIndex = 2;
             this.dgvHoiVien.SelectionChanged += new System.EventHandler(this.dgvHoiVien_SelectionChanged);
             // 
@@ -129,7 +129,7 @@
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSearch.Location = new System.Drawing.Point(0, 0);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(546, 37);
+            this.pnlSearch.Size = new System.Drawing.Size(555, 37);
             this.pnlSearch.TabIndex = 0;
             // 
             // btnThemHoiVien
@@ -137,7 +137,7 @@
             this.btnThemHoiVien.BackColor = System.Drawing.Color.SpringGreen;
             this.btnThemHoiVien.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnThemHoiVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemHoiVien.Location = new System.Drawing.Point(427, 0);
+            this.btnThemHoiVien.Location = new System.Drawing.Point(436, 0);
             this.btnThemHoiVien.Name = "btnThemHoiVien";
             this.btnThemHoiVien.Size = new System.Drawing.Size(119, 37);
             this.btnThemHoiVien.TabIndex = 2;
@@ -171,7 +171,7 @@
             this.tabChiTiet.Location = new System.Drawing.Point(0, 0);
             this.tabChiTiet.Name = "tabChiTiet";
             this.tabChiTiet.SelectedIndex = 0;
-            this.tabChiTiet.Size = new System.Drawing.Size(492, 450);
+            this.tabChiTiet.Size = new System.Drawing.Size(501, 578);
             this.tabChiTiet.TabIndex = 0;
             // 
             // tabThongTin
@@ -195,8 +195,8 @@
             this.tabThongTin.Controls.Add(this.lblMaHV);
             this.tabThongTin.Location = new System.Drawing.Point(4, 22);
             this.tabThongTin.Name = "tabThongTin";
-            this.tabThongTin.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabThongTin.Size = new System.Drawing.Size(484, 424);
+            this.tabThongTin.Padding = new System.Windows.Forms.Padding(3);
+            this.tabThongTin.Size = new System.Drawing.Size(493, 552);
             this.tabThongTin.TabIndex = 0;
             this.tabThongTin.Text = "Thông tin khách hàng";
             // 
@@ -206,7 +206,7 @@
             this.btnLamMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLamMoi.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnLamMoi.Location = new System.Drawing.Point(393, 10);
-            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(2);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(70, 31);
             this.btnLamMoi.TabIndex = 15;
@@ -377,8 +377,8 @@
             this.tabDichVu.Controls.Add(this.dgvGoiTap);
             this.tabDichVu.Location = new System.Drawing.Point(4, 22);
             this.tabDichVu.Name = "tabDichVu";
-            this.tabDichVu.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabDichVu.Size = new System.Drawing.Size(483, 424);
+            this.tabDichVu.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDichVu.Size = new System.Drawing.Size(484, 424);
             this.tabDichVu.TabIndex = 1;
             this.tabDichVu.Text = "Thông tin dịch vụ";
             this.tabDichVu.UseVisualStyleBackColor = true;
@@ -391,7 +391,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(3, 389);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(477, 32);
+            this.panel1.Size = new System.Drawing.Size(478, 32);
             this.panel1.TabIndex = 1;
             // 
             // btnGiaHan
@@ -399,7 +399,7 @@
             this.btnGiaHan.BackColor = System.Drawing.Color.Aquamarine;
             this.btnGiaHan.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnGiaHan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGiaHan.Location = new System.Drawing.Point(222, 0);
+            this.btnGiaHan.Location = new System.Drawing.Point(223, 0);
             this.btnGiaHan.Name = "btnGiaHan";
             this.btnGiaHan.Size = new System.Drawing.Size(122, 32);
             this.btnGiaHan.TabIndex = 1;
@@ -412,7 +412,7 @@
             this.btnDangKyGoi.BackColor = System.Drawing.Color.Aquamarine;
             this.btnDangKyGoi.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDangKyGoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDangKyGoi.Location = new System.Drawing.Point(344, 0);
+            this.btnDangKyGoi.Location = new System.Drawing.Point(345, 0);
             this.btnDangKyGoi.Name = "btnDangKyGoi";
             this.btnDangKyGoi.Size = new System.Drawing.Size(133, 32);
             this.btnDangKyGoi.TabIndex = 0;
@@ -432,7 +432,7 @@
             this.dgvGoiTap.ReadOnly = true;
             this.dgvGoiTap.RowHeadersWidth = 51;
             this.dgvGoiTap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGoiTap.Size = new System.Drawing.Size(477, 418);
+            this.dgvGoiTap.Size = new System.Drawing.Size(478, 418);
             this.dgvGoiTap.TabIndex = 0;
             // 
             // printCardPreviewDialog
@@ -453,9 +453,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 450);
+            this.ClientSize = new System.Drawing.Size(1060, 578);
             this.Controls.Add(this.splitContainer1);
             this.Name = "QuanLyThanhVien";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuanLyThanhVien";
             this.Load += new System.EventHandler(this.QuanLyThanhVien_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
