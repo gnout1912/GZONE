@@ -1,4 +1,4 @@
-﻿using GZone.models; // Thêm
+﻿using GZone.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +14,12 @@ namespace GZone.QuanLyLamViec
     public partial class Quanlylamviec : Form
     {
         private NhanVienDAL _nhanVienDAL;
-
-        public Quanlylamviec()
+        private string _maChiNhanh;
+        public Quanlylamviec(string maChiNhanh)
         {
             InitializeComponent();
             _nhanVienDAL = new NhanVienDAL();
+            _maChiNhanh = maChiNhanh;
         }
 
         private void Quanlylamviec_Load(object sender, EventArgs e)
@@ -28,8 +29,8 @@ namespace GZone.QuanLyLamViec
 
         private void LoadDanhSachNhanVien()
         {
-         
-            List<NhanVien> dsNhanVien = _nhanVienDAL.GetAllNhanVienWithChiNhanh();
+
+            List<NhanVien> dsNhanVien = _nhanVienDAL.GetNhanVienByChiNhanh(_maChiNhanh);
             dgvNhanVien.DataSource = dsNhanVien;
 
             dgvNhanVien.Columns["Ma"].Visible = false; 
@@ -39,7 +40,6 @@ namespace GZone.QuanLyLamViec
             dgvNhanVien.Columns["Ten"].Width = 200;
             dgvNhanVien.Columns["Sdt"].HeaderText = "Số Điện Thoại";
             dgvNhanVien.Columns["GioiTinh"].HeaderText = "Giới Tính";
-            dgvNhanVien.Columns["TenChiNhanh"].HeaderText = "Chi Nhánh";
 
             dgvNhanVien.ReadOnly = true;
             dgvNhanVien.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

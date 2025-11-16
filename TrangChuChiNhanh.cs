@@ -50,14 +50,31 @@ namespace GZone
 
         private void btnQuanLyLamViec_Click(object sender, EventArgs e)
         {
-            GZone.QuanLyLamViec.Quanlylamviec frm = new Quanlylamviec();
+            var manager = GZone.Session.LoggedInUser;
+            string maChiNhanhCuaManager = manager.MaChiNhanh;
+            GZone.QuanLyLamViec.Quanlylamviec frm = new Quanlylamviec(maChiNhanhCuaManager);
             frm.ShowDialog();
         }
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyNhanVien
-            QuanLyNhanVien frm = new QuanLyNhanVien();
+            // 1. Lấy thông tin manager từ session
+            var manager = GZone.Session.LoggedInUser;
+
+            // 2. Kiểm tra xem manager có được gán chi nhánh không
+            if (manager == null || string.IsNullOrEmpty(manager.MaChiNhanh))
+            {
+                MessageBox.Show("Lỗi: Tài khoản của bạn không được gán vào chi nhánh nào.",
+                                "Lỗi Phân Quyền", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Lấy mã chi nhánh
+            string maChiNhanhCuaManager = manager.MaChiNhanh;
+
+            // 4. Mở form QuanLyNhanVien và "truyền" mã chi nhánh này vào
+            // (Chúng ta sẽ tạo constructor mới này ở Bước 2)
+            QuanLyNhanVien frm = new QuanLyNhanVien(maChiNhanhCuaManager);
             frm.ShowDialog();
         }
 

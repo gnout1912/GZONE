@@ -133,5 +133,56 @@ namespace GZone.models
             }
             return false;
         }
+        public List<DangKiLichLam> GetLichLamTheoTuanCuaChiNhanh(DateTime startOfWeek, string maChiNhanh)
+        {
+            List<DangKiLichLam> list = new List<DangKiLichLam>();
+            DateTime endOfWeek = startOfWeek.AddDays(6);
+
+            if (clsDatabase.OpenConnection())
+            {
+                try
+                {
+                    // 1. Thêm điều kiện 'AND N.CN_Ma = @maChiNhanh' vào query
+                    string query = @"
+                SELECT D.*, N.NV_Ten 
+                FROM DANG_KI_LICH_LAM D
+                JOIN NHAN_VIEN N ON D.NV_Ma = N.NV_Ma
+                WHERE D.DK_NgayDangKy BETWEEN @start AND @end
+                  AND N.CN_Ma = @maChiNhanh"; // <-- THAY ĐỔI QUAN TRỌNG Ở ĐÂY
+
+                    SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+                    cmd.Parameters.AddWithValue("@start", startOfWeek.Date);
+                    cmd.Parameters.AddWithValue("@end", endOfWeek.Date);
+
+                    // 2. Thêm tham số @maChiNhanh
+                    cmd.Parameters.AddWithValue("@maChiNhanh", maChiNhanh);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        list.Add(new DangKiLichLam
+                        {
+                            DkMa = (int)reader["DK_Ma"],
+                            NvMa = reader["NV_Ma"].ToString(),
+                            CaMa = reader["CA_Ma"].ToString(),
+                            NgayDangKy = (DateTime)reader["DK_NgayDangKy"],
+                            DaChamCong = (bool)reader["DK_DaChamCong"],
+                            TenNhanVien = reader["NV_Ten"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    // 3. Cập nhật thông báo lỗi
+                    MessageBox.Show("Lỗi khi tải lịch làm việc của chi nhánh: " + ex.Message);
+                }
+                finally
+                {
+                    clsDatabase.CloseConnection();
+                }
+            }
+            return list;
+        }
     }
 }
