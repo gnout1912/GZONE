@@ -7,19 +7,20 @@ namespace GZone.models
 {
     public class CoSoVatChat
     {
-        public int Ma { get; set; }              // CSVC_Ma (tự tăng)
-        public string MaChiNhanh { get; set; }   // CN_Ma
-        public string TenMay { get; set; }       // CSVC_TenMay
-        public string LoaiMay { get; set; }      // CSVC_LoaiMay
-        public int SoLuong { get; set; }         // CSVC_SoLuong
-        public string TinhTrang { get; set; }    // CSVC_TinhTrang
-        public string GhiChu { get; set; }       // CSVC_GhiChu
+        public int Ma { get; set; }            // CSVC_Ma (tự tăng)
+        public string MaChiNhanh { get; set; }    // CN_Ma
+        public string TenMay { get; set; }        // CSVC_TenMay
+        public string LoaiMay { get; set; }       // CSVC_LoaiMay
+        public int SoLuong { get; set; }        // CSVC_SoLuong
+        public string TinhTrang { get; set; }     // CSVC_TinhTrang
+        public string GhiChu { get; set; }        // CSVC_GhiChu
     }
 
     public class CoSoVatChatDAL
     {
-        // 📋 Lấy danh sách cơ sở vật chất
-        public List<CoSoVatChat> GetAllCSVC()
+        // 📋 SỬA LẠI HÀM NÀY
+        // Lấy danh sách cơ sở vật chất THEO MÃ CHI NHÁNH
+        public List<CoSoVatChat> GetCSVCByMaChiNhanh(string maCN)
         {
             List<CoSoVatChat> list = new List<CoSoVatChat>();
 
@@ -38,9 +39,14 @@ namespace GZone.models
                             TinhTrang, 
                             GhiChu
                         FROM CO_SO_VAT_CHAT
+                        WHERE CN_Ma = @MaChiNhanh -- THÊM DÒNG NÀY ĐỂ LỌC
                         ORDER BY CSVC_Ma DESC";
 
                     SqlCommand cmd = new SqlCommand(query, clsDatabase.con);
+
+                    // THÊM THAM SỐ CHO CÂU LỆNH WHERE
+                    cmd.Parameters.AddWithValue("@MaChiNhanh", maCN);
+
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -72,7 +78,7 @@ namespace GZone.models
             return list;
         }
 
-        // ➕ Thêm cơ sở vật chất
+        // ➕ Thêm cơ sở vật chất (Giữ nguyên)
         public void AddCSVC(CoSoVatChat c)
         {
             if (clsDatabase.OpenConnection())
@@ -105,7 +111,7 @@ namespace GZone.models
             }
         }
 
-        // 🗑️ Xóa cơ sở vật chất
+        // 🗑️ Xóa cơ sở vật chất (Giữ nguyên)
         public void DeleteCSVC(int ma)
         {
             if (clsDatabase.OpenConnection())
@@ -130,7 +136,7 @@ namespace GZone.models
             }
         }
 
-        // ✏️ Cập nhật cơ sở vật chất
+        // ✏️ Cập nhật cơ sở vật chất (Giữ nguyên)
         public void UpdateCSVC(CoSoVatChat c)
         {
             if (clsDatabase.OpenConnection())
