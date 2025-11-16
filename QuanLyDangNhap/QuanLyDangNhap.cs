@@ -55,6 +55,10 @@ namespace GZone.QuanLyDangNhap
                     MessageBox.Show($"Chào mừng {taiKhoan.Quyen} {taiKhoan.Ten}!", "Đăng nhập thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     GZone.Session.LoggedInUser = taiKhoan;
+                    GZone.Session.MaTaiKhoan = taiKhoan.Ma; // Ví dụ: taiKhoan.MaTaiKhoan
+                    GZone.Session.TenTaiKhoan = taiKhoan.Ten; // Ví dụ: taiKhoan.TenHienThi
+                    GZone.Session.MaChiNhanh = taiKhoan.MaChiNhanh; // << QUAN TRỌNG NHẤT
+                    GZone.Session.Quyen = taiKhoan.Quyen;
 
 
                     if (taiKhoan.Quyen == "Admin") 

@@ -82,10 +82,26 @@ namespace GZone
 
         private void btnQuanLyThanhVien_Click(object sender, EventArgs e)
         {
-            // Giả sử bạn có Form tên là QuanLyThanhVien
-            //QuanLyThanhVien frm = new QuanLyThanhVien();
-            // frm.ShowDialog();
-            MessageBox.Show("Chức năng 'Quản lý Thành viên' đang được phát triển.");
+            // 1. Lấy thông tin người quản lý từ session
+            var manager = GZone.Session.LoggedInUser;
+
+            // 2. Kiểm tra xem manager có tồn tại và có mã chi nhánh không
+            if (manager == null || string.IsNullOrEmpty(manager.MaChiNhanh))
+            {
+                MessageBox.Show("Lỗi: Tài khoản của bạn không được gán vào chi nhánh nào.",
+                                "Lỗi Phân Quyền", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 3. Lấy mã chi nhánh của manager
+            string maChiNhanhCuaManager = manager.MaChiNhanh;
+
+            // 4. Sửa lại lời gọi: Truyền mã chi nhánh vào constructor
+            GZone.QuanLyThanhVien.QuanLyThanhVien frm =
+                new GZone.QuanLyThanhVien.QuanLyThanhVien(); // <== SỬA Ở ĐÂY
+
+            // 5. Hiển thị form
+            frm.ShowDialog();
         }
         private void btnDangXuat_Click(object sender, EventArgs e)
         {

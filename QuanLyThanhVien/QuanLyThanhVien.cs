@@ -451,15 +451,19 @@ namespace GZone.QuanLyThanhVien
                 Font infoFont = new Font("Arial", 10);
                 SolidBrush brush = new SolidBrush(Color.Black);
                 Pen blackPen = new Pen(Color.Black, 2);
-                int startX = 100, startY = 100, cardWidth = 400, cardHeight = 250;
+                int startX = 100, startY = 100, cardWidth = 600, cardHeight = 250;
 
                 e.Graphics.DrawRectangle(blackPen, startX, startY, cardWidth, cardHeight);
-                e.Graphics.DrawString("THẺ THÀNH VIÊN", titleFont, brush, startX + 75, startY + 15);
+
+                SizeF titleSize = e.Graphics.MeasureString("THẺ THÀNH VIÊN", titleFont);
+                float titleX = startX + (cardWidth - titleSize.Width) / 2;
+                e.Graphics.DrawString("THẺ THÀNH VIÊN", titleFont, brush, titleX, startY + 15);
+
                 e.Graphics.DrawImage(qrCodeImage, startX + 20, startY + 60);
 
-                float infoX_Label = startX + qrCodeImage.Width + 30;
+                float infoX_Label = startX + qrCodeImage.Width + 60;
                 float infoX_Text = infoX_Label + 80;
-                float infoY = startY + 60;
+                float infoY = startY + 40;
 
                 e.Graphics.DrawString("Mã TV:", labelFont, brush, infoX_Label, infoY);
                 e.Graphics.DrawString(maTV, infoFont, brush, infoX_Text, infoY);
