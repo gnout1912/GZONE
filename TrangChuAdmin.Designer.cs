@@ -52,7 +52,7 @@
             this.btnQuanLyTaiKhoan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnQuanLyTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnQuanLyTaiKhoan.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnQuanLyTaiKhoan.Location = new System.Drawing.Point(62, 145);
+            this.btnQuanLyTaiKhoan.Location = new System.Drawing.Point(93, 145);
             this.btnQuanLyTaiKhoan.Name = "btnQuanLyTaiKhoan";
             this.btnQuanLyTaiKhoan.Size = new System.Drawing.Size(181, 62);
             this.btnQuanLyTaiKhoan.TabIndex = 1;
@@ -65,7 +65,7 @@
             this.btnQuanLyChiNhanh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnQuanLyChiNhanh.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnQuanLyChiNhanh.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnQuanLyChiNhanh.Location = new System.Drawing.Point(351, 145);
+            this.btnQuanLyChiNhanh.Location = new System.Drawing.Point(326, 145);
             this.btnQuanLyChiNhanh.Name = "btnQuanLyChiNhanh";
             this.btnQuanLyChiNhanh.Size = new System.Drawing.Size(181, 62);
             this.btnQuanLyChiNhanh.TabIndex = 2;
@@ -78,7 +78,7 @@
             this.btnQuanLyDoanhThu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnQuanLyDoanhThu.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnQuanLyDoanhThu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnQuanLyDoanhThu.Location = new System.Drawing.Point(62, 235);
+            this.btnQuanLyDoanhThu.Location = new System.Drawing.Point(93, 235);
             this.btnQuanLyDoanhThu.Name = "btnQuanLyDoanhThu";
             this.btnQuanLyDoanhThu.Size = new System.Drawing.Size(181, 62);
             this.btnQuanLyDoanhThu.TabIndex = 3;
@@ -91,7 +91,7 @@
             this.btnQuanLyGoiTap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnQuanLyGoiTap.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btnQuanLyGoiTap.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnQuanLyGoiTap.Location = new System.Drawing.Point(351, 235);
+            this.btnQuanLyGoiTap.Location = new System.Drawing.Point(326, 235);
             this.btnQuanLyGoiTap.Name = "btnQuanLyGoiTap";
             this.btnQuanLyGoiTap.Size = new System.Drawing.Size(181, 62);
             this.btnQuanLyGoiTap.TabIndex = 4;

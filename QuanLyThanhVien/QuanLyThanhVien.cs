@@ -510,5 +510,19 @@ namespace GZone.QuanLyThanhVien
             printCardPreviewDialog.ShowDialog();
 
         }
+
+        private void btnSignOut_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                          "Xác nhận Đăng xuất",
+                          MessageBoxButtons.YesNo,
+                          MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                GZone.Session.LoggedInUser = null;
+                this.Close();
+            }
+        }
     }
 }

@@ -61,6 +61,7 @@
             this.dgvGoiTap = new System.Windows.Forms.DataGridView();
             this.printCardPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printCardDocument = new System.Drawing.Printing.PrintDocument();
+            this.btnSignOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -177,6 +178,7 @@
             // tabThongTin
             // 
             this.tabThongTin.BackColor = System.Drawing.Color.White;
+            this.tabThongTin.Controls.Add(this.btnSignOut);
             this.tabThongTin.Controls.Add(this.btnLamMoi);
             this.tabThongTin.Controls.Add(this.btnXoa);
             this.tabThongTin.Controls.Add(this.btnInThe);
@@ -378,7 +380,7 @@
             this.tabDichVu.Location = new System.Drawing.Point(4, 22);
             this.tabDichVu.Name = "tabDichVu";
             this.tabDichVu.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDichVu.Size = new System.Drawing.Size(484, 424);
+            this.tabDichVu.Size = new System.Drawing.Size(493, 552);
             this.tabDichVu.TabIndex = 1;
             this.tabDichVu.Text = "Thông tin dịch vụ";
             this.tabDichVu.UseVisualStyleBackColor = true;
@@ -389,9 +391,9 @@
             this.panel1.Controls.Add(this.btnGiaHan);
             this.panel1.Controls.Add(this.btnDangKyGoi);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 389);
+            this.panel1.Location = new System.Drawing.Point(3, 517);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(478, 32);
+            this.panel1.Size = new System.Drawing.Size(487, 32);
             this.panel1.TabIndex = 1;
             // 
             // btnGiaHan
@@ -399,7 +401,7 @@
             this.btnGiaHan.BackColor = System.Drawing.Color.Aquamarine;
             this.btnGiaHan.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnGiaHan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGiaHan.Location = new System.Drawing.Point(223, 0);
+            this.btnGiaHan.Location = new System.Drawing.Point(232, 0);
             this.btnGiaHan.Name = "btnGiaHan";
             this.btnGiaHan.Size = new System.Drawing.Size(122, 32);
             this.btnGiaHan.TabIndex = 1;
@@ -412,7 +414,7 @@
             this.btnDangKyGoi.BackColor = System.Drawing.Color.Aquamarine;
             this.btnDangKyGoi.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDangKyGoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDangKyGoi.Location = new System.Drawing.Point(345, 0);
+            this.btnDangKyGoi.Location = new System.Drawing.Point(354, 0);
             this.btnDangKyGoi.Name = "btnDangKyGoi";
             this.btnDangKyGoi.Size = new System.Drawing.Size(133, 32);
             this.btnDangKyGoi.TabIndex = 0;
@@ -432,7 +434,7 @@
             this.dgvGoiTap.ReadOnly = true;
             this.dgvGoiTap.RowHeadersWidth = 51;
             this.dgvGoiTap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGoiTap.Size = new System.Drawing.Size(478, 418);
+            this.dgvGoiTap.Size = new System.Drawing.Size(487, 546);
             this.dgvGoiTap.TabIndex = 0;
             // 
             // printCardPreviewDialog
@@ -448,6 +450,19 @@
             // printCardDocument
             // 
             this.printCardDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printCardDocument_PrintPage);
+            // 
+            // btnSignOut
+            // 
+            this.btnSignOut.BackColor = System.Drawing.Color.Red;
+            this.btnSignOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnSignOut.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSignOut.Location = new System.Drawing.Point(357, 492);
+            this.btnSignOut.Name = "btnSignOut";
+            this.btnSignOut.Size = new System.Drawing.Size(116, 41);
+            this.btnSignOut.TabIndex = 10;
+            this.btnSignOut.Text = "Đăng xuất";
+            this.btnSignOut.UseVisualStyleBackColor = false;
+            this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
             // 
             // QuanLyThanhVien
             // 
@@ -511,5 +526,6 @@
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.PrintPreviewDialog printCardPreviewDialog;
         private System.Drawing.Printing.PrintDocument printCardDocument;
+        private System.Windows.Forms.Button btnSignOut;
     }
 }
