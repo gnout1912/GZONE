@@ -163,6 +163,18 @@
     <Compile Include="QuanLyThanhVien\ThemThanhVien.Designer.cs">
       <DependentUpon>ThemThanhVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyYeuCau\QuanLyYeuCau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyYeuCau\QuanLyYeuCau.Designer.cs">
+      <DependentUpon>QuanLyYeuCau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyYeuCau\QuanLyYeuCau2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyYeuCau\QuanLyYeuCau2.Designer.cs">
+      <DependentUpon>QuanLyYeuCau2.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangChuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +328,12 @@
     </Compile>
     <EmbeddedResource Include="QuanLyThanhVien\ThemThanhVien.resx">
       <DependentUpon>ThemThanhVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyYeuCau\QuanLyYeuCau.resx">
+      <DependentUpon>QuanLyYeuCau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuanLyYeuCau\QuanLyYeuCau2.resx">
+      <DependentUpon>QuanLyYeuCau2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangChuAdmin.resx">
       <DependentUpon>TrangChuAdmin.cs</DependentUpon>

@@ -52,7 +52,7 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblTitle.Location = new System.Drawing.Point(180, 10);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(207, 25);
+            this.lblTitle.Size = new System.Drawing.Size(167, 20);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Danh Sách Nhân Viên";
             // 
@@ -131,7 +131,7 @@
             this.lblTen.AutoSize = true;
             this.lblTen.Location = new System.Drawing.Point(40, 60);
             this.lblTen.Name = "lblTen";
-            this.lblTen.Size = new System.Drawing.Size(56, 16);
+            this.lblTen.Size = new System.Drawing.Size(47, 13);
             this.lblTen.TabIndex = 2;
             this.lblTen.Text = "Tên NV:";
             // 
@@ -140,7 +140,7 @@
             this.lblSdt.AutoSize = true;
             this.lblSdt.Location = new System.Drawing.Point(40, 90);
             this.lblSdt.Name = "lblSdt";
-            this.lblSdt.Size = new System.Drawing.Size(37, 16);
+            this.lblSdt.Size = new System.Drawing.Size(32, 13);
             this.lblSdt.TabIndex = 3;
             this.lblSdt.Text = "SĐT:";
             // 
@@ -149,7 +149,7 @@
             this.lblGioiTinh.AutoSize = true;
             this.lblGioiTinh.Location = new System.Drawing.Point(320, 60);
             this.lblGioiTinh.Name = "lblGioiTinh";
-            this.lblGioiTinh.Size = new System.Drawing.Size(63, 16);
+            this.lblGioiTinh.Size = new System.Drawing.Size(54, 13);
             this.lblGioiTinh.TabIndex = 4;
             this.lblGioiTinh.Text = "Giới Tính:";
             // 
@@ -158,7 +158,7 @@
             this.lblCNMa.AutoSize = true;
             this.lblCNMa.Location = new System.Drawing.Point(320, 90);
             this.lblCNMa.Name = "lblCNMa";
-            this.lblCNMa.Size = new System.Drawing.Size(51, 16);
+            this.lblCNMa.Size = new System.Drawing.Size(43, 13);
             this.lblCNMa.TabIndex = 5;
             this.lblCNMa.Text = "Mã CN:";
             // 
@@ -166,32 +166,29 @@
             // 
             this.txtTen.Location = new System.Drawing.Point(110, 57);
             this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(180, 22);
+            this.txtTen.Size = new System.Drawing.Size(180, 20);
             this.txtTen.TabIndex = 6;
             // 
             // txtSdt
             // 
             this.txtSdt.Location = new System.Drawing.Point(110, 87);
             this.txtSdt.Name = "txtSdt";
-            this.txtSdt.Size = new System.Drawing.Size(180, 22);
+            this.txtSdt.Size = new System.Drawing.Size(180, 20);
             this.txtSdt.TabIndex = 7;
             // 
             // cbGioiTinh
             // 
             this.cbGioiTinh.FormattingEnabled = true;
-            this.cbGioiTinh.Items.AddRange(new object[] {
-            "Nam",
-            "Nữ"});
             this.cbGioiTinh.Location = new System.Drawing.Point(390, 57);
             this.cbGioiTinh.Name = "cbGioiTinh";
-            this.cbGioiTinh.Size = new System.Drawing.Size(140, 24);
+            this.cbGioiTinh.Size = new System.Drawing.Size(140, 21);
             this.cbGioiTinh.TabIndex = 8;
             // 
             // txtCNMa
             // 
             this.txtCNMa.Location = new System.Drawing.Point(390, 87);
             this.txtCNMa.Name = "txtCNMa";
-            this.txtCNMa.Size = new System.Drawing.Size(140, 22);
+            this.txtCNMa.Size = new System.Drawing.Size(140, 20);
             this.txtCNMa.TabIndex = 9;
             // 
             // btnThem

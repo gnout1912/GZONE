@@ -1,5 +1,7 @@
-﻿using GZone.QuanLyDangNhap;
+﻿
+using GZone.QuanLyDangNhap;
 using GZone.QuanLyLamViec;
+using GZone.QuanLyYeuCau;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -113,5 +115,10 @@ namespace GZone
             }
         }
 
+        private void btnGuiYeuCau_Click(object sender, EventArgs e)
+        {
+            QuanLyYeuCau2 frm = new QuanLyYeuCau2();
+            frm.ShowDialog();
+        }
     }
 }

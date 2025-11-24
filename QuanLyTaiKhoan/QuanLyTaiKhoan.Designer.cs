@@ -45,23 +45,25 @@
             // splitMain
             // 
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitMain.Location = new System.Drawing.Point(0, 58);
+            this.splitMain.Location = new System.Drawing.Point(0, 71);
+            this.splitMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitMain.Name = "splitMain";
             // 
             // splitMain.Panel1
             // 
             this.splitMain.Panel1.Controls.Add(this.lstChiNhanh);
             this.splitMain.Panel1.Controls.Add(this.lblDanhSachChiNhanh);
-            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10);
+            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
             // 
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.dgvTaiKhoan);
             this.splitMain.Panel2.Controls.Add(this.lblTieuDeTaiKhoan);
-            this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(10);
+            this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.splitMain.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitMain_Panel2_Paint);
-            this.splitMain.Size = new System.Drawing.Size(984, 503);
-            this.splitMain.SplitterDistance = 259;
+            this.splitMain.Size = new System.Drawing.Size(1312, 619);
+            this.splitMain.SplitterDistance = 345;
+            this.splitMain.SplitterWidth = 5;
             this.splitMain.TabIndex = 0;
             // 
             // lstChiNhanh
@@ -69,10 +71,11 @@
             this.lstChiNhanh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstChiNhanh.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstChiNhanh.FormattingEnabled = true;
-            this.lstChiNhanh.ItemHeight = 20;
-            this.lstChiNhanh.Location = new System.Drawing.Point(10, 38);
+            this.lstChiNhanh.ItemHeight = 25;
+            this.lstChiNhanh.Location = new System.Drawing.Point(13, 49);
+            this.lstChiNhanh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lstChiNhanh.Name = "lstChiNhanh";
-            this.lstChiNhanh.Size = new System.Drawing.Size(239, 455);
+            this.lstChiNhanh.Size = new System.Drawing.Size(319, 558);
             this.lstChiNhanh.TabIndex = 1;
             this.lstChiNhanh.SelectedIndexChanged += new System.EventHandler(this.lstChiNhanh_SelectedIndexChanged);
             // 
@@ -81,10 +84,11 @@
             this.lblDanhSachChiNhanh.AutoSize = true;
             this.lblDanhSachChiNhanh.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblDanhSachChiNhanh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDanhSachChiNhanh.Location = new System.Drawing.Point(10, 10);
+            this.lblDanhSachChiNhanh.Location = new System.Drawing.Point(13, 12);
+            this.lblDanhSachChiNhanh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDanhSachChiNhanh.Name = "lblDanhSachChiNhanh";
-            this.lblDanhSachChiNhanh.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lblDanhSachChiNhanh.Size = new System.Drawing.Size(200, 28);
+            this.lblDanhSachChiNhanh.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.lblDanhSachChiNhanh.Size = new System.Drawing.Size(251, 37);
             this.lblDanhSachChiNhanh.TabIndex = 0;
             this.lblDanhSachChiNhanh.Text = "DANH SÁCH CHI NHÁNH";
             // 
@@ -112,7 +116,8 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvTaiKhoan.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTaiKhoan.Location = new System.Drawing.Point(10, 38);
+            this.dgvTaiKhoan.Location = new System.Drawing.Point(13, 49);
+            this.dgvTaiKhoan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvTaiKhoan.MultiSelect = false;
             this.dgvTaiKhoan.Name = "dgvTaiKhoan";
             this.dgvTaiKhoan.ReadOnly = true;
@@ -120,7 +125,7 @@
             this.dgvTaiKhoan.RowHeadersWidth = 51;
             this.dgvTaiKhoan.RowTemplate.Height = 28;
             this.dgvTaiKhoan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTaiKhoan.Size = new System.Drawing.Size(701, 455);
+            this.dgvTaiKhoan.Size = new System.Drawing.Size(936, 558);
             this.dgvTaiKhoan.TabIndex = 1;
             this.dgvTaiKhoan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTaiKhoan_CellContentClick);
             // 
@@ -129,10 +134,11 @@
             this.lblTieuDeTaiKhoan.AutoSize = true;
             this.lblTieuDeTaiKhoan.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTieuDeTaiKhoan.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTieuDeTaiKhoan.Location = new System.Drawing.Point(10, 10);
+            this.lblTieuDeTaiKhoan.Location = new System.Drawing.Point(13, 12);
+            this.lblTieuDeTaiKhoan.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTieuDeTaiKhoan.Name = "lblTieuDeTaiKhoan";
-            this.lblTieuDeTaiKhoan.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lblTieuDeTaiKhoan.Size = new System.Drawing.Size(204, 28);
+            this.lblTieuDeTaiKhoan.Padding = new System.Windows.Forms.Padding(0, 0, 0, 9);
+            this.lblTieuDeTaiKhoan.Size = new System.Drawing.Size(258, 37);
             this.lblTieuDeTaiKhoan.TabIndex = 0;
             this.lblTieuDeTaiKhoan.Text = "TÀI KHOẢN CHI NHÁNH...";
             // 
@@ -145,16 +151,18 @@
             this.panelTop.Controls.Add(this.btnThem);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(984, 58);
+            this.panelTop.Size = new System.Drawing.Size(1312, 71);
             this.panelTop.TabIndex = 1;
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.Location = new System.Drawing.Point(368, 11);
+            this.btnLamMoi.Location = new System.Drawing.Point(491, 14);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(90, 38);
+            this.btnLamMoi.Size = new System.Drawing.Size(120, 47);
             this.btnLamMoi.TabIndex = 4;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
@@ -163,9 +171,10 @@
             // btnXoa
             // 
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Location = new System.Drawing.Point(272, 11);
+            this.btnXoa.Location = new System.Drawing.Point(363, 14);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(90, 38);
+            this.btnXoa.Size = new System.Drawing.Size(120, 47);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -174,9 +183,10 @@
             // btnSua
             // 
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Location = new System.Drawing.Point(176, 10);
+            this.btnSua.Location = new System.Drawing.Point(235, 12);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(90, 38);
+            this.btnSua.Size = new System.Drawing.Size(120, 47);
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Chỉnh sửa";
             this.btnSua.UseVisualStyleBackColor = true;
@@ -185,9 +195,10 @@
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Location = new System.Drawing.Point(12, 10);
+            this.btnThem.Location = new System.Drawing.Point(16, 12);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(158, 38);
+            this.btnThem.Size = new System.Drawing.Size(211, 47);
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "+ Thêm tài khoản mới";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -195,11 +206,12 @@
             // 
             // QuanLyTaiKhoan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 561);
+            this.ClientSize = new System.Drawing.Size(1312, 690);
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.panelTop);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "QuanLyTaiKhoan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Tài Khoản Chi Nhánh";

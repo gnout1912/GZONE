@@ -29,7 +29,7 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblTitle.Location = new System.Drawing.Point(250, 15);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(198, 25);
+            this.lblTitle.Size = new System.Drawing.Size(156, 20);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Quản Lý Chấm Công";
             // 
@@ -37,7 +37,7 @@
             // 
             this.txtMaNV.Location = new System.Drawing.Point(110, 62);
             this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(200, 22);
+            this.txtMaNV.Size = new System.Drawing.Size(200, 20);
             this.txtMaNV.TabIndex = 2;
             // 
             // lblMaNV
@@ -45,7 +45,7 @@
             this.lblMaNV.AutoSize = true;
             this.lblMaNV.Location = new System.Drawing.Point(40, 65);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(51, 16);
+            this.lblMaNV.Size = new System.Drawing.Size(43, 13);
             this.lblMaNV.TabIndex = 1;
             this.lblMaNV.Text = "Mã NV:";
             // 
@@ -83,6 +83,7 @@
             // 
             // QuanLyChamCong
             // 
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(660, 440);
             this.Controls.Add(this.dgvChamCong);
             this.Controls.Add(this.btnCheckOut);
@@ -91,6 +92,7 @@
             this.Controls.Add(this.lblMaNV);
             this.Controls.Add(this.lblTitle);
             this.Name = "QuanLyChamCong";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chấm công nhân viên";
             this.Load += new System.EventHandler(this.QuanLyChamCong_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChamCong)).EndInit();
