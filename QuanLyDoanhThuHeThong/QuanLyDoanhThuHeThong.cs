@@ -213,10 +213,6 @@ namespace GZone.QuanLyDoanhThuHeThong
             e.Graphics.DrawString(title, titleFont, brush, e.MarginBounds.Left + (e.MarginBounds.Width - titleSize.Width) / 2, y);
             y += titleSize.Height + 20;
 
-            string filterInfo = $"Tổng hợp: {cbTongHopTheo.Text} | Chi nhánh: {cbChiNhanh.Text} | Sắp xếp: {cbSapXepTheo.Text} ({cbTangGiam.Text})";
-            e.Graphics.DrawString(filterInfo, bodyFont, brush, x, y);
-            y += rowHeight + 10;
-
             float currentX = x;
             float colSttWidth = 50;
             float colThoiGianWidth = 100;
