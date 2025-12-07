@@ -32,7 +32,7 @@ Academic Project
 ## How to Run
 - Create the database using the SQL script provided in the quanlyphonggymDB.sql file.
 - Open the project and update the database connection information in clsConnectDB.cs, specifically the line where the connection string is defined.
-  
+- First log in with username: admin, password: admin
 ## Author
 Lam The Vinh,
 Duong The Vi,
