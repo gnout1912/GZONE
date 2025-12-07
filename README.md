@@ -29,7 +29,10 @@ This application helps users manage a large gym system with multiple branches. K
 ## Status
 
 Academic Project
-
+## How to Run
+- Create the database using the SQL script provided in the quanlyphonggymDB.sql file.
+- Open the project and update the database connection information in clsConnectDB.cs, specifically the line where the connection string is defined.
+  
 ## Author
 Lam The Vinh,
 Duong The Vi,
